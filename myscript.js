@@ -1,3 +1,3 @@
 function myFunction() {
-  document.getElementById("demo2").innerHTML = "These words are meaning of the part of speech"
+  document.getElementById("demo2").innerHTML = "<a href="https://www.w3schools.com">This is a link</a>"
 }
