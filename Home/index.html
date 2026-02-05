@@ -1,0 +1,40 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Home</title>
+<style>
+  h1 { color: #55671A; }
+  h2 { color: #55671A; }
+  h3 { color: #55671A; }
+  h4 { color: #55671A; }
+  h5 { color: #55671A; }
+  p { color: #A9CD33; }
+  a { color: #A9CD33; }
+  body { text-align: center; }
+</style>
+</head>
+<body>
+  <img src="https://erlinguillen.github.io/Server/Home/icecreamlogo.jpg" alt="ice cream from web" width="250px">
+  <h1 id="status"></h1>
+  <p>This is my first website. More updates soon.</p>
+  <h2>Quote</h2>
+  <p>I miss old Roblox. It was part of my childhood when I was 5.</p>
+  <p>I didn’t have many friends when I was 13.</p>
+  <h3>Link</h3>
+  <a href="https://www.youtube.com/@ErlinGuillen_YT" target="_blank" rel="noopener">My Youtube Chanmel</a>
+  <h4 id="version"></h4>
+  <a href="https://erlinguillen.github.io/Server/Version/" target="_blank" rel="noopener">Version</a>
+  <script>document.getElementById("status").innerHTML = "<h1>Home</h1>";</script>
+  <script>document.getElementById("version").innerText = "What's New";</script>
+  <script>document.write("<p>v0.3</p>");</script>
+  <h5>Button!</h5>
+  <p id="msg">Click the button</p>
+  <button onclick="changeText()">Button</button>
+  <button onclick="showAlert()">Setting</button>
+  <button onclick="logMessage()">Console</button>
+  <button onclick="printPage()">Print</button>
+  <script>function showAlert() { window.alert("This setting is unavaliable (Error: 404)"); }</script>
+  <script>function changeText() { document.getElementById("msg").innerText = "Button clicked!"; }</script>
+  <script>function logMessage() { console.log("Hello, World"); }</script>
+  <script>function printPage() { window.print(); }</script>
+</body>
