@@ -18,3 +18,10 @@ function addClick() {
 
 const siteName = "Home";
 console.log("Site:", siteName);
+
+let count = 0;
+count = count + 1;
+let date = 0;
+date = date + 6;
+let sum = count + date;
+console.log(count + date);
