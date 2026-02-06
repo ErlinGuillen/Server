@@ -10,3 +10,11 @@ function logMessage() {
 function printPage() { 
   window.print(); 
 }
+
+let clicks = 0;
+function addClick() { 
+  clicks += 1; document.getElementById("clicks").innerText = clicks;
+}
+
+const siteName = "Home";
+console.log("Site:", siteName);
