@@ -27,6 +27,14 @@
   <button onclick="showAlert()">Setting</button>
   <button onclick="logMessage()">Console</button>
   <button onclick="printPage()">Print</button>
+  <button onclick="addClick()">Click count</button>
+  <p id="clicks">0</p>
+  <script>
+  let clicks = 0;
+  function addClick() { clicks += 1; document.getElementById("clicks").innerText = clicks;}
+  const siteName = "Home";
+  console.log("Site:", siteName);
+  </script>
   <script>function showAlert() { window.alert("This setting is unavaliable (Error: 404)"); }</script>
   <script>function changeText() { document.getElementById("msg").innerText = "Button clicked!"; }</script>
   <script>function logMessage() { console.log("Hello, World"); }</script>
