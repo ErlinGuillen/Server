@@ -3,7 +3,7 @@ body {
   text-align: center;
   background-color: black;
 }
-/* Heading colors */
+/* Heading colors, background, and border soild */
 h1 { 
   color: #000000;
   background-color: #808080;
@@ -12,10 +12,6 @@ h1 {
 /* paragraphs, a, and pre colors */
 p, a, pre { 
   color: #969999; 
-}
-/* image martin-left */
-img {
-  margin-left: 1000px;
 }
 /* hr width, border, height, background, and margin */
 hr {
