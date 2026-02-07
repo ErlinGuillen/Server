@@ -1,30 +1,34 @@
+// Show an alert when the button is clicked
 function showAlert() { 
   window.alert("This setting is unavaliable (Error: 404)"); 
 }
+// Show a text when the button is clicked
 function changeText() { 
   document.getElementById("msg").innerText = "Button clicked!"; 
 }
+// Show a message console when the button is clicked
 function logMessage() { 
   console.log("Hello, World"); 
 }
+// Show an print when the button is clicked
 function printPage() { 
   window.print(); 
 }
-
+// Show an heading and paragraph when the button is clicked
 function myParagraph() {
   document.getElementById("demo1").innerHTML = "<h5>Information<h5>";
   document.getElementById("demo2").innerText = "This is currently under construction";
 }
-
+/* Count button clicks */
 let clicks = 0;
 function addClick() { 
   clicks += 1; 
   document.getElementById("clicks").innerText = clicks;
 }
-
+// Show a message console 
 const siteName = "Home";
 console.log("Site:", siteName);
-
+// Show a message console when solve
 let count, date, sum;
 count = 0;
 count = count + 1;
