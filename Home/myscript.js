@@ -12,7 +12,7 @@ function printPage() {
 }
 
 function myParagraph() {
-  document.getElementById("demo1").innerHTML = "<h4>Information<h4>";
+  document.getElementById("demo1").innerHTML = "<h5>Information<h5>";
   document.getElementById("demo2").innerText = "This is currently under construction";
 }
 
