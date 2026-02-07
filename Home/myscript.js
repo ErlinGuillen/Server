@@ -11,7 +11,7 @@ function printPage() {
   window.print(); 
 }
 
-function myparagraph() {
+function myParagraph() {
   document.getElementById("demo1").innerHTML = "<h4>Information<h4>";
   document.getElementById("demo2").innerText = "This is currently under construction";
 }
