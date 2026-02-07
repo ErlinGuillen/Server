@@ -7,6 +7,7 @@ body {
 h1 { 
   color: #000000;
   background-color: #808080;
+  border: 2px solid white;
 }
 /* paragraphs, a, and pre colors */
 p, a, pre { 
