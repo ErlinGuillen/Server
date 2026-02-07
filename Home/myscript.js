@@ -11,6 +11,11 @@ function printPage() {
   window.print(); 
 }
 
+function myparagraph() {
+  document.getElementById("demo1").innerHTML = "<h4>Information<h4>";
+  document.getElementById("demo2").innerText = "This is currently under construction";
+}
+
 let clicks = 0;
 function addClick() { 
   clicks += 1; 
