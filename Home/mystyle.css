@@ -1,3 +1,8 @@
+/* Main Heading styles */
+body { 
+  text-align: center;
+  background-color: black;
+}
 /* Heading colors */
 h1, { 
   color: #000000;
@@ -7,10 +12,6 @@ h1, {
 p, a, pre { 
   color: #969999; 
 }
-/* Main Heading styles */
-body { 
-  text-align: center;
-  background-color: black;
 /* image martin-left */
 img {
   margin-left: 1000px;
