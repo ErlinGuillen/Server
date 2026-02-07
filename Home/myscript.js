@@ -13,15 +13,17 @@ function printPage() {
 
 let clicks = 0;
 function addClick() { 
-  clicks += 1; document.getElementById("clicks").innerText = clicks;
+  clicks += 1; 
+  document.getElementById("clicks").innerText = clicks;
 }
 
 const siteName = "Home";
 console.log("Site:", siteName);
 
-let count = 0;
+let count, date, sum;
+count = 0;
 count = count + 1;
-let date = 0;
+date = 0;
 date = date + 6;
-let sum = count + date;
-console.log(count + date);
+sum = count + date;
+console.log(sum);
