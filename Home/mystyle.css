@@ -13,10 +13,14 @@ h1 {
 p, a, pre, small { 
   color: #969999; 
 }
-/* mark hightlight */
+/* mark highlight colors */
 mark {
   background-color: #808080;
   color: #000000;
+}
+/* del mark colors */
+del {
+  color: red; 
 }
 /* hr width, border, height, background, and margin */
 hr {
