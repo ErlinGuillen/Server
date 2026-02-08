@@ -22,6 +22,11 @@ mark {
 del {
   color: red; 
 }
+/* ins underlined colors */
+ins {
+  color: white;
+}
+
 /* hr width, border, height, background, and margin */
 hr {
   width: 60%;
