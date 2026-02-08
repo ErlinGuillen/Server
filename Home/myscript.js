@@ -29,9 +29,7 @@ function addClick() {
 const siteName = "Home";
 console.log("Site:", siteName);
 // Show a message console when solve
-const count = 0;
-count = count + 1;
-const date = 0;
-date = date + 8;
+const count = 1;
+const date = 8;
 let sum = count + date;
 console.log(sum);
