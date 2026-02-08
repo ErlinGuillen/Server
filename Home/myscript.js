@@ -32,6 +32,6 @@ console.log("Site:", siteName);
 const count = 0;
 count = count + 1;
 const date = 0;
-date = date + 6;
+date = date + 8;
 let sum = count + date;
 console.log(sum);
