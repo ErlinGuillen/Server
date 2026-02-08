@@ -15,7 +15,7 @@ p, a, pre, small {
 }
 /* mark highlight colors */
 mark {
-  background-color: #808080;
+  background-color: white;
   color: #000000;
 }
 /* del mark colors */
