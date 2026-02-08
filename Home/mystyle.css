@@ -10,7 +10,7 @@ h1 {
   border: 2px solid white;
 }
 /* paragraphs, a, and pre colors */
-p, a, pre { 
+p, a, pre, small { 
   color: #969999; 
 }
 /* hr width, border, height, background, and margin */
