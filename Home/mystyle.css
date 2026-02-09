@@ -35,15 +35,15 @@ hr {
   margin: 20px auto;
 }
 
-h1.home{
+div.home{
   background-color: #3C3C3C
 }
 
 a.home{
-  background-color: #5E5E5E
+  background-color: #808080
 }
 
 p.home{
-  background-color: #808080
+  background-color: #5E5E5E
 }
 
