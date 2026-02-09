@@ -12,7 +12,7 @@ function printPage() {
 }
 // Show an heading and paragraph when the button is clicked
 function myParagraph() {
-  document.getElementById("demo1").innerHTML = "<h5>Information<h5>";
+  document.getElementById("demo1").innerHTML = "<ins>Information<ins>";
   document.getElementById("demo2").innerText = "This is currently under construction";
 }
 /* Count button clicks */
