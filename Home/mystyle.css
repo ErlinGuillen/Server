@@ -34,3 +34,16 @@ hr {
   background: #555;
   margin: 20px auto;
 }
+
+h1.home{
+  background-color: #3C3C3C
+}
+
+a.home{
+  background-color: #5E5E5E
+}
+
+p.home{
+  background-color: #808080
+}
+
