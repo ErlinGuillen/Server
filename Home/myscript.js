@@ -33,3 +33,8 @@ const count = 1;
 const date = 8;
 let sum = count + date;
 console.log(sum);
+// Allowed
+{
+let clicks = 2;  
+}
+
