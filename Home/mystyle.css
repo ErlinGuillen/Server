@@ -10,7 +10,7 @@ h1 {
   border: 2px solid white;
 }
 /* paragraphs, a, and pre colors */
-p, a, pre, small { 
+p, a, pre, small, blackquote { 
   color: #969999; 
 }
 /* mark highlight colors */
