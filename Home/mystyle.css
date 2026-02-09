@@ -9,7 +9,7 @@ h1 {
   background-color: #80808080;
   border: 2px solid white;
 }
-/* paragraphs, a, and pre colors */
+/* paragraphs, a, and pre, blackquote, and address colors */
 p, a, pre, small, blackquote, address { 
   color: #969999; 
 }
@@ -26,7 +26,6 @@ del {
 ins {
   color: white;
 }
-
 /* hr width, border, height, background, and margin */
 hr {
   width: 60%;
