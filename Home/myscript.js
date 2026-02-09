@@ -1,7 +1,3 @@
-// Show an alert when the button is clicked
-function showAlert() { 
-  window.alert("This setting is unavaliable (Error: 404)"); 
-}
 // Show a text when the button is clicked
 function changeText() { 
   document.getElementById("msg").innerText = "Button clicked!"; 
