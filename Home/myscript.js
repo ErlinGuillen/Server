@@ -56,7 +56,7 @@ carName = "Nissian";
 var carName;
 
 var name = "Home";
-var count = 10;
+var subs = 10;
 var isLive = true;
 
 console.log(typeof name);   // "string"
