@@ -22,7 +22,7 @@ function myParagraph() {
 // Count button clicks
 var clicks = 0;
 function addClick() {
-  clicks++;
+  clicks += 1;
   document.getElementById("clicks").innerText = clicks;
 }
 
