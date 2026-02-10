@@ -55,9 +55,9 @@ car.owner = "Veneranda"; // Add a property:
 carName = "Nissian";
 var carName;
 
-const name = "Home";
-const count = 10;
-const isLive = true;
+var name = "Home";
+var count = 10;
+var isLive = true;
 
 console.log(typeof name);   // "string"
 console.log(typeof count);  // "number"
