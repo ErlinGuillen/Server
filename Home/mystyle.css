@@ -1,31 +1,36 @@
 /* Main Heading styles */
 body { 
-  text-align: center;
   background-image: url("https://upload.wikimedia.org/wikipedia/commons/2/2c/Rotating_earth_%28large%29.gif");
 }
 /* Heading colors, background, and border soild */
 h1 { 
   color: rgb(0, 0, 0);
   background-color:rgb(128, 128, 128, 0.5);
+  text-align: center;
 }
 /* paragraphs, a, and pre, blackquote, and address colors */
 p, a, pre, small, blackquote, address, bdo { 
   color:rgb(168, 168, 168); 
+  text-align: center;
 }
 /* mark highlight colors */
 mark {
   background-color:rgb(255, 255, 255);
   color:rgb(0, 0, 0);
+  text-align: center;
 }
 /* del mark colors */
 del {
   color:rgb(255, 0, 0); 
+  text-align: center;
 }
 /* ins underlined colors */
 ins {
   color:rgb(255, 255, 255);
+  text-align: center;
 }
 /* div.home */
 div.home {
   background-color:rgb(51, 51, 51, 0.5);
+  text-align: center;
 }
