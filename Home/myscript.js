@@ -38,11 +38,11 @@ var sum = count + date;
 console.log(sum);
 
 // Array example
-var subjects = ["Class", "Class", "Class"];
-subjects[0] = "Math";
-subjects[1] = "Reading";
-subjects[2] = "Science";
-subjects.push("By Erlin");
+var subjects = ["Class", "Class", "Class"]; // You can create a constant array:
+subjects[0] = "Math"; // You can change an element:
+subjects[1] = "Reading"; // You can change an element:
+subjects[2] = "Science"; // You can change an element:
+subjects.push("By Erlin"); // You can add an element:
 
 
 
