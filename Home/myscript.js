@@ -42,7 +42,5 @@ var subjects = ["Math", "Reading", "Science"];
 subjects[2] = "Class";
 subjects.push("By Erlin");
 
-// Display array
-
 
 
