@@ -18,6 +18,7 @@ function myParagraph() {
   document.getElementById("demo1").innerHTML = "<ins>Information</ins>";
   document.getElementById("demo2").innerText = "This is currently under construction";
   document.getElementById("demo3").innerText = subjects
+  document.getElementById("demo4").innerHTML = "Car owner is " + car.owner;
 }
 
 // Count button clicks
@@ -43,6 +44,15 @@ subjects[0] = "Math"; // You can change an element:
 subjects[1] = "Reading"; // You can change an element:
 subjects[2] = "Science"; // You can change an element:
 subjects.push("By Erlin"); // You can add an element:
+
+// Create an object:
+const car = {type:"Fiat", model:"500", color:"red"};
+// Change a property:
+car.color = "red";
+// Add a property:
+car.owner = "Veneranda";
+// Display the property:
+
 
 
 
