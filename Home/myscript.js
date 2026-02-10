@@ -39,18 +39,19 @@ var date = 8;
 var sum = count + date;
 console.log(sum);
 
-// Array example
+// demo3
 var subjects = ["Class", "Class", "Class"]; // You can create a constant array:
 subjects[0] = "Math"; // You can change an element:
 subjects[1] = "Reading"; // You can change an element:
 subjects[2] = "Science"; // You can change an element:
 subjects.push("By Erlin"); // You can add an element:
 
-
+// demo4
 var car = {type:"Fiat", model:"500", color:"red"}; // Create an object
 car.color = "red"; // Change a property:
 car.owner = "Veneranda"; // Add a property:
 
+// demo5
 carName = "Nissian";
 var carName;
 
