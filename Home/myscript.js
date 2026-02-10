@@ -33,5 +33,13 @@ console.log(sum);
 {
 let clicks = 2;  
 }
+// Create an Array:
+const subject = ["Math", "Reading", "Science"];
+// Change an element:
+subject[2] = "Class";
+// Add an element:
+subject.push("By Erlin");
+// Display the Array:
+document.getElementById("demo3").innerHTML = subject; 
 
 
