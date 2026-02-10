@@ -17,7 +17,7 @@ function printPage() {
 function myParagraph() {
   document.getElementById("demo1").innerHTML = "<ins>Information</ins>";
   document.getElementById("demo2").innerText = "This is currently under construction";
-  document.getElementById("demo3").innerText = subjects.join(", ");
+  document.getElementById("demo3").innerText = subjects
 }
 
 // Count button clicks
