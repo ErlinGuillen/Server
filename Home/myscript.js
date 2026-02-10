@@ -60,7 +60,7 @@ var subs = 10;
 var isLive = true;
 
 console.log(typeof name);   // "string"
-console.log(typeof count);  // "number"
+console.log(typeof subs);  // "number"
 console.log(typeof isLive); // "boolean"
 
 
