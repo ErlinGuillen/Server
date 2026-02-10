@@ -38,8 +38,10 @@ var sum = count + date;
 console.log(sum);
 
 // Array example
-var subjects = ["Math", "Reading", "Science"];
-subjects[2] = "Class";
+var subjects = ["Class", "Class", "Class"];
+subjects[0] = "Math";
+subjects[1] = "Reading";
+subjects[2] = "Science";
 subjects.push("By Erlin");
 
 
