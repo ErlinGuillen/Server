@@ -13,13 +13,14 @@ function printPage() {
   window.print();
 }
 
-// Show heading and paragraph
+// Show heading and paragraph 
 function myParagraph() {
   document.getElementById("demo1").innerHTML = "<ins>Information</ins>";
   document.getElementById("demo2").innerText = "This is currently under construction";
   document.getElementById("demo3").innerText = subjects
   document.getElementById("demo4").innerHTML = "Car owner is " + car.owner;
   document.getElementById("demo5").innerHTML = carName;
+  document.getElementById("myp6").innerHTML = question + " <br> " + answer1 + " <br> " + answer2  + " <br> " + answer3
 }
 
 // Count button clicks
@@ -62,5 +63,11 @@ var isLive = true;
 console.log(typeof name);   // "string"
 console.log(typeof subs);  // "number"
 console.log(typeof isLive); // "boolean"
+
+// myp6
+var question = "What is 10 + 9";
+var answer1 = "10";
+var answer2 = "21";
+var answer3 = "9";
 
 
