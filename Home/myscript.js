@@ -21,6 +21,7 @@ function myParagraph() {
   document.getElementById("demo4").innerHTML = "Car owner is " + car.owner;
   document.getElementById("demo5").innerHTML = carName;
   document.getElementById("myp6").innerHTML = question + " <br> " + answer1 + " <br> " + answer2  + " <br> " + answer3
+  document.getElementById("myp7").innerHTML = (solution == 19)
 }
 
 // Count button clicks
@@ -69,5 +70,9 @@ var question = "What is 10 + 9";
 var answer1 = "10";
 var answer2 = "21";
 var answer3 = "9";
+
+// myp7
+var solution = "21"
+
 
 
