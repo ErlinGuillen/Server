@@ -1,9 +1,5 @@
-// Output to the browser console
-console.log("Hello World!");
-
-// Output using an alert popup
-alert("Welcome to my website!");
-
-// Output directly into the HTML page
-document.write("This text was added by JavaScript.");
-
+document.getElementById("demo").innerHTML = "Hello <b>World</b>!";
+document.getElementById("text").innerText = "Hello World!";
+document.write("This text is written to the page");
+window.alert("Hello! This is an alert.");
+console.log("Hello from the console!");
