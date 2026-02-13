@@ -9,29 +9,33 @@
 <body>
 
   <header>
-    <h1>Welcome to My Website</h1>
-    <p id="message"></p>
+    <h1 title="Welcome Heading">Welcome to My Website</h1>
+    <p id="message" class="highlight">This message will be updated by JavaScript.</p>
   </header>
 
   <main>
-  <h2>About Me</h2>
+    <h2 id="about" class="section-title">About Me</h2>
 
-  <p>This is a paragraph element.</p>
+    <p>This is a paragraph element with a <span class="highlight">highlighted word</span>.</p>
 
-  <a href="https://www.google.com">This is a link</a>
+    <!-- Link with attributes -->
+    <a href="https://www.google.com" target="_blank" rel="noopener" title="Go to Google">This is a link</a>
 
-  <br>
+    <br>
 
-  <img src="https://via.placeholder.com/150" alt="Placeholder Image">
+    <!-- Image with attributes -->
+    <img src="https://via.placeholder.com/150" alt="Placeholder Image" width="150" height="150" title="Example Image">
 
-  <ul>
-    <li>Item One</li>
-    <li>Item Two</li>
-    <li>Item Three</li>
-  </ul>
+    <!-- List with attributes -->
+    <ul>
+      <li id="item1">Item One</li>
+      <li id="item2">Item Two</li>
+      <li id="item3">Item Three</li>
+    </ul>
 
-  <button onclick="showMessage()">Click Me</button>
-</main>
+    <!-- Button with event attribute -->
+    <button onclick="showMessage()" id="myButton" title="Click this button">Click Me</button>
+  </main>
 
   <footer>
     <p>&copy; 2026 My Website</p>
