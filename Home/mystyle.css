@@ -56,20 +56,6 @@ footer {
   color: #666;
 }
 
-/* Select by ID */
-#main-title {
-  color: blue;
-  text-align: center;
-}
-
-/* Select by class */
-.card {
-  background-color: white;
-  padding: 20px;
-  margin: 10px;
-  border-radius: 8px;
-}
-
 /* Select all paragraphs inside a section */
 section p {
   color: gray;
