@@ -1,79 +1,30 @@
-/* This is a single-line comment */
+/* This is a CSS comment */
 
-/* 
-  This is a multi-line comment.
-  You can write multiple lines of text here.
-*/
-
-/* Styling the body element */
 body {
-  background-color: lightblue; /* Light gray background */
-  font-family: Arial, sans-serif; /* Font for the page */
-  margin: 0; /* Remove default margin */
-  padding: 0; /* Remove default padding */
+  background-color: #f4f4f4;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
-/* Heading styles */
-h1, h2 {
-  color: blue; /* Make headings blue */
-  text-align: center; /* Center the text */
-  font-family: Georgia, serif; /* Change heading font */
+h1 {
+  color: blue;
+  text-align: center;
 }
 
-/* Button styles */
-button {
-  background-color: green; /* Button background */
-  color: white; /* Button text color */
-  padding: 10px 15px; /* Button padding */
-  border: none; /* Remove border */
-  cursor: pointer; /* Cursor changes on hover */
-}
-
-/* Hover effect for buttons */
-button:hover {
-  background-color: darkgreen; /* Darker green on hover */
-}
-
-/* ID Selector */
-#message {
-  color: red;
-  font-weight: bold;
-}
-
-/* Class Selector */
-.highlight {
-  background-color: yellow;
-  padding: 5px;
-}
-
-/* Descendant Selector */
-header p {
-  font-style: italic;
-}
-
-/* Child Selector */
-main > p {
-  border-left: 4px solid blue;
-  padding-left: 10px;
-}
-
-/* Attribute Selector */
-a[href] {
-  color: purple;
-  text-decoration: none;
-}
-
-/* Hover Pseudo-class */
-a:hover {
-  text-decoration: underline;
-}
-
-/* Text color */
 p {
-  color: red; /* Text will be red */
+  color: #333;
+  font-size: 16px;
 }
 
-/* Border color */
-div {
-  border: 2px solid green;
+button {
+  background-color: green;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: darkgreen;
 }
