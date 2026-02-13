@@ -8,39 +8,54 @@
 </head>
 <body>
 
+  <!-- Header Section -->
   <header>
     <h1 title="Welcome Heading">Welcome to My Website</h1>
     <p id="message" class="highlight">This message will be updated by JavaScript.</p>
   </header>
 
+  <!-- Main Content Section -->
   <main>
-    <h2 id="about" class="section-title">About Me</h2>
+    <!-- About Section -->
+    <section id="about" class="section">
+      <h2>About Me</h2>
+      <p>This is a paragraph element with a <span class="highlight">highlighted word</span>.</p>
+    </section>
 
-    <p>This is a paragraph element with a <span class="highlight">highlighted word</span>.</p>
+    <!-- Links Section -->
+    <section class="links">
+      <h2>Useful Links</h2>
+      <a href="https://www.google.com" target="_blank" rel="noopener" title="Go to Google">Go to Google</a>
+    </section>
 
-    <!-- Link with attributes -->
-    <a href="https://www.google.com" target="_blank" rel="noopener" title="Go to Google">This is a link</a>
+    <!-- Image Section -->
+    <section class="images">
+      <h2>Gallery</h2>
+      <img src="https://via.placeholder.com/150" alt="Placeholder Image" width="150" height="150" title="Example Image">
+    </section>
 
-    <br>
+    <!-- List Section -->
+    <section class="list-section">
+      <h2>My List</h2>
+      <ul>
+        <li id="item1">Item One</li>
+        <li id="item2">Item Two</li>
+        <li id="item3">Item Three</li>
+      </ul>
+    </section>
 
-    <!-- Image with attributes -->
-    <img src="https://via.placeholder.com/150" alt="Placeholder Image" width="150" height="150" title="Example Image">
-
-    <!-- List with attributes -->
-    <ul>
-      <li id="item1">Item One</li>
-      <li id="item2">Item Two</li>
-      <li id="item3">Item Three</li>
-    </ul>
-
-    <!-- Button with event attribute -->
-    <button onclick="showMessage()" id="myButton" title="Click this button">Click Me</button>
+    <!-- Button Section -->
+    <section class="actions">
+      <button id="myButton" onclick="showMessage()" title="Click this button">Click Me</button>
+    </section>
   </main>
 
+  <!-- Footer Section -->
   <footer>
     <p>&copy; 2026 My Website</p>
   </footer>
 
+  <!-- JavaScript -->
   <script src="myscript.js"></script>
 </body>
 </html>
