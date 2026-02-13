@@ -7,7 +7,7 @@
 
 /* Styling the body element */
 body {
-  background-color: #f4f4f4; /* Light gray background */
+  background-color: lightblue; /* Light gray background */
   font-family: Arial, sans-serif; /* Font for the page */
   margin: 0; /* Remove default margin */
   padding: 0; /* Remove default padding */
@@ -66,4 +66,14 @@ a[href] {
 /* Hover Pseudo-class */
 a:hover {
   text-decoration: underline;
+}
+
+/* Text color */
+p {
+  color: red; /* Text will be red */
+}
+
+/* Border color */
+div {
+  border: 2px solid green;
 }
