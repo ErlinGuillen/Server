@@ -8,14 +8,28 @@
 */
 
 // 1. Variable declaration
-let name = "Erlin";       // variable that can change
-const age = 20;           // constant, cannot be changed
-var city = "Miami";       // old-style variable
+// Using let (can change value later)
+let name = "Erlin";
+let age = 17;
 
+// Using const (cannot change value)
+const country = "USA";
+
+// Using var (old way, can change value)
+var city = "Miami";
+
+// Changing a let or var variable
+name = "Alex";
+age = 18;
+city = "New York";
+
+// Trying to change const will cause an error
+// country = "Canada"; // ❌ This will break the cod
 // 2. Output statements
-console.log("Hello World!");               // prints in console
-alert("Welcome to my website!");           // pops up in browser
-document.getElementById("message").textContent = "JS is working!";  // shows in HTML
+
+console.log(name);         // prints in console
+alert("Welcome " + name);  // shows popup
+document.getElementById("message").textContent = "Hello " + name; // prints in HTML
 
 // 3. Conditional statement
 if (age >= 18) {
@@ -32,10 +46,11 @@ for (let i = 1; i <= 5; i++) {
 }
 
 // Looping through an array
-let colors = ["red", "green", "blue"];
-for (let color of colors) {
-  console.log(color);  // prints each color
-}
+let number = 10;           // number
+let text = "Hello World";  // string
+let isStudent = true;      // boolean (true/false)
+let colors = ["red", "green", "blue"]; // array
+let person = {name: "Erlin", age: 17}; // object
 
 // 5. Function example
 function greet(user) {
