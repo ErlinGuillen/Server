@@ -5,9 +5,10 @@ body {
   padding: 0;
 }
 
-h1 {
+h1, h2 {
   color: blue;
   text-align: center;
+  font-family: Georgia, serif;
 }
 
 p {
@@ -25,4 +26,38 @@ button {
 
 button:hover {
   background-color: darkgreen;
+}
+
+/* ID Selector */
+#message {
+  color: red;
+  font-weight: bold;
+}
+
+/* Class Selector */
+.highlight {
+  background-color: yellow;
+  padding: 5px;
+}
+
+/* Descendant Selector */
+header p {
+  font-style: italic;
+}
+
+/* Child Selector */
+main > p {
+  border-left: 4px solid blue;
+  padding-left: 10px;
+}
+
+/* Attribute Selector */
+a[href] {
+  color: purple;
+  text-decoration: none;
+}
+
+/* Hover Pseudo-class */
+a:hover {
+  text-decoration: underline;
 }
