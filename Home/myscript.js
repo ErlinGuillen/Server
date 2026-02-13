@@ -11,3 +11,7 @@ document.write("This text was added by JavaScript.");
 document.getElementById("message").textContent = "Hello from JavaScript!";
 let variableName = "value";
 console.log(variableName);
+
+function showMessage() {
+  document.getElementById("message").textContent = "Button was clicked!";
+}
