@@ -21,5 +21,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 
+console.log("Hello, World!");
+
+document.write("Hello, World!");
+
+document.getElementById("demo").innerHTML = "Hello, World!";
+
+alert("Hello, World!");
+
+let name = "Alex";
+console.log("Hello " + name);
 
 
