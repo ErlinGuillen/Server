@@ -56,9 +56,20 @@ footer {
   color: #666;
 }
 
+h1, h2, p {
+  color: blue;
+  font-family: Arial, sans-serif;
+}
+
 /* Select all paragraphs inside a section */
 section p {
   color: gray;
+}
+
+button, .btn, #submit {
+  background-color: black;
+  color: white;
+  padding: 10px;
 }
 
 /* Select button when hovered */
