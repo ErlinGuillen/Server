@@ -52,4 +52,5 @@
   
   img{
     background-color:rgba(255,255,255); 
+	border: 2px solid rgba(150,225,255);
   }
