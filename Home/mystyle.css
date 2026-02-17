@@ -1,0 +1,54 @@
+@charset "UTF-8";
+/* CSS Document */
+  body {
+    margin:0;
+	text-align: center;
+  }
+  
+  wrapper {
+  	width:80%;
+  	display:block;
+  	margin:auto;
+	background-color:rgba(225,240,255);
+  }
+  
+  h1, h3, a {
+	font-family: "Roboto", sans-serif;
+  	font-optical-sizing: auto;
+  	font-weight: 900;
+  	font-style: normal;
+  	font-variation-settings: "wdth" 100;
+  }
+ 
+  h1.logo {
+    font-size:300%;
+  }
+
+  p.logo {
+    font-size:111%;
+  }
+
+  p {
+	color: grey;
+	font-family: "Roboto", sans-serif;
+  	font-optical-sizing: auto;
+  	font-weight: 400;
+  	font-style: normal;
+  	font-variation-settings: "wdth" 100;	
+  }
+	
+  .thingiliked {
+	background-color:rgba(255,255,255);
+  }
+	
+  .thingihated {
+	background-color:rgba(255,255,255); 
+  }
+  
+  section{
+	background-color:rgba(255,255,255); 
+  }
+  
+  img{
+    background-color:rgba(255,255,255); 
+  }
