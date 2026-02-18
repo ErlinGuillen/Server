@@ -3,7 +3,7 @@
   body {
     margin:0;
 	text-align: center;
-	background-image: url('img_girl.jpg');
+	background-image: url("backgroundv1.jpg");
     background-repeat: no-repeat;
     background-size: cover;
   }
