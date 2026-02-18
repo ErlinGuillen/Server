@@ -39,11 +39,12 @@
   }
  
   section {
-   	padding: 0px 111px;
-	margin: 1px 25px;
+   	padding: 1px 111px;
+	margin: 10px 25px;
 	border: 2px solid rgba(125,125,125);
 	background-color:rgba(255,255,255);
-	display: inline-block
+	display: inline-block;
+	width: 10%;
   }
   
   img{
