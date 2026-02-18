@@ -3,7 +3,7 @@
   body {
     margin:0;
 	text-align: center;
-	background-image: url("Backgroundv1.jpg");
+	background-image: url("../../Downloads/Backgroundv1.jpg");
     background-repeat: no-repeat;
     background-size: cover;
   }
@@ -21,7 +21,6 @@
   	font-weight: 900;
   	font-style: normal;
   	font-variation-settings: "wdth" 100;
-	color: white;
   }
   
   h1.logo {
@@ -35,11 +34,9 @@
 
   p.black{
 	color: black;
-  }
-
-  h3.black{
-	color: black;
-  }
+  
+	
+}
 
   p {
 	color: white;
@@ -50,22 +47,6 @@
   	font-variation-settings: "wdth" 100;	
   }
   
-  section {
-	margin: 10px 25px;
-	background-color:rgba(255,255,255);
-	display: inline-block;
-	width: 40%; 
-  }
-  
-  img.logo {
-    background-color:rgba(255,255,255); 
-	float: left;
-  }
-  
-  img{
-    background-color:rgba(255,255,255); 
-  }
-
   a.bottom {
 	background-color: black;
 	color: white;
@@ -89,7 +70,27 @@
     padding: 5px 50px;
 	margin: 1px 10px;
   }
+
+  section {
+	margin: 10px 25px;
+	background-color:rgba(255,255,255);
+	display: inline-block;
+	width: 40%; 
+  }
+
+  ins {
+	color: white;
+  }
   
+  img.logo {
+    background-color:rgba(255,255,255); 
+	float: left;
+  }
+
+  img{
+    background-color:rgba(255,255,255);
+  }
+
   button{
 	background-color:rgba(255,255,255);
 	padding: 5px 50px;
@@ -106,4 +107,8 @@
   button:active {
   color: white;
   background-color: green;
+  }
+
+  address{
+     color:white;
   }
