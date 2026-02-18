@@ -12,7 +12,6 @@
   	width:80%;
   	display:block;
   	margin:auto;
-
   }
   
   h1, h2, h3 {
@@ -21,6 +20,7 @@
   	font-weight: 900;
   	font-style: normal;
   	font-variation-settings: "wdth" 100;
+	color: white;
   }
   
   h1.logo {
