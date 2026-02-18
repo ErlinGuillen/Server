@@ -21,6 +21,7 @@
   	font-weight: 900;
   	font-style: normal;
   	font-variation-settings: "wdth" 100;
+	color: whitw;
   }
   
   h1.logo {
@@ -34,9 +35,7 @@
 
   p.black{
 	color: black;
-  
-	
-}
+  }
 
   p {
 	color: white;
