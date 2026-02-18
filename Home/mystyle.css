@@ -32,10 +32,6 @@
     font-size:111%;
   }
 
-  p.black{
-	color: black;
-  }
-
   h3.black{
 	color: black;
   }
@@ -81,7 +77,7 @@
   }
 
   ins {
-	color: white;
+	color: black;
   }
   
   img.logo {
