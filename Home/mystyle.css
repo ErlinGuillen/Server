@@ -13,7 +13,7 @@
 	border: 2px solid rgba(150,225,255);
   }
   
-  h1, h3 {
+  h1 {
 	font-family: "Roboto", sans-serif;
   	font-optical-sizing: auto;
   	font-weight: 900;
@@ -21,6 +21,14 @@
   	font-variation-settings: "wdth" 100;
   }
  
+  h3 {
+	font-family: "Roboto", sans-serif;
+  	font-optical-sizing: auto;
+  	font-weight: 900;
+  	font-style: normal;
+  	font-variation-settings: "wdth" 100;
+  }
+
   h1.logo {
     font-size:300%;
   }
@@ -37,13 +45,18 @@
   	font-style: normal;
   	font-variation-settings: "wdth" 100;	
   }
- 
+  
   section {
 	margin: 10px 25px;
 	border: 2px solid rgba(125,125,125);
 	background-color:rgba(255,255,255);
 	display: inline-block;
-	width: 40%;
+	width: 40%; 
+  }
+  
+  img.logo {
+    background-color:rgba(255,255,255); 
+	float: left;
   }
   
   img{
@@ -69,4 +82,3 @@
   color: white;
   background-color: green;
   }
-
