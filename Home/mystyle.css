@@ -50,12 +50,22 @@
 	border: 2px solid rgba(150,225,255);
   }
 
-  button{
+  button {
 	background-color:rgba(255,255,255);
 	padding: 2%;
 	margin: 0.1%;
 	border: 2px solid rgba(125,125,125);
     font-size: 150%;
 	font-weight: 1000;
+  }
+
+  button:hover {
+  color: white;
+  background-color: black;
+  }
+
+  button:active {
+  color: white;
+  background-color: green;
   }
 
