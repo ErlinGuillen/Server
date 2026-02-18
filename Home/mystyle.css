@@ -3,7 +3,7 @@
   body {
     margin:0;
 	text-align: center;
-	background-image: url("Backgroundv1.jpg");
+	background-image: url("../../Downloads/Backgroundv1.jpg");
     background-repeat: no-repeat;
     background-size: cover;
   }
@@ -12,26 +12,17 @@
   	width:80%;
   	display:block;
   	margin:auto;
+
   }
   
-  h1 {
+  h1, h2, h3 {
 	font-family: "Roboto", sans-serif;
   	font-optical-sizing: auto;
   	font-weight: 900;
   	font-style: normal;
   	font-variation-settings: "wdth" 100;
-	color: white;
   }
- 
-  h2 {
-	font-family: "Roboto", sans-serif;
-  	font-optical-sizing: auto;
-  	font-weight: 900;
-  	font-style: normal;
-  	font-variation-settings: "wdth" 100;
-	color: white;
-  }
-
+  
   h1.logo {
     font-size:300%;
 	text-align: left;
@@ -40,6 +31,12 @@
   p.logo {
     font-size:111%;
   }
+
+  p.black{
+	color: black;
+  
+	
+}
 
   p {
 	color: white;
@@ -52,7 +49,6 @@
   
   section {
 	margin: 10px 25px;
-	border: 2px solid rgba(125,125,125);
 	background-color:rgba(255,255,255);
 	display: inline-block;
 	width: 40%; 
@@ -65,14 +61,12 @@
   
   img{
     background-color:rgba(255,255,255); 
-	border: 2px solid rgba(150,225,255);
   }
 
   button{
 	background-color:rgba(255,255,255);
 	padding: 5px 50px;
 	margin: 1px 10px;
-	border: 2px solid rgba(125,125,125);
     font-size: 150%;
 	font-weight: 1000;
   }
@@ -80,9 +74,4 @@
   button:hover {
   color: white;
   background-color: black;
-  }
-
-  button:active {
-  color: white;
-  background-color: green;
   }
