@@ -14,12 +14,13 @@
   	margin:auto;
   }
   
-  h1, h3 {
+  h1 {
 	font-family: "Roboto", sans-serif;
   	font-optical-sizing: auto;
   	font-weight: 900;
   	font-style: normal;
   	font-variation-settings: "wdth" 100;
+	color: white;
   }
  
   h2 {
@@ -28,6 +29,7 @@
   	font-weight: 900;
   	font-style: normal;
   	font-variation-settings: "wdth" 100;
+	color: white;
   }
 
   h1.logo {
@@ -40,7 +42,7 @@
   }
 
   p {
-	color: grey;
+	color: white;
 	font-family: "Roboto", sans-serif;
   	font-optical-sizing: auto;
   	font-weight: 400;
