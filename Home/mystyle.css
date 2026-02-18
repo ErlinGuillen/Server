@@ -3,13 +3,15 @@
   body {
     margin:0;
 	text-align: center;
+	background-image: url('img_girl.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
   }
   
   wrapper {
   	width:80%;
   	display:block;
   	margin:auto;
-	background-color:rgba(225,240,255);
 	border: 2px solid rgba(150,225,255);
   }
   
