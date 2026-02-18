@@ -37,6 +37,18 @@
 	color: black;
   }
 
+  h1.black{
+	color: black;
+  }
+
+  h2.black{
+	color: black;
+  }
+
+  h3.black{
+	color: black;
+  }
+
   p {
 	color: white;
 	font-family: "Roboto", sans-serif;
