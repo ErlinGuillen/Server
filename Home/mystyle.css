@@ -13,7 +13,7 @@
 	border: 2px solid rgba(150,225,255);
   }
   
-  h1 {
+  h1, h3 {
 	font-family: "Roboto", sans-serif;
   	font-optical-sizing: auto;
   	font-weight: 900;
@@ -21,7 +21,7 @@
   	font-variation-settings: "wdth" 100;
   }
  
-  h3 {
+  h2 {
 	font-family: "Roboto", sans-serif;
   	font-optical-sizing: auto;
   	font-weight: 900;
