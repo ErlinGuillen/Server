@@ -3,7 +3,7 @@
   body {
     margin:0;
 	text-align: center;
-	background-image: url("Backgroundv1.jpg");
+	background-image: url("../../Downloads/Backgroundv1.jpg");
     background-repeat: no-repeat;
     background-size: cover;
   }
@@ -12,6 +12,7 @@
   	width:80%;
   	display:block;
   	margin:auto;
+
   }
   
   h1, h2, h3 {
@@ -32,23 +33,51 @@
     font-size:111%;
   }
 
-  h3.black{
-	color: black;
-  }
-
   p.black{
 	color: black;
   }
 
+  h3.black{
+	color: black;
+  }
+
   p {
-	color: white;
 	font-family: "Roboto", sans-serif;
   	font-optical-sizing: auto;
-  	font-weight: 400;
+  	font-weight: 1000;
   	font-style: normal;
   	font-variation-settings: "wdth" 100;	
   }
   
+  p.project {
+	font-family: "Roboto", sans-serif;
+  	font-optical-sizing: auto;
+  	font-weight: 1000;
+  	font-style: normal;
+  	font-variation-settings: "wdth" 100;
+	color: black;
+  }
+  
+  ins {
+	color: black;
+  }
+
+  section {
+	margin: 10px 25px;
+	background-color:rgba(255,255,255);
+	display: inline-block;
+	width: 40%; 
+  }
+  
+  img.logo {
+    background-color:rgba(255,255,255); 
+	float: left;
+  }
+  
+  img{
+    background-color:rgba(255,255,255); 
+  }
+
   a.bottom {
 	background-color: black;
 	color: white;
@@ -72,23 +101,7 @@
     padding: 5px 50px;
 	margin: 1px 10px;
   }
-
-  section {
-	margin: 10px 25px;
-	background-color:rgba(255,255,255);
-	display: inline-block;
-	width: 40%; 
-  }
-
-  ins {
-	color: black;
-  }
   
-  img.logo {
-    background-color:rgba(255,255,255); 
-	float: left;
-  }
-
   button{
 	background-color:rgba(255,255,255);
 	padding: 5px 50px;
@@ -105,8 +118,4 @@
   button:active {
   color: white;
   background-color: green;
-  }
-
-  address{
-     color:white;
   }
