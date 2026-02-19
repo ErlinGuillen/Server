@@ -12,10 +12,9 @@
   	width:80%;
   	display:block;
   	margin:auto;
-
   }
 
-  header{
+  header {
 	background-color: black;
 	padding-bottom: 1px;
   }
@@ -95,10 +94,10 @@
     padding: 5px 50px;
 	margin: 1px 10px;
  
-  p.nav {
+  .nav {
     display: inline-block;
   }
   
   address {
-  color: white;
+     color: white;
   }
