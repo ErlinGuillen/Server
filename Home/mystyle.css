@@ -27,6 +27,7 @@
   	font-style: normal;
   	font-variation-settings: "wdth" 100;
 	color: white;
+    text-shadow: black 1px 1px 10px;
   }
 
   q, p, table {
@@ -36,6 +37,7 @@
   	font-style: normal;
   	font-variation-settings: "wdth" 100;
 	color: white;
+	text-shadow: black 1px 1px 10px;
   }
   
   ins{
