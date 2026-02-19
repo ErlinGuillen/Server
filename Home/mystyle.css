@@ -3,7 +3,7 @@
   body {
     margin:0;
     text-align: center;
-    background-image: url("Backgroundv1.jpg");
+    background-image: url("../../Downloads/Backgroundv1.jpg");
     background-repeat: no-repeat;
     background-size: cover;
   }
@@ -19,7 +19,7 @@
 	padding-bottom: 1px;
   }
   
-  h1, h2, h3 {
+  h1, h2, h3, blockquote, q {
 	font-family: "Roboto", sans-serif;
   	font-optical-sizing: auto;
   	font-weight: 900;
@@ -45,7 +45,7 @@
   	font-optical-sizing: auto;
   	font-weight: 1000;
   	font-style: normal;
-  	font-variation-settings: "wdth" 100;	
+  	font-variation-settings: "wdth" 100;
   }
   
   p.project {
@@ -86,16 +86,12 @@
 	text-decoration: none;
     padding: 5px 50px;
   }
-
+  
   footer {
 	 background-color: black;
 	 padding: 10px;
   }
-
-  address {
-    color: white;
-  }
-
+  
   hr{
 	border: solid white;
 	width: 15%;
@@ -105,3 +101,7 @@
     border: solid green;
 	width: 15%;
   } 
+
+  address{
+	color: white;
+  }
