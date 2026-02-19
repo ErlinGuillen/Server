@@ -19,7 +19,7 @@
 	padding-bottom: 1px;
   }
   
-  h1, h2, h3, blockquote, q {
+  h1, h2, h3, blockquote, q, p {
 	font-family: "Roboto", sans-serif;
   	font-optical-sizing: auto;
   	font-weight: 900;
@@ -40,23 +40,6 @@
 	color: black;
   }
 
-  p {
-	font-family: "Roboto", sans-serif;
-  	font-optical-sizing: auto;
-  	font-weight: 1000;
-  	font-style: normal;
-  	font-variation-settings: "wdth" 100;
-  }
-  
-  p.project {
-	font-family: "Roboto", sans-serif;
-  	font-optical-sizing: auto;
-  	font-weight: 1000;
-  	font-style: normal;
-  	font-variation-settings: "wdth" 100;
-	color: black;
-  }
-  
   img.logo {
     background-color:rgba(255,255,255); 
   }
