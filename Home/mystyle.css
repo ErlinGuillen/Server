@@ -14,6 +14,11 @@
   	margin:auto;
 
   }
+
+  header{
+	background-color: black;
+	padding-bottom: 1px;
+  }
   
   h1, h2, h3 {
 	font-family: "Roboto", sans-serif;
