@@ -97,3 +97,7 @@
   address {
      color: white;
   }
+
+  .option {
+	display: inline-block;
+  }
