@@ -98,3 +98,13 @@
   address {
     color: white;
   }
+
+  hr{
+	border: solid white;
+	width: 15%;
+  } 
+  
+  hr:hover{
+    border: solid green;
+	width: 15%;
+  } 
