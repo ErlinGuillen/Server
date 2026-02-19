@@ -6,8 +6,7 @@
     background-image: url("Backgroundv0.1.jpg");
     background-repeat: no-repeat;
     background-size: cover;
-	background-attachment: fixed;
-	text-shadow: black;
+	text-shadow: black 
   }
   
   wrapper {
@@ -18,7 +17,6 @@
 
   header {
 	background-color: black;
-	padding-bottom: 1px;
   }
   
   h1, h2, h3, blockquote, q, p {
@@ -91,4 +89,9 @@
 
   address{
 	color: white;
+  }
+
+  .option {
+	display: inline-block;
+	width: 14%;
   }
