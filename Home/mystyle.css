@@ -28,7 +28,7 @@
 	color: white;
   }
 
-  q, p {
+  q, p, table {
 	font-family: "Roboto", sans-serif;
   	font-optical-sizing: auto;
   	font-weight: 200;
