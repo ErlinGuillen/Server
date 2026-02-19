@@ -3,10 +3,10 @@
   body {
     margin:0;
     text-align: center;
-    background-image: url("Backgroundv0.1.jpg");
+    background-image: url(../../Downloads/Backgroundv1.jpg);
     background-repeat: no-repeat;
-	background-attachment: fixed;
     background-size: cover;
+	text-shadow: black 
   }
   
   wrapper {
@@ -46,14 +46,6 @@
    
   p.logo {
     font-size:111%;
-  }
-
-  p.black{
-	color: black;
-  }
-
-  h3.black{
-	color: black;
   }
 
   img.logo {
