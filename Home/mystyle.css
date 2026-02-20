@@ -3,7 +3,7 @@
   body {
     margin:0;
     text-align: center;
-    background-image: url("backgroundv0.1.1.jpg");
+    background-image: url("Backgroundv0.1.1.jpg");
     background-repeat: no-repeat;
 	background-attachment: fixed;
     background-size: cover;
@@ -27,6 +27,7 @@
   	font-style: normal;
   	font-variation-settings: "wdth" 100;
 	color: white;
+    text-shadow: black 1px 1px;
   }
 
   q, p, table {
@@ -36,18 +37,7 @@
   	font-style: normal;
   	font-variation-settings: "wdth" 100;
 	color: white;
-  }
-  
-  ins{
-	color: white;
-  }
-   
-  p.logo {
-    font-size:111%;
-  }
-
-  img.logo {
-    background-color:rgba(255,255,255); 
+	text-shadow: black 1px 1px;
   }
 
   a.bottom {
@@ -81,19 +71,14 @@
   }
   
   footer {
-	background-color: black;
-	padding: 1px 0px;
+	 background-color: black;
+	 padding: 1px 0px;
   }
   
   hr{
 	border: solid white;
 	width: 15%;
-	border-radius: 1px;
-  } 
-  
-  hr:hover{
-    border: solid green;
-	width: 15%;
+	border-radius: 5px;
   } 
 
   address{
