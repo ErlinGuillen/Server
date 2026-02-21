@@ -7,7 +7,6 @@
     background-repeat: no-repeat;
 	background-attachment: fixed;
     background-size: cover;
-	text-shadow: black 
   }
   wrapper {
   	width:1304.5px;
@@ -18,7 +17,7 @@
 	background-color: black;
 	border-bottom: 2px solid white;
   }
-  h1, h2, h3, blockquote, b {
+  h1, h2, h3, blockquote {
 	font-family: "Roboto", sans-serif;
   	font-optical-sizing: auto;
   	font-weight: 900;
@@ -62,18 +61,15 @@
     border-color: white;
   }
   footer {
-	 border-top: 2px solid white;
 	 background-color: black;
 	 padding: 1px 0px;
+	 border-top: 2px solid white;
   }
   hr{
 	border: solid white;
 	width: 10%;
 	border-radius: 5px;
   } 
-  address{
-	color: white;
-  }
   .option {
 	display: inline-block;
 	width: 14%;
