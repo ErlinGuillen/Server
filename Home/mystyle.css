@@ -16,7 +16,7 @@
   }
   header {
 	background-color: black;
-	border-bottom: 5px solid white;
+	border-bottom: 2px solid white;
   }
   h1, h2, h3, blockquote, q, p {
 	font-family: "Roboto", sans-serif;
@@ -62,6 +62,7 @@
     border-color: white;
   }
   footer {
+	 border-top: 2px solid white;
 	 background-color: black;
 	 padding: 1px 0px;
   }
@@ -72,7 +73,6 @@
   } 
   address{
 	color: white;
-    border-top: 5px solid white;
   }
   .option {
 	display: inline-block;
