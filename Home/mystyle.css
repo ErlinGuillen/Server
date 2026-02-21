@@ -18,7 +18,7 @@
 	background-color: black;
 	border-bottom: 2px solid white;
   }
-  h1, h2, h3, blockquote {
+  h1, h2, h3, blockquote, b {
 	font-family: "Roboto", sans-serif;
   	font-optical-sizing: auto;
   	font-weight: 900;
