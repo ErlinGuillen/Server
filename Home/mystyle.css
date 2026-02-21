@@ -9,17 +9,14 @@
     background-size: cover;
 	text-shadow: black 
   }
-  
   wrapper {
   	width:1304.5px;
   	display:block;
   	margin:auto;
   }
-
   header {
 	background-color: black;
   }
-  
   h1, h2, h3, blockquote, q, p {
 	font-family: "Roboto", sans-serif;
   	font-optical-sizing: auto;
@@ -28,7 +25,6 @@
   	font-variation-settings: "wdth" 100;
 	color: white;
   }
-
   q, p, table {
 	font-family: "Roboto", sans-serif;
   	font-optical-sizing: auto;
@@ -37,7 +33,6 @@
   	font-variation-settings: "wdth" 100;
 	color: white;
   }
-
   a.bottom {
 	background-color: black;
 	color: white;
@@ -47,7 +42,6 @@
 	border-style: solid;
     border-color: white;
   }
-
   a.bottom:hover {
 	background-color: white;
 	color: black;
@@ -57,7 +51,6 @@
     border-style: solid;
 	border-color: green;
   }
-
   a.bottom:active {
 	background-color: green;
 	color: black;
@@ -67,24 +60,23 @@
 	border-style: solid;
     border-color: white;
   }
-  
   footer {
 	 background-color: black;
 	 padding: 1px 0px;
   }
-  
   hr{
 	border: solid white;
 	width: 10%;
 	border-radius: 5px;
   } 
-
   address{
 	color: white;
   }
-
   .option {
 	display: inline-block;
 	width: 14%;
     margin: 10px 0px;
+  }
+  tr:hover {
+	background-color: rgba(0, 188, 255, 0.25)
   }
