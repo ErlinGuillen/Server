@@ -1,0 +1,80 @@
+@charset "UTF-8";
+/* CSS Document */
+  body {
+    margin:0;
+    text-align: center;
+    background-image: url("backgroundv0.1.1.jpg");
+    background-repeat: no-repeat;
+	background-attachment: fixed;
+    background-size: cover;
+  }
+  wrapper {
+  	width:1304.5px;
+  	display:block;
+  	margin:auto;
+  }
+  header {
+	background-color: black;
+	border-bottom: 2px solid white;
+  }
+  h1, h2, h3, blockquote {
+	font-family: "Roboto", sans-serif;
+  	font-optical-sizing: auto;
+  	font-weight: 900;
+  	font-style: normal;
+  	font-variation-settings: "wdth" 100;
+	color: white;
+  }
+  q, p, table, li {
+	font-family: "Roboto", sans-serif;
+  	font-optical-sizing: auto;
+  	font-weight: 200;
+  	font-style: normal;
+  	font-variation-settings: "wdth" 100;
+	color: white;
+  }
+  a.bottom {
+	background-color: black;
+	color: white;
+	text-decoration: none;
+	padding: 2px 50px;
+	border-radius: 10px;
+	border-style: solid;
+    border-color: white;
+  }
+  a.bottom:hover {
+	background-color: white;
+	color: black;
+	text-decoration: none;
+    padding: 2px 50px;
+	border-radius: 10px;
+    border-style: solid;
+	border-color: green;
+  }
+  a.bottom:active {
+	background-color: green;
+	color: black;
+	text-decoration: none;
+    padding: 2px 50px;
+	border-radius: 10px;
+	border-style: solid;
+    border-color: white;
+  }
+  footer {
+	 background-color: black;
+	 padding: 1px 0px;
+	 border-top: 2px solid white;
+  }
+  hr{
+	border: solid white;
+	width: 10%;
+	border-radius: 5px;
+  } 
+  .option {
+	display: inline-block;
+	width: 14%;
+    margin: 10px 0px;
+  }
+  tr:hover {
+	background-color: rgba(0, 188, 255, 0.25)
+  }
