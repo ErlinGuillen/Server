@@ -106,3 +106,14 @@
     background-color: green;
 	color: black
   }
+  .hrlogo{
+	display: inline-block;
+	width: auto;
+	height: 30px;
+  }
+  .hrnav{
+	display: inline-block;
+	width: auto;
+	padding-top: 32px;
+	vertical-align: bottom;
+  } 
