@@ -117,3 +117,14 @@
 	padding-top: 32px;
 	vertical-align: bottom;
   } 
+  h1.title {
+	text-align: left;
+  }
+  table, th, td {
+    border-collapse: collapse;
+  }
+  th, td {
+    background-color:rgba(0,0,0,0.25);
+	width: 20%;
+	padding: 5px 0px;
+  }		
