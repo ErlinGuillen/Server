@@ -117,3 +117,13 @@
 	padding-top: 32px;
 	vertical-align: bottom;
   } 
+  .html-paragraph-heading {
+	margin: 1% 25%;
+  }
+  .order {
+    background-color: rgba(0,0,0,0.0);
+	text-align: left;
+  }
+  .thing{
+    padding: 5px 0px
+  }
