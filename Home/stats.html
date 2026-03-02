@@ -5,10 +5,52 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect">
 <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,900;1,900&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;1,100&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,200;1,200&display=swap" rel="stylesheet">
 <link rel="icon" type="image/x-icon" href="logo.png">
 <link rel="stylesheet" href="mystyle.css">
-<title>Stats</title>  
+<title>Stats</title>
+<style>
+	section {
+		background-color: rgba(0,0,0,0.2);
+		width: 100%;
+		display: inline-block;
+	}
+	.health{
+		font-size: 300%;
+		margin: 20px auto;
+	}
+	.dps{
+		font-size: 200%;
+	    margin: 20px auto;
+	}
+	.skill{
+		background-color: rgba(0,0,0,0.2);
+		margin: 10px 0px;
+		padding: 10px 0px;
+		width: 13.75%;
+	    display: inline-block;
+	}
+    .skill:hover, .positive:hover{
+		background-color: rgba(0,255,0,0.25);
+	}
+	.immune:hover{
+		background-color: rgba(255,0,0,0.25);
+	}
+	.positive{
+		background-color: rgba(0,0,0,0.2);
+		margin: 10px 0px;
+		padding: 10px 0px;
+		width: 98%;
+	    display: inline-block;
+	}
+	.immune{
+		background-color: rgba(0,0,0,0.2);
+		margin: 10px 0px;
+		padding: 10px 0px;
+		width: 98%;
+	    display: inline-block;
+	}
+</style>
 </head>
 <body>
   <wrapper>
@@ -25,11 +67,21 @@
   </ul>
   </nav>
   <main>
-	 <h1>404 Page Not Found</h1>
-     <hr>
-	 <p>This page is not available</p>
-	 <img src="Backgroundv0.1.jpg" alt="background" width="100%">
-     <br>
+  <section>
+  <div class="skill"><p>Grammar</p></div>
+  <div class="skill"><p>Coding</p></div>
+  <div class="skill"><p>Mathmatics</p></div>
+  <div class="skill"><p>Design</p></div>
+  <div class="skill"><p>Art</p></div>
+  <div class="skill"><p>Technology</p></div>
+  <div class="skill"><p>Editor</p></div>
+  <h1>Erlin's Stats (Level 836)</h1>
+  <hr>
+  <p class="health">83,600 HP</p>
+  <p class="dps">8,360 ATK</p>
+  <div class="positive"><p>Positive: 100% IQ Strength (When 50% Complete), 100% Focus </p></div>
+  <div class="immune"><p>Immune: Brainrot, Haters, Weaken IQ, and Online daters</p></div>
+  </section>
   </main>
   <footer>
 	  <address>
