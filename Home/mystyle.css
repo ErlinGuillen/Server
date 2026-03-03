@@ -52,7 +52,7 @@
   .skill:hover, .positive:hover{
 	background-color: rgba(0,255,0,0.25);
   }
-  .stat:hover{
+  .stat:hover, .welcome:hover, .icon:hover, .getstarted:hover, .quote:hover, .contact:hover{
 	background-color: rgba(0, 188, 255, 0.2);
   }
   .immune:hover{
@@ -195,3 +195,23 @@
 	   font-size: 605%;
 	   margin: 20px auto;
   } 
+  .welcome{
+    padding: 15% 0px;
+    background-color: rgba(0,0,0,0.2);
+  }
+  .icon{
+	padding: 106.57px 0px;
+    background-color: rgba(0,0,0,0.2);	
+  }
+  .getstarted{
+	padding: 10px 0px;
+    background-color: rgba(0,0,0,0.2);	
+  }
+  .quote{
+	padding: 10px 0px;
+    background-color: rgba(0,0,0,0.2);	
+  }
+  .contact{
+	padding: 10px 0px;
+    background-color: rgba(0,0,0,0.2);	
+  }

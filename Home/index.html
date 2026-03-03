@@ -11,18 +11,27 @@
 <link rel="stylesheet" href="mystyle.css">
 <title>Home</title>
 <style>
-  section {
-	margin: 10px 25px;
-	background-color:rgba(255,255,255);
-	display: inline-block;
-	width: 40%; 
-  }	
-  img.background{
-    width: 95%; 
-	margin: 10px 0px;
+  .mycontainer{
+      margin: 10px;
   }
-  div:hover{
-	background-color: rgba(0, 188, 255, 0.2);
+  div.mycontainer .welcome{
+	width: 50%;
+    float:left;
+  }
+  div.mycontainer .icon{
+	width: 50%;
+    float:left;
+  }
+  div.mycontainer .getstarted{
+	width: 100%;
+    float:left;
+  }
+  div.mycontainer .quote{
+	width: 50%;
+    float:left;
+  }
+  div.mycontainer .contact{
+	width: 50%;
   }
 </style>
 </head>
@@ -45,17 +54,24 @@
   </ul>
   </nav>
   <main>
+	<div class="mycontainer">
 	 <div class="welcome">
      <h1>Welcome to my website</h1>
      <hr>
      <p>Welcome to my website! This site is a place where you can explore, learn, and discover helpful information. I hope you enjoy your time here and find what you’re looking for.</p>
-	 <img src="Backgroundv0.1.jpg" alt="background" width="100%" class="background">
 	 </div>
-	 <div class="welcome">
+	 <div class="icon">
+	 <img src="imageicon.png" alt="icon" width="50%">
+	 </div>
+	</div>
+	<div class="mycontainer">
+	 <div class="getstarted">
      <h1>Get Started</h1>
      <hr>
      <p>your first step into exploring everything this website has to offer. Here, you can learn more about the project, discover useful information, and navigate through different sections with ease. This area is designed to help you understand the purpose of the site and guide you toward what you want to explore next. Whether you are new or returning, Get Started helps you begin your journey quickly and simply.</p>
 	 </div>
+	</div>
+    <div class="mycontainer">
 	 <div class="contact">
 	 <h1>Contact</h1>
      <hr>
@@ -70,6 +86,7 @@
      I always come back.
      </q></blockquote><br>
 	 </div>
+    </div>
   </main>
   <footer>
 	  <h3 id="SocialMedia">Social Media</h3>
