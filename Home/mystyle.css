@@ -40,14 +40,26 @@
   	font-variation-settings: "wdth" 100;
 	color: white;
   }
-  a.bottom {
-	background-color: black;
-	color: white;
-	text-decoration: none;
-	padding: 2px 50px;
-	border-radius: 10px;
-	border-style: solid;
-    border-color: white;
+  table, th, td {
+    border-collapse: collapse;
+  }
+  th, td {
+    background-color:rgba(0,0,0,0.25);
+	width: 20%;
+	padding: 5px 0px;
+  }	
+ /* hover is on */
+  .skill:hover, .positive:hover{
+	background-color: rgba(0,255,0,0.25);
+  }
+  .stat:hover{
+	background-color: rgba(0, 188, 255, 0.2);
+  }
+  .immune:hover{
+	background-color: rgba(255,0,0,0.25);
+  }
+  .project:hover, .photoshop:hover, .site:hover{
+	background-color: rgba(0, 188, 255, 0.2);
   }
   a.bottom:hover {
 	background-color: white;
@@ -57,6 +69,23 @@
 	border-radius: 10px;
     border-style: solid;
 	border-color: green;
+  }
+  tr:hover {
+	background-color: rgba(0, 188, 255, 0.25)
+  }
+  li a:hover {
+    background-color: white;
+	color: black;
+    border-radius: 10px;
+  }
+  a.bottom {
+	background-color: black;
+	color: white;
+	text-decoration: none;
+	padding: 2px 50px;
+	border-radius: 10px;
+	border-style: solid;
+    border-color: white;
   }
   a.bottom:active {
 	background-color: green;
@@ -72,9 +101,6 @@
 	width: 10%;
 	border-radius: 5px;
   } 
-  tr:hover {
-	background-color: rgba(0, 188, 255, 0.25)
-  }
   ul {
     list-style-type: none;
     margin: 0;
@@ -92,11 +118,6 @@
     padding: 16px;
     text-decoration: none;
   }
-  li a:hover {
-    background-color: white;
-	color: black;
-    border-radius: 10px;
-  }
   li a:active {
     background-color: green;
 	color: black
@@ -111,15 +132,7 @@
 	width: auto;
 	padding-top: 32px;
 	vertical-align: bottom;
-  } 
-  table, th, td {
-    border-collapse: collapse;
-  }
-  th, td {
-    background-color:rgba(0,0,0,0.25);
-	width: 20%;
-	padding: 5px 0px;
-  }		
+  } 	
   .sidelogo{
 	margin:0px 10px;
 	padding:6.25px 0%;
@@ -129,21 +142,13 @@
   .logo{
 	margin:0px 10px;	
   }
-  .welcome{
-    background-color: rgba(0,0,0,0.2);
-	display: inline-block;
-    margin: 10px 0px;
-    width: 95%; 
-  }
   .quote{
 	width: 47.4%; 
 	display:inline-block; 
-	background-color: rgba(0,0,0,0.2);
   }
   .contact{
 	width: 47.4%; 
 	display:inline-block; 
-	background-color: rgba(0,0,0,0.2);
   }
 	.health{
 		font-size: 300%;
@@ -155,32 +160,17 @@
 	}
 	.skill{
 		background-color: rgba(0,0,0,0.2);
-		margin: 10px 0px;
-		padding: 10px 0px;
-		width: 13.75%;
-	    display: inline-block;
-	}
-    .skill:hover, .positive:hover{
-		background-color: rgba(0,255,0,0.25);
-	}
-	.immune:hover{
-		background-color: rgba(255,0,0,0.25);
 	}
 	.positive{
 		background-color: rgba(0,0,0,0.2);
-		margin: 10px 0px;
-		padding: 10px 0px;
-		width: 98%;
-	    display: inline-block;
 	}
 	.immune{
 		background-color: rgba(0,0,0,0.2);
-		margin: 10px 0px;
-		padding: 10px 0px;
-		width: 98%;
-	    display: inline-block;
 	}
-   .project{
+	.stat{
+		background-color: rgba(0,0,0,0.2);
+	}
+    .project{
       background-color: rgba(0,0,0,0.2);
 	  display: inline-block;
 	  width: 40%;
@@ -201,6 +191,7 @@
 	  margin: 10px 5px;
 	  padding: 114px 0px;
   }
-  .project:hover, .photoshop:hover, .site:hover{
-	background-color: rgba(0, 188, 255, 0.2);
-  }
+  .count{
+	   font-size: 605%;
+	   margin: 20px auto;
+  } 
