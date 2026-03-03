@@ -34,7 +34,7 @@
   </header>
   <nav>
   <ul>
-     <li><a href="https://erlinguillen.github.io/Server/Home/index.html">Back</a></li>
+     <li><a href="https://erlinguillen.github.io/Server/Home/version.html">Back</a></li>
   </ul>
   </nav>
     <h1>Click the Box!</h1>
@@ -43,56 +43,65 @@
     <div id="box"></div>
     <br>
     <button id="restartBtn">Restart Game</button>
-    <script>
-        let score = 0;
-        let timeLeft = 10;
-        let timer;
-        let box = document.getElementById("box");
-        let restartBtn = document.getElementById("restartBtn");
+<script>
+    let score = 0;
+    let timeLeft = 10;
+    let timer;
 
-        startGame();
+    let box = document.getElementById("box");
+    let restartBtn = document.getElementById("restartBtn");
 
-        function startGame() {
-            score = 0;
-            timeLeft = 10;
+    startGame();
 
+    function startGame() {
+        score = 0;
+        timeLeft = 10;
+
+        document.getElementById("score").innerText = score;
+        document.getElementById("time").innerText = timeLeft;
+
+        box.style.display = "block";
+        restartBtn.style.display = "none";
+
+        timer = setInterval(countdown, 1000);
+    }
+
+    box.onclick = function() {
+        if (timeLeft > 0) {
+            score++;
             document.getElementById("score").innerText = score;
-            document.getElementById("time").innerText = timeLeft;
 
-            box.style.display = "block";
-            restartBtn.style.display = "none";
-
-            timer = setInterval(countdown, 1000);
+            moveBox();
         }
+    };
 
-        box.onclick = function() {
-            if (timeLeft > 0) {
-                score++;
-                document.getElementById("score").innerText = score;
+    function moveBox() {
+        // Get full screen size
+        let maxX = window.innerWidth - box.offsetWidth;
+        let maxY = window.innerHeight - box.offsetHeight;
 
-                let x = Math.random() * 500;
-                let y = Math.random() * 300;
+        let x = Math.random() * maxX;
+        let y = Math.random() * maxY;
 
-                box.style.left = x + "px";
-                box.style.top = y + "px";
-            }
-        };
+        box.style.left = x + "px";
+        box.style.top = y + "px";
+    }
 
-        function countdown() {
-            timeLeft--;
-            document.getElementById("time").innerText = timeLeft;
+    function countdown() {
+        timeLeft--;
+        document.getElementById("time").innerText = timeLeft;
 
-            if (timeLeft <= 0) {
-                clearInterval(timer);
-                box.style.display = "none";
-                restartBtn.style.display = "inline-block";
-            }
-        }
-
-        restartBtn.onclick = function() {
+        if (timeLeft <= 0) {
             clearInterval(timer);
-            startGame();
-        };
-    </script>
+            box.style.display = "none";
+            restartBtn.style.display = "inline-block";
+        }
+    }
+
+    restartBtn.onclick = function() {
+        clearInterval(timer);
+        startGame();
+    };
+</script>
 </body>
 </html>
