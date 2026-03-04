@@ -71,7 +71,6 @@
   }
   a {
     text-decoration: none;
-	color: white;
   }
  /* hover is on */
   .skill:hover, .positive:hover{
@@ -161,33 +160,33 @@
 	    margin: 20px auto;
 	}
 	.skill{
-		background-color: rgba(0,0,0,0.2);
+		background-color: rgba(0,0,0,0.1);
 	}
 	.positive{
-		background-color: rgba(0,0,0,0.2);
+		background-color: rgba(0,0,0,0.1);
 	}
 	.immune{
-		background-color: rgba(0,0,0,0.2);
+		background-color: rgba(0,0,0,0.1);
 	}
 	.stat{
-		background-color: rgba(0,0,0,0.2);
+		background-color: rgba(0,0,0,0.1);
 	}
     .project{
-      background-color: rgba(0,0,0,0.2);
+      background-color: rgba(0,0,0,0.1);
 	  display: inline-block;
 	  width: 40%;
 	  vertical-align: top;
 	  margin: 10px 5px; 
   }
   .site{
-      background-color: rgba(0,0,0,0.2);
+      background-color: rgba(0,0,0,0.1);
 	  display: inline-block;
 	  width: 40%;
 	  margin: 10px 5px; 
 	  padding: 233px 0px;
   }
   .photoshop{
-      background-color: rgba(0,0,0,0.2);
+      background-color: rgba(0,0,0,0.1);
 	  display: inline-block;
 	  width: 40%;
 	  margin: 10px 5px;
@@ -199,25 +198,28 @@
   } 
   .welcome{
     padding: 15% 0px;
-    background-color: rgba(0,0,0,0.2);
+    background-color: rgba(0,0,0,0.1);
   }
   .icon{
 	padding: 106.57px 0px;
-    background-color: rgba(0,0,0,0.2);	
+    background-color: rgba(0,0,0,0.1);	
   }
   .getstarted{
 	padding: 10px 0px;
-    background-color: rgba(0,0,0,0.2);	
+    background-color: rgba(0,0,0,0.1);	
   }
   .quote{
 	padding: 10px 0px;
-    background-color: rgba(0,0,0,0.2);	
+    background-color: rgba(0,0,0,0.1);	
   }
   .contact{
 	padding: 10px 0px;
-    background-color: rgba(0,0,0,0.2);	 
+    background-color: rgba(0,0,0,0.1);	 
   }
   .navigator{
 	background-color: black;
 	padding: 10px;
+  }
+  .game{
+    background-color: rgba(0,0,0,0.1);	 
   }
