@@ -12,8 +12,15 @@
 <title>Home</title>
 <style>
   .mycontainer{
-      margin: 10px;
-	  display: flex;
+    margin: 10px;
+	display: flex;
+  }
+  .mycontainer2{
+	display: flex;
+  }
+  div.mycontainer2 > .navigator{
+    width: 25%;
+	float:left;
   }
   div.mycontainer > .welcome{
 	width: 50%;
@@ -44,15 +51,20 @@
      <h1 class="sidelogo">Home</h1>
   </header>
   <nav>
-  <ul>
-    <li><a href="https://erlinguillen.github.io/Server/Home/version.html">Game</a></li>
-	<hr class="hrnav">
-    <li><a href="https://erlinguillen.github.io/Server/Home/project.html">Project</a></li>
-	<hr class="hrnav">
-    <li><a href="https://erlinguillen.github.io/Server/Home/stats.html">Stats</a></li>
-	<hr class="hrnav">
-    <li><a href="#SocialMedia">Bottom</a></li>
-  </ul>
+	<div class="mycontainer2">
+	<div class="navigator">
+    <a href="https://erlinguillen.github.io/Server/Home/version.html">Game</a>
+	</div>
+    <div class="navigator">
+    <a href="https://erlinguillen.github.io/Server/Home/project.html">Project</a>
+	</div>
+    <div class="navigator">
+    <a href="https://erlinguillen.github.io/Server/Home/stats.html">Stats</a>
+	</div>
+	<div class="navigator">
+    <a href="#SocialMedia">Bottom</a>
+	</div>
+	</div>
   </nav>
   <main>
 	<div class="mycontainer">
@@ -93,7 +105,7 @@
 	  <h3 id="SocialMedia">Social Media</h3>
 	  <a href="https://www.youtube.com/@ErlinGuillen_YT" target="_blank" alt="youtube"><img src="youtube.png" alt="Logo" width="200" height="200"></a>
 	  <a href="https://www.roblox.com/users/2625249323/profile" target="_blank" alt="youtube"><img src="roblox.png" alt="Logo" width="200" height="200"></a>
-	  <p align="right" style="margin: 0;">By Erlin Guillen-Velasquez - Build 681 - March 2026</p>
+	  <p align="right" style="margin: 0;">By Erlin Guillen-Velasquez - Build 731 - March 2026</p>
   </footer>
   </wrapper>
 </body>

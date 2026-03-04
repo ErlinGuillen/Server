@@ -16,9 +16,6 @@
   header {
 	background-color: black;
   }
-  nav{
-	border-bottom: 2px solid white;
-  }
   footer {
 	 background-color: black;
 	 padding: 1px 0px;
@@ -32,7 +29,7 @@
   	font-variation-settings: "wdth" 100;
 	color: white;
   }
-  q, p, table, li, button {
+  q, p, table, li, button, a {
 	font-family: "Roboto", sans-serif;
   	font-optical-sizing: auto;
   	font-weight: 200;
@@ -72,12 +69,22 @@
     text-decoration: none;
     border: none;
   }
+  a {
+    text-decoration: none;
+	color: white;
+  }
  /* hover is on */
   .skill:hover, .positive:hover{
 	background-color: rgba(0,255,0,0.25);
   }
-  .stat:hover, .welcome:hover, .icon:hover, .getstarted:hover, .quote:hover, .contact:hover{
-	background-color: rgba(0, 188, 255, 0.2);
+  div:hover{
+	background-color: rgba(0, 188, 255, 0.1);
+  }
+  .navigator:hover{
+	background-color: rgba(0,92,125,1.00);
+  }
+  .navigator:active{
+	background-color: rgba(0,125,0,1.00)
   }
   .immune:hover{
 	background-color: rgba(255,0,0,0.25);
@@ -95,11 +102,6 @@
   }
   tr:hover {
 	background-color: rgba(0, 188, 255, 0.25)
-  }
-  li a:hover {
-    background-color: white;
-	color: black;
-    border-radius: 10px;
   }
   a.bottom {
 	background-color: black;
@@ -122,29 +124,6 @@
 	width: 10%;
 	border-radius: 5px;
   } 
-  ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: black;
-  }
-  li {
-	display: inline-block;
-	background-color: rgba(0,0,0,0.2);
-	border-radius: 10px;
-  }  
-  li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 16px;
-    text-decoration: none;
-  }
-  li a:active {
-    background-color: green;
-	color: black
-  }
   .hrlogo{
 	display: inline-block;
 	width: auto;
@@ -236,5 +215,9 @@
   }
   .contact{
 	padding: 10px 0px;
-    background-color: rgba(0,0,0,0.2);	
+    background-color: rgba(0,0,0,0.2);	 
+  }
+  .navigator{
+	background-color: black;
+	padding: 10px;
   }

@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Game</title>  
+<title>Version</title>  
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect">
 <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,900;1,900&display=swap" rel="stylesheet">
@@ -10,6 +10,13 @@
 <link rel="icon" type="image/x-icon" href="logo.png">
 <link rel="stylesheet" href="mystyle.css">
 <style>
+  .mycontainer2{
+	display: flex;
+  }
+  div.mycontainer2 > .navigator{
+    width: 50%;
+	float:left;
+  }
 </style>
 </head>
 <body>
@@ -20,14 +27,17 @@
      <h1 class="sidelogo">Game</h1>
   </header>
   <nav>
-  <ul>
-     <li><a href="https://erlinguillen.github.io/Server/Home/index.html">Back</a></li>
-	 <hr class="hrnav">
-     <li><a href="#SocialMedia">Bottom</a></li>
-  </ul>
+	<div class="mycontainer2">
+    <div class="navigator">
+    <a href="https://erlinguillen.github.io/Server/Home/index.html">Back</a>
+	</div>
+	<div class="navigator">
+    <a href="#SocialMedia">Bottom</a>
+	</div>
+	</div>
   </nav>
   <main>
-	 <li><a href="https://erlinguillen.github.io/Server/Home/clickthebox.html">Click The Box! - v1</a></li>
+	 <p><a href="https://erlinguillen.github.io/Server/Home/clickthebox.html" class="bottom" style="margin: 10px 0px;">Click The Box! - v1</a></p>
 	 <img src="404.png" alt="404" width="100%">
   </main>
   <footer>

@@ -10,20 +10,28 @@
 <link rel="stylesheet" href="mystyle.css">
     <title>Click the Box!</title>
     <style>
-        body {
-            text-align: center;
-            font-family: Arial;
-        }
-
-        #box {
-            width: 100px;
-            height: 100px;
-            background-color: red;
-            position: absolute;
-            top: 200px;
-            left: 200px;
-            cursor: pointer;
-        }
+	.mycontainer2{
+	  display: flex;
+    }
+    div.mycontainer2 > .navigator{
+      width: 100%;
+	  float:left;
+    }
+    /* Game */
+    #box {
+      width: 100px;
+      height: 100px;
+      background-color: red;
+      position: absolute;
+      top: 200px;
+      left: 200px;
+      cursor: pointer;
+      transition: all 0.25s ease; /* smooth movement */
+	  box-shadow: 0 0 15px rgba(255,0,0,0.7);
+    }
+    .pop {
+      transform: scale(1.3);
+    }
     </style>
 </head>
 <body>
@@ -33,9 +41,11 @@
      <h1 class="sidelogo">Click the Box!</h1>
   </header>
   <nav>
-  <ul>
-     <li><a href="https://erlinguillen.github.io/Server/Home/version.html">Back</a></li>
-  </ul>
+	<div class="mycontainer2">
+    <div class="navigator">
+    <a href="https://erlinguillen.github.io/Server/Home/version.html">Back</a>
+	</div>
+	</div>
   </nav>
     <h1>Click the Box!</h1>
     <p>Score: <span id="score">0</span></p>
@@ -66,14 +76,20 @@
         timer = setInterval(countdown, 1000);
     }
 
-    box.onclick = function() {
-        if (timeLeft > 0) {
-            score++;
-            document.getElementById("score").innerText = score;
+	box.onclick = function() {
+    	if (timeLeft > 0) {
+       		score++;
+        	document.getElementById("score").innerText = score;
 
-            moveBox();
-        }
-    };
+        	// 💥 Pop animation
+        	box.classList.add("pop");
+			setTimeout(() => {
+				box.classList.remove("pop");
+			}, 100);
+
+			moveBox();
+		}
+	};
 
     function moveBox() {
         // Get full screen size

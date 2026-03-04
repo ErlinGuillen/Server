@@ -14,9 +14,16 @@
       margin: 10px;
     }
 	section {
-		width: 100%;
-		display: inline-block;
+	  width: 100%;
+      display: inline-block;
 	}
+	.mycontainer2{
+	  display: flex;
+    }
+    div.mycontainer2 > .navigator{
+      width: 50%;
+	  float:left;
+    }
 	div.mycontainer .skill{
       width:14.285%;  
       float:left;
@@ -43,11 +50,14 @@
      <h1 class="sidelogo">Stats</h1>
   </header>
   <nav>
-  <ul>
-     <li><a href="https://erlinguillen.github.io/Server/Home/index.html">Back</a></li>
-	 <hr class="hrnav">
-     <li><a href="#SocialMedia">Bottom</a></li>
-  </ul>
+	<div class="mycontainer2">
+    <div class="navigator">
+    <a href="https://erlinguillen.github.io/Server/Home/index.html">Back</a>
+	</div>
+	<div class="navigator">
+    <a href="#SocialMedia">Bottom</a>
+	</div>
+	</div>
   </nav>
   <main>
   <section>
