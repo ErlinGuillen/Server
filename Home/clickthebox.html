@@ -18,6 +18,35 @@
 	  float:left;
     }
     /* Game */
+  main {
+    margin: 0;
+    font-family: Arial;
+    overflow: hidden;
+    background-image: url("hello.gif");
+	background-attachment: fixed;
+	background-size: 100% 100%;
+	background-color: black;
+    color: white;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+/* Center container */
+  .ui {
+    text-align: center;
+  } 
+  /* Style button */
+button {
+    padding: 8px 16px;
+    font-size: 16px;
+    margin-top: 5px;
+    cursor: pointer;
+}
+
+/* Game box */
     #box {
       width: 100px;
       height: 100px;
@@ -29,10 +58,10 @@
       transition: all 0.25s ease; /* smooth movement */
 	  box-shadow: 0 0 15px rgba(255,0,0,0.7);
     }
-.pop {
+   .pop {
    transform: scale(1.3);
-}
-.particle {
+   }
+   .particle {
     position: absolute;
     width: 8px;
     height: 8px;
@@ -40,7 +69,7 @@
     border-radius: 50%;
     pointer-events: none;
     animation: explode 600ms ease-out forwards;
-}
+   }
 
 @keyframes explode {
     to {
@@ -61,15 +90,22 @@
     <a href="https://erlinguillen.github.io/Server/Home/index.html" class="navigator">Back</a>
 	</div>
   </nav>
+  <main>
+  <div class="ui">
     <h1>Click the Box!</h1>
     <p>Score: <span id="score">0</span></p>
-    <p>Time Left: <span id="time">10</span></p>
-    <div id="box"></div>
-    <br>
+    <p>Time Left: <span id="time">30</span></p>
     <button id="restartBtn">Restart Game</button>
-<script>
+	<p>High Score: <span id="highScore">0</span></p>
+  </div>
+
+  <div id="box"></div>
+    <script>
+	let highScore = localStorage.getItem("highScore") || 0;
+    document.getElementById("highScore").innerText = highScore;
+		
     let score = 0;
-    let timeLeft = 10;
+    let timeLeft = 30;
     let timer;
 
     let box = document.getElementById("box");
@@ -120,6 +156,12 @@ box.onclick = function() {
     function countdown() {
         timeLeft--;
         document.getElementById("time").innerText = timeLeft;
+		
+		if (score > highScore) {
+           highScore = score;
+           localStorage.setItem("highScore", highScore);
+           document.getElementById("highScore").innerText = highScore;
+        }   
 
         if (timeLeft <= 0) {
             clearInterval(timer);
@@ -158,5 +200,10 @@ function createExplosion(x, y) {
         startGame();
     };
 </script>
+</main>
+<footer>
+  <p id="version"></p>
+</footer>
+<script src="myscript.js"></script>
 </body>
 </html>

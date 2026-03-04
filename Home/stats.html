@@ -8,14 +8,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,200;1,200&display=swap" rel="stylesheet">
 <link rel="icon" type="image/x-icon" href="logo.png">
 <link rel="stylesheet" href="mystyle.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Stats</title>
 <style>
-    .mycontainer {
-      margin: 10px;
-    }
 	section {
-	  width: 99%;
-      display: inline-block;
+	  margin: 10px;
 	}
 	.mycontainer2{
 	  display: flex;
@@ -24,22 +21,22 @@
       width: 50%;
 	  float:left;
     }
-	div.mycontainer .skill{
-      width:14.285%;  
-      float:left;
-	}
-	div.mycontainer .positive {
-      width:50%;  
-      float:left;
-	}
-	div.mycontainer .immune{
-      width:50%;  
-      float:left;
-	}
-	div.mycontainer .stat{
-      width:50%;  
-      float:left;
-	}	
+    .grid-container {
+      display: grid;
+      grid-template-columns: 14.28% 14.28% 14.28% 14.28% 14.28% 14.28% 14.28%;
+	  background-color: rgba(0,0,0,0.1);
+     }
+	 .grid-container2 {
+      display: grid;
+      grid-template-columns: 50% 50%;
+	  background-color: rgba(0,0,0,0.1);
+	  padding: 10px 0px;
+     }
+     .grid-container3 {
+      display: grid;
+      grid-template-columns: 50% 50%;
+	  background-color: rgba(0,0,0,0.1);
+     }
 </style>
 </head>
 <body>
@@ -57,52 +54,49 @@
   </nav>
   <main>
   <section>
-  <h1 style="font-size: 300%;margin:20px">Erlin's Skill</h1>
-  <hr>
-  <div class="mycontainer">
-    <div class="skill"><p>Grammar</p></div>
-    <div class="skill"><p>Coding</p></div>
-    <div class="skill"><p>Mathmatics</p></div>
-    <div class="skill"><p>Design</p></div>
-    <div class="skill"><p>Art</p></div>
-    <div class="skill"><p>Technology</p></div>
-    <div class="skill"><p>Editor</p></div>
+  <div class="grid-container">
+    <div class="skill">
+	<p>Grammar</p>
+	</div>
+    <div class="skill">
+    <p>Coding</p>
+	</div>
+    <div class="skill">
+	<p>Mathmatics</p>
+	</div>
+    <div class="skill">
+	<p>Design</p>
+	</div>
+    <div class="skill">
+	<p>Art</p>
+	</div>
+    <div class="skill">
+	<p>Technology</p>
+	</div>
+    <div class="skill">
+	<p>Editor</p>
+	</div>
   </div>
-  <div class="mycontainer">
-    <div class="stat">
-    <h1>Stats</h1>
-    <hr>
-    <p class="health">Level 838</p>
-    <p class="dps">83,800 HP - 8,380 ATK</p>
-    </div>
+  <div class="grid-container2">
+    <div class="count"><h2>Stats</h2><p style="font-size: 50px; margin: 10px">83,800 HP - 8.38k DMG</p></div>
+    <div class="count"><h2>Subscribers</h2><p style="font-size: 50px; margin: 10px">83,800</p></div>
   </div>
-  <div class="mycontainer">
-    <div class="stat">
-    <h1>Total Subscribes</h1>
-    <hr>
-    <p class="count">83,886</p>
-    </div>
+  <div class="grid-container2">
+    <div class="count">
+	<h2>Stats</h2>
+	<p style="font-size: 50px; margin: 10px">Level 41 - Stop at Geography</p></div>
+    <div class="count">
+	<h2>View</h2>
+	<p style="font-size: 50px; margin: 10px">16.5M</p>
+	</div>
   </div>
-  <div class="mycontainer">
-    <div class="stat">
-    <h1>English Words</h1>
-    <hr>
-	<p class="health">Level 41</p>
-    <p class="dps">Stop at Geography/Para de grografia</p>
-    </div>
-  </div>
-  <div class="mycontainer">
-    <div class="stat">
-    <h1>Total Views</h1>
-    <hr>
-    <p class="count">16.5M</p>
-    </div>
-  </div>
-  <div class="mycontainer">
-  <div class="positive"><p>Positive: 100% IQ Strength (When 50% Complete), 100% Focus </p></div>
-  </div>
-  <div class="mycontainer">
-  <div class="immune"><p>Immune: Brainrot, Haters, Weaken IQ, and Online daters</p></div>
+  <div class="grid-container3">
+    <div class="good">
+    <p>Useful: 100% Strength IQ (When 50% Complete), and 100% Focus</p>
+	</div>
+	<div class="bad">
+    <p>Immune: Brainrot, Online Daters, IQ Weaken, and Haters</p>
+	</div>
   </div>
   </section>
   <p>Under Construction</p>
@@ -112,8 +106,10 @@
 	  <h3 id="SocialMedia">Social Media</h3>
 	  <a href="https://www.youtube.com/@ErlinGuillen_YT" target="_blank" alt="youtube"><img src="youtube.png" alt="Logo" width="200" height="200"></a>
 	  <a href="https://www.roblox.com/users/2625249323/profile" target="_blank" alt="youtube"><img src="roblox.png" alt="Logo" width="200" height="200"></a>
+	  <p id="version"></p>
       </address>   
   </footer>
   </wrapper>
+  <script src="myscript.js"></script>
 </body>
 </html>

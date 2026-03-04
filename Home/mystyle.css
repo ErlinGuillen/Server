@@ -7,11 +7,11 @@
     background-repeat: no-repeat;
 	background-attachment: fixed;
     background-size: cover;
-	font-size: 18px;
   }
   wrapper {
   	display:block;
   	margin:auto;
+	width: 1366px;
   }
   header {
 	background-color: black;
@@ -19,7 +19,6 @@
   footer {
 	 background-color: black;
 	 padding: 1px 0px;
-	 border-top: 2px solid white;
   }
   h1, h2, h3, blockquote, b {
 	font-family: "Roboto", sans-serif;
@@ -28,15 +27,6 @@
   	font-style: normal;
   	font-variation-settings: "wdth" 100;
 	color: white;
-  }
-  h1{
-	font-size: 42px;
-  }
-  h2{
-    font-size: 32px;
-  }
-  p{
-	font-size: 20px;
   }
   q, p, table, li, button, a {
 	font-family: "Roboto", sans-serif;
@@ -85,11 +75,11 @@
     text-decoration: none;
   }
  /* hover is on */
-  .skill:hover, .positive:hover{
-	background-color: rgba(0,255,0,0.25);
+  .skill:hover, .good:hover{
+	background-color: rgba(0,255,0,0.2);
   }
-  div:hover{
-	background-color: rgba(0, 188, 255, 0.1);
+  .bad:hover{
+	background-color: rgba(255,0,0,0.2);
   }
   .navigator:hover{
 	background-color: rgba(0,92,125,1.00);
@@ -97,10 +87,7 @@
   .navigator:active{
 	background-color: rgba(0,125,0,1.00)
   }
-  .immune:hover{
-	background-color: rgba(255,0,0,0.25);
-  }
-  .project:hover, .photoshop:hover, .site:hover{
+  .welcome:hover, .game:hover, .count:hover {
 	background-color: rgba(0, 188, 255, 0.2);
   }
   tr:hover {
@@ -124,7 +111,7 @@
   } 	
   .sidelogo{
 	margin:0px 10px;
-	padding:1.3px 0%;
+	padding:6.25px 0%;
 	display:inline-block; 
 	vertical-align: top;
   }
@@ -141,30 +128,16 @@
   }
 	.health{
 		font-size: 300%;
-		margin: 20px auto;
 	}
 	.dps{
 		font-size: 200%;
-	    margin: 20px auto;
-	}
-	.skill{
-		background-color: rgba(0,0,0,0.2);
-	}
-	.positive{
-		background-color: rgba(0,0,0,0.1);
-	}
-	.immune{
-		background-color: rgba(0,0,0,0.1);
-	}
-	.stat{
-		background-color: rgba(0,0,0,0.1);
 	}
     .project{
       background-color: rgba(0,0,0,0.1);
 	  display: inline-block;
 	  width: 40%;
 	  vertical-align: top;
-  }
+    }
   .site{
       background-color: rgba(0,0,0,0.1);
 	  display: inline-block;
@@ -174,35 +147,15 @@
       background-color: rgba(0,0,0,0.1);
 	  display: inline-block;
 	  width: 40%;
-  }
-  .count{
-	   font-size: 605%;
-	   margin: 20px auto;
   } 
   .welcome{
-    padding: 15% 0px;
     background-color: rgba(0,0,0,0.1);
-  }
-  .icon{
-	padding: 106.57px 0px;
-    background-color: rgba(0,0,0,0.1);	
-  }
-  .getstarted{
-	padding: 10px 0px;
-    background-color: rgba(0,0,0,0.1);	
-  }
-  .quote{
-	padding: 10px 0px;
-    background-color: rgba(0,0,0,0.1);	
-  }
-  .contact{
-	padding: 10px 0px;
-    background-color: rgba(0,0,0,0.1);	 
   }
   .navigator{
 	background-color: black;
 	padding: 10px;
   }
   .game{
-    background-color: rgba(0,0,0,0.1);	 
+    background-color: rgba(0,0,0,0.1);	
+	padding: 10px;
   }

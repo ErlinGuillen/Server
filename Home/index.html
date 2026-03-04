@@ -3,7 +3,6 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect">
 <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,900;1,900&display=swap" rel="stylesheet">
@@ -12,8 +11,11 @@
 <link rel="stylesheet" href="mystyle.css">
 <title>Home</title>
 <style>
+  section {
+	margin: 10px;
+    display: flex;
+  }
   .mycontainer{
-    margin: 10px;
 	display: flex;
   }
   .mycontainer2{
@@ -31,21 +33,8 @@
 	width: 50%;
     float:left;
   }
-  div.mycontainer > .getstarted{
+  .game{
 	width: 100%;
-    float:left;
-  }
-  div.mycontainer > .quote{
-	width: 50%;
-    float:left;
-  }
-  div.mycontainer > .contact{
-	width: 50%;
-	float:left;
-  }
-  div.mycontainer > .game{
-	width: 100%;
-	float:left;
   }
 </style>
 </head>
@@ -65,53 +54,51 @@
 	</div>
   </nav>
   <main>
+   <section>
 	<div class="mycontainer">
 	 <div class="welcome">
      <h1>Welcome to my website</h1>
      <hr>
-     <p>Welcome to my website! This site is a place where you can explore, learn, and discover helpful information. I hope you enjoy your time here and find what you’re looking for.</p>
-	 </div>
-	 <div class="icon">
-	 <img src="imageicon.png" alt="icon" width="50%">
-	 </div>
-	</div>
-	<div class="mycontainer">
-	 <div class="getstarted">
-     <h1>Get Started</h1>
+     <p>This site is a place where you can explore, learn, and discover helpful information. I hope you enjoy your time here and find exactly what you're looking for.</p>
+	 <br>
+	 <h1>Get Started</h1>
      <hr>
-     <p>your first step into exploring everything this website has to offer. Here, you can learn more about the project, discover useful information, and navigate through different sections with ease. This area is designed to help you understand the purpose of the site and guide you toward what you want to explore next. Whether you are new or returning, Get Started helps you begin your journey quickly and simply.</p>
-	 </div>
-	</div>
-    <div class="mycontainer">
-	 <div class="contact">
+     <p>This is your first step in exploring everything this website has to offer. Here, you can learn more about my projects, discover useful information, and navigate through different sections easily.</p>
+	 <br>
 	 <h1>Contact</h1>
      <hr>
-     <p>Press a button to send a email</p>
-     <p><a href="mailto:guillenvelaaquezerlin@gmail.com" class="bottom">Email</a></p><br>
-	 </div>
-	 <div class="quote">
+     <p>Press the button below to send me an email.</p>
+     <p><a href="mailto:guillenvelaaquezerlin@gmail.com" class="navigator">Email Me</a>
+     </p>
+	 <br>
      <h1>Quote</h1>
      <hr>
      <p>For Erlin:</p>
-     <blockquote><q>On Saturday, I will post 6 and more, because it's admin abuse.</q></blockquote><br>
+     <blockquote><q>On Saturday, I will post six or more because it is important to stay active.</q></blockquote><br>
 	 </div>
-    </div>
-     <div class="mycontainer">
+	 <div class="icon">
+	 <img src="imageicon.png" alt="icon" width="100%" height="100%" class="welcome">
+	 </div>
+	</div>
+  </section>
+  <section>
 	  <div class="game">
 		<h1>Game</h1>
 		<hr>
-		<p>Check it out about click a box. Press button to play</p>
-	    <p><a href="https://erlinguillen.github.io/Server/Home/clickthebox.html" class="bottom">Click The Box! - v1.1</a></p>
+		<p>Try out my game! Click the button below to start playing.</p>
+	    <p><a href="https://erlinguillen.github.io/Server/Home/clickthebox.html" class="navigator">Play "Click the Box" – Version 1.1</a></p>
 		<img src="imageicon.png" alt="icon" width="25%">
 	  </div>
-	 </div>
+   </section>
   </main>
   <footer>
 	  <h3 id="SocialMedia">Social Media</h3>
+	  <p>Follow me on social media to see more content and updates.</p>
 	  <a href="https://www.youtube.com/@ErlinGuillen_YT" target="_blank" alt="youtube"><img src="youtube.png" alt="Logo" width="200" height="200"></a>
 	  <a href="https://www.roblox.com/users/2625249323/profile" target="_blank" alt="youtube"><img src="roblox.png" alt="Logo" width="200" height="200"></a>
-	  <p align="right" style="margin: 0;">By Erlin Guillen-Velasquez - Build 765 - March 2026</p>
+	  <p id="version"></p>
   </footer>
   </wrapper>
+  <script src="myscript.js"></script>
 </body>
 </html>
