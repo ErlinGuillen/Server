@@ -24,34 +24,8 @@ div.mycontainer2 > .navigator{
   float:left;
 }
 
-main{
-    font-family: Arial, sans-serif;
-    text-align: center;
-    color: white;
-  }
-
-  #gameArea {
-    width: 500px;
-    height: 400px;
-    border: 2px solid white;
-    margin: 20px auto;
-    position: relative;
-    background-color: #444;
-  }
-
-  #box {
-    width: 50px;
-    height: 50px;
-    background: red;
-    position: absolute;
-    cursor: pointer;
-  }
-
-  button, select {
-    font-size: 16px;
-    margin: 5px;
-  }
-
+main{}
+  
 </style>
 </head>
 
@@ -70,111 +44,12 @@ main{
 </nav>
 
 <main>
-
-<h1>Click the Box!</h1>
-
-<button id="startBtn">Start Game</button>
-
-<p>
-Difficulty:
-<select id="difficulty">
-  <option value="1200">Easy</option>
-  <option value="800">Medium</option>
-  <option value="400">Hard</option>
-</select>
-</p>
-
-<p>Time: <span id="time">30</span> | Score: <span id="score">0</span></p>
-
-<div id="gameArea">
-  <div id="box"></div>
-</div>
-
-<!-- Background Music -->
-<audio id="bgMusic" loop>
-  <source src="Wonderful Day.mp3" type="audio/mpeg">
-</audio>
-
-<!-- Click Sound -->
-<audio id="clickSound">
-  <source src="lobotomy.mp3" type="audio/mpeg">
-</audio>
-
 </main>
 
 <footer>
 <p id="version"></p>
 </footer>
-
 <script>
-let score = 0;
-let time = 30;
-let gameInterval;
-let timerInterval;
-
-const box = document.getElementById("box");
-const gameArea = document.getElementById("gameArea");
-const clickSound = document.getElementById("clickSound");
-const bgMusic = document.getElementById("bgMusic");
-const startBtn = document.getElementById("startBtn");
-const difficulty = document.getElementById("difficulty");
-const scoreDisplay = document.getElementById("score");
-const timeDisplay = document.getElementById("time");
-
-// Play music after first click
-document.body.addEventListener("click", function() {
-  bgMusic.play();
-}, { once: true });
-
-// Move box to a random position
-function moveBox() {
-  const maxX = gameArea.clientWidth - box.offsetWidth;
-  const maxY = gameArea.clientHeight - box.offsetHeight;
-
-  const x = Math.random() * maxX;
-  const y = Math.random() * maxY;
-
-  box.style.left = x + "px";
-  box.style.top = y + "px";
-}
-
-// Click on the box
-box.onclick = function() {
-  clickSound.play();
-  score++;
-  scoreDisplay.textContent = score;
-  moveBox();
-}
-
-// Start game button
-startBtn.onclick = function() {
-  score = 0;
-  time = 30;
-  scoreDisplay.textContent = score;
-  timeDisplay.textContent = time;
-
-  moveBox();
-
-  // Clear previous intervals if game restarted
-  clearInterval(gameInterval);
-  clearInterval(timerInterval);
-
-  // Move box automatically based on difficulty
-  const speed = parseInt(difficulty.value);
-  gameInterval = setInterval(moveBox, speed);
-
-  // Countdown timer
-  timerInterval = setInterval(() => {
-    time--;
-    timeDisplay.textContent = time;
-
-    if(time <= 0){
-      clearInterval(timerInterval);
-      clearInterval(gameInterval);
-      alert("Game Over! Score: " + score);
-    }
-  }, 1000);
-}
 </script>
 <script src="myscript.js"></script>
 </body>
