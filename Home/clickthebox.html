@@ -104,45 +104,41 @@ const bgMusic = document.getElementById("bgMusic");
 const startBtn = document.getElementById("startBtn");
 const difficulty = document.getElementById("difficulty");
 
+// Allow background music after first click
 document.body.addEventListener("click", function(){
   bgMusic.play();
 }, { once: true });
 
 function moveBox(){
-
   let x = Math.random() * 450;
   let y = Math.random() * 350;
-
   box.style.left = x + "px";
   box.style.top = y + "px";
 }
 
 box.onclick = function(){
-
   clickSound.play();
-
   score++;
   document.getElementById("score").textContent = score;
-
   moveBox();
 };
 
+// Start Game button functionality
 startBtn.onclick = function(){
-
   score = 0;
   time = 30;
-
   document.getElementById("score").textContent = score;
   document.getElementById("time").textContent = time;
 
   moveBox();
 
+  // Move box automatically based on difficulty
   let speed = difficulty.value;
-
+  clearInterval(gameInterval); // in case a game was already running
   gameInterval = setInterval(moveBox, speed);
 
+  // Timer countdown
   let timer = setInterval(function(){
-
     time--;
     document.getElementById("time").textContent = time;
 
@@ -151,10 +147,9 @@ startBtn.onclick = function(){
       clearInterval(gameInterval);
       alert("Game Over! Score: " + score);
     }
-
-  },1000);
-
+  }, 1000);
 };
+  
 </script>
 <script src="myscript.js"></script>
 </body>
