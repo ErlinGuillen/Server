@@ -68,7 +68,7 @@
 
 <div id="game-container"></div>
 <div id="scoreboard">Score: 0</div>
-<div id="timer">Time: 30s</div>
+<div id="timer">Time: 5:00</div>
 
 <!-- Background music and sound effect -->
 <audio id="bg-music" src="Wonderful Day.mp3" loop></audio>
@@ -86,7 +86,7 @@ const clickSound = document.getElementById('click-sound');
 let score = 0;
 let gameInterval;
 let boxExists = false;
-let timeLeft = 30;
+let timeLeft = 300; // 5 minutes
 let timerInterval;
 
 function getDifficultySpeed() {
@@ -126,11 +126,9 @@ function createBox() {
     }, getDifficultySpeed());
 }
 
-let timeLeft = 300; // 5 minutes in seconds
-
 function startGame() {
     score = 0;
-    timeLeft = 300; // reset to 5 minutes
+    timeLeft = 300; // 5 minutes
     scoreboard.textContent = `Score: ${score}`;
     timerDisplay.textContent = `Time: 5:00`;
 
