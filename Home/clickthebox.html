@@ -121,7 +121,7 @@ const difficulty = document.getElementById("difficulty");
 const scoreDisplay = document.getElementById("score");
 const timeDisplay = document.getElementById("time");
 
-// Allow music to play after first click
+// Play music after first click
 document.body.addEventListener("click", function() {
   bgMusic.play();
 }, { once: true });
@@ -146,7 +146,7 @@ box.onclick = function() {
   moveBox();
 }
 
-// Start Game button
+// Start game button
 startBtn.onclick = function() {
   score = 0;
   time = 30;
@@ -155,7 +155,7 @@ startBtn.onclick = function() {
 
   moveBox();
 
-  // Clear previous intervals
+  // Clear previous intervals if game restarted
   clearInterval(gameInterval);
   clearInterval(timerInterval);
 
@@ -163,7 +163,7 @@ startBtn.onclick = function() {
   const speed = parseInt(difficulty.value);
   gameInterval = setInterval(moveBox, speed);
 
-  // Timer countdown
+  // Countdown timer
   timerInterval = setInterval(() => {
     time--;
     timeDisplay.textContent = time;
