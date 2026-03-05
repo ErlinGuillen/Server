@@ -16,6 +16,7 @@
     color: #333;
   }
 
+  /* Game container */
   #game-container {
     position: relative;
     width: 500px;
@@ -28,6 +29,7 @@
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
   }
 
+  /* Boxes */
   .box {
     position: absolute;
     width: 50px;
@@ -37,11 +39,11 @@
     border-radius: 8px;
     transition: transform 0.1s;
   }
-
   .box:hover {
     transform: scale(1.1);
   }
 
+  /* Controls */
   #controls {
     display: flex;
     justify-content: center;
@@ -50,7 +52,6 @@
     margin: 20px auto;
     flex-wrap: wrap;
   }
-
   .btn {
     padding: 12px 25px;
     font-size: 18px;
@@ -62,12 +63,10 @@
     cursor: pointer;
     transition: 0.3s;
   }
-
   .btn:hover {
     background-color: #45a049;
     transform: scale(1.05);
   }
-
   .difficulty-container {
     display: flex;
     align-items: center;
@@ -75,7 +74,6 @@
     font-size: 18px;
     font-weight: bold;
   }
-
   .difficulty-select {
     padding: 6px 12px;
     font-size: 16px;
@@ -84,33 +82,24 @@
     cursor: pointer;
     transition: 0.2s;
   }
-
   .difficulty-select:hover {
     border-color: #4CAF50;
   }
 
+  /* Score & Timer */
   #scoreboard, #timer, #highscore {
     font-size: 20px;
     font-weight: bold;
     margin-top: 10px;
   }
-
-  #scoreboard {
-    color: #ff5722;
-  }
-
-  #timer {
-    color: #2196F3;
-  }
-
-  #highscore {
-    color: #9C27B0;
-  }
+  #scoreboard { color: #ff5722; }
+  #timer { color: #2196F3; }
+  #highscore { color: #9C27B0; }
 
   /* Game Over Overlay */
   #game-over {
     display: none;
-    position: absolute;
+    position: fixed;
     top: 0; left: 0;
     width: 100%; height: 100%;
     background-color: rgba(0,0,0,0.7);
@@ -121,10 +110,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border-radius: 10px;
-    z-index: 100;
+    z-index: 1000;
   }
-
   #game-over button {
     margin-top: 20px;
     padding: 10px 20px;
@@ -135,11 +122,9 @@
     color: white;
     cursor: pointer;
   }
-
   #game-over button:hover {
     background-color: #45a049;
   }
-
 </style>
 </head>
 <body>
@@ -158,11 +143,13 @@
   </div>
 </div>
 
-<div id="game-container">
-  <div id="game-over">
-    <div id="game-over-text"></div>
-    <button id="restart-btn">Restart</button>
-  </div>
+<!-- Game container -->
+<div id="game-container"></div>
+
+<!-- Game Over Overlay (outside game container!) -->
+<div id="game-over">
+  <div id="game-over-text"></div>
+  <button id="restart-btn">Restart</button>
 </div>
 
 <div id="scoreboard">Score: 0</div>
@@ -205,10 +192,12 @@ function createBox() {
   if (boxExists) return;
   const box = document.createElement('div');
   box.classList.add('box');
+
   const maxX = gameContainer.clientWidth - 50;
   const maxY = gameContainer.clientHeight - 50;
   box.style.left = Math.floor(Math.random() * maxX) + 'px';
   box.style.top = Math.floor(Math.random() * maxY) + 'px';
+
   gameContainer.appendChild(box);
   boxExists = true;
 
@@ -233,8 +222,9 @@ function endGame() {
   clearInterval(gameInterval);
   clearInterval(timerInterval);
   bgMusic.pause();
-  gameContainer.innerHTML = '';
+  gameContainer.innerHTML = ''; // Only clears the boxes
   boxExists = false;
+
   let newRecord = false;
   if (score > highScore) {
     highScore = score;
@@ -243,7 +233,7 @@ function endGame() {
   }
   highscoreDisplay.textContent = `High Score: ${highScore}`;
   gameOverText.textContent = `Game Over!\nScore: ${score}${newRecord ? ' 🎉 New Record!' : ''}`;
-  gameOverOverlay.style.display = 'flex';
+  gameOverOverlay.style.display = 'flex'; // Show overlay
 }
 
 function startGame() {
