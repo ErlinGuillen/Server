@@ -54,18 +54,27 @@
 <main>
 <h1>Click the Box Game</h1>
 <p>Score: <span id="score">0</span></p>
-
+	
 <div id="gameArea">
 <div id="box"></div>
 </div>
+
+<audio id="bgMusic" autoplay loop>
+  <source src="wonderfulday.mp3" type="audio/mpeg">
+</audio>
+
+<audio id="clickSound">
+  <source src="lobotomy.mp3" type="audio/mpeg">
+</audio>
 </main>
   <footer>
 	  <p id="version"></p>
   </footer>
 <script>
-
+	
 let score = 0;
 const box = document.getElementById("box");
+const clickSound = document.getElementById("clickSound");
 
 function moveBox(){
 
@@ -79,6 +88,8 @@ box.style.top = y + "px";
 
 box.onclick = function(){
 
+clickSound.play();   // play sound
+
 score++;
 document.getElementById("score").textContent = score;
 
@@ -87,7 +98,7 @@ moveBox();
 };
 
 moveBox();
-
+	
 </script>
 <script src="myscript.js"></script>
 </body>
