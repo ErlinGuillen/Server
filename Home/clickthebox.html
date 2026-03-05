@@ -64,12 +64,18 @@ main{
 
 <main>
 
-<h1>Click the Box Game</h1>
-<p>Score: <span id="score">0</span></p>
+<button id="startBtn">Start Game</button>
 
-<div id="gameArea">
-<div id="box"></div>
-</div>
+<p>
+Difficulty:
+<select id="difficulty">
+  <option value="1200">Easy</option>
+  <option value="800">Medium</option>
+  <option value="400">Hard</option>
+</select>
+</p>
+
+<p>Time: <span id="time">30</span></p>
 
 <!-- Background Music -->
 <audio id="bgMusic" autoplay loop>
@@ -88,12 +94,15 @@ main{
 </footer>
 
 <script>
-  
 let score = 0;
+let time = 30;
+let gameInterval;
 
 const box = document.getElementById("box");
 const clickSound = document.getElementById("clickSound");
 const bgMusic = document.getElementById("bgMusic");
+const startBtn = document.getElementById("startBtn");
+const difficulty = document.getElementById("difficulty");
 
 document.body.addEventListener("click", function(){
   bgMusic.play();
@@ -118,7 +127,34 @@ box.onclick = function(){
   moveBox();
 };
 
-moveBox();
+startBtn.onclick = function(){
+
+  score = 0;
+  time = 30;
+
+  document.getElementById("score").textContent = score;
+  document.getElementById("time").textContent = time;
+
+  moveBox();
+
+  let speed = difficulty.value;
+
+  gameInterval = setInterval(moveBox, speed);
+
+  let timer = setInterval(function(){
+
+    time--;
+    document.getElementById("time").textContent = time;
+
+    if(time <= 0){
+      clearInterval(timer);
+      clearInterval(gameInterval);
+      alert("Game Over! Score: " + score);
+    }
+
+  },1000);
+
+};
 </script>
 <script src="myscript.js"></script>
 </body>
