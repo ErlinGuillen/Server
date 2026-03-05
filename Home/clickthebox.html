@@ -8,16 +8,25 @@
   body {
     font-family: Arial, sans-serif;
     text-align: center;
+    background-color: #eef2f3;
   }
 
+  h1 {
+    margin-top: 20px;
+    color: #333;
+  }
+
+  /* Game Container */
   #game-container {
     position: relative;
     width: 500px;
     height: 400px;
     margin: 20px auto;
-    border: 2px solid #333;
-    background-color: #f0f0f0;
+    border: 3px solid #333;
+    border-radius: 10px;
+    background-color: #f9f9f9;
     overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
   }
 
   .box {
@@ -27,27 +36,74 @@
     background-color: red;
     cursor: pointer;
     border-radius: 8px;
+    transition: transform 0.1s;
   }
 
-  #scoreboard, #timer {
-    margin-top: 15px;
-    font-size: 20px;
+  .box:hover {
+    transform: scale(1.1);
+  }
+
+  /* Controls */
+  #controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    margin: 20px auto;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    padding: 12px 25px;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  .btn:hover {
+    background-color: #45a049;
+    transform: scale(1.05);
+  }
+
+  .difficulty-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 18px;
     font-weight: bold;
   }
 
-  #controls {
-    margin: 20px;
-  }
-
-  #start-btn {
-    padding: 10px 20px;
+  .difficulty-select {
+    padding: 6px 12px;
     font-size: 16px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
     cursor: pointer;
+    transition: 0.2s;
   }
 
-  select {
-    font-size: 16px;
-    margin-left: 10px;
+  .difficulty-select:hover {
+    border-color: #4CAF50;
+  }
+
+  /* Score and Timer */
+  #scoreboard, #timer {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+
+  #scoreboard {
+    color: #ff5722;
+  }
+
+  #timer {
+    color: #2196F3;
   }
 </style>
 </head>
@@ -56,21 +112,22 @@
 <h1>Click the Box Game!</h1>
 
 <div id="controls">
-  <button id="start-btn">Start Game</button>
-  <label>Difficulty:
-    <select id="difficulty">
+  <button id="start-btn" class="btn">Start Game</button>
+  <div class="difficulty-container">
+    <span>Difficulty:</span>
+    <select id="difficulty" class="difficulty-select">
       <option value="easy">Easy</option>
       <option value="medium" selected>Medium</option>
       <option value="hard">Hard</option>
     </select>
-  </label>
+  </div>
 </div>
 
 <div id="game-container"></div>
 <div id="scoreboard">Score: 0</div>
 <div id="timer">Time: 5:00</div>
 
-<!-- Background music and sound effect -->
+<!-- Background music and click sound -->
 <audio id="bg-music" src="Wonderful Day.mp3" loop></audio>
 <audio id="click-sound" src="lobotomy.mp3"></audio>
 
@@ -97,66 +154,64 @@ function getDifficultySpeed() {
 }
 
 function createBox() {
-    if (boxExists) return;
-    const box = document.createElement('div');
-    box.classList.add('box');
+  if (boxExists) return;
+  const box = document.createElement('div');
+  box.classList.add('box');
 
-    const maxX = gameContainer.clientWidth - 50;
-    const maxY = gameContainer.clientHeight - 50;
-    box.style.left = Math.floor(Math.random() * maxX) + 'px';
-    box.style.top = Math.floor(Math.random() * maxY) + 'px';
+  const maxX = gameContainer.clientWidth - 50;
+  const maxY = gameContainer.clientHeight - 50;
+  box.style.left = Math.floor(Math.random() * maxX) + 'px';
+  box.style.top = Math.floor(Math.random() * maxY) + 'px';
 
-    gameContainer.appendChild(box);
-    boxExists = true;
+  gameContainer.appendChild(box);
+  boxExists = true;
 
-    box.addEventListener('click', () => {
-        score++;
-        scoreboard.textContent = `Score: ${score}`;
-        clickSound.currentTime = 0;
-        clickSound.play();
-        box.remove();
-        boxExists = false;
-    });
+  box.addEventListener('click', () => {
+    score++;
+    scoreboard.textContent = `Score: ${score}`;
+    clickSound.currentTime = 0;
+    clickSound.play();
+    box.remove();
+    boxExists = false;
+  });
 
-    setTimeout(() => {
-        if (boxExists) {
-            box.remove();
-            boxExists = false;
-        }
-    }, getDifficultySpeed());
+  setTimeout(() => {
+    if (boxExists) {
+      box.remove();
+      boxExists = false;
+    }
+  }, getDifficultySpeed());
 }
 
 function startGame() {
-    score = 0;
-    timeLeft = 300; // 5 minutes
-    scoreboard.textContent = `Score: ${score}`;
-    timerDisplay.textContent = `Time: 5:00`;
+  score = 0;
+  timeLeft = 300;
+  scoreboard.textContent = `Score: ${score}`;
+  timerDisplay.textContent = `Time: 5:00`;
 
-    if (gameInterval) clearInterval(gameInterval);
-    if (timerInterval) clearInterval(timerInterval);
+  if (gameInterval) clearInterval(gameInterval);
+  if (timerInterval) clearInterval(timerInterval);
 
-    bgMusic.currentTime = 0;
-    bgMusic.play();
+  bgMusic.currentTime = 0;
+  bgMusic.play();
 
-    gameInterval = setInterval(createBox, getDifficultySpeed());
-    timerInterval = setInterval(() => {
-        timeLeft--;
+  gameInterval = setInterval(createBox, getDifficultySpeed());
+  timerInterval = setInterval(() => {
+    timeLeft--;
+    const minutes = Math.floor(timeLeft / 60);
+    const seconds = timeLeft % 60;
+    const formattedSeconds = seconds < 10 ? '0' + seconds : seconds;
+    timerDisplay.textContent = `Time: ${minutes}:${formattedSeconds}`;
 
-        // Format minutes and seconds
-        const minutes = Math.floor(timeLeft / 60);
-        const seconds = timeLeft % 60;
-        const formattedSeconds = seconds < 10 ? '0' + seconds : seconds;
-        timerDisplay.textContent = `Time: ${minutes}:${formattedSeconds}`;
-
-        if (timeLeft <= 0) {
-            clearInterval(gameInterval);
-            clearInterval(timerInterval);
-            alert(`Time's up! Your score: ${score}`);
-            bgMusic.pause();
-            gameContainer.innerHTML = '';
-            boxExists = false;
-        }
-    }, 1000);
+    if (timeLeft <= 0) {
+      clearInterval(gameInterval);
+      clearInterval(timerInterval);
+      alert(`Time's up! Your score: ${score}`);
+      bgMusic.pause();
+      gameContainer.innerHTML = '';
+      boxExists = false;
+    }
+  }, 1000);
 }
 
 startBtn.addEventListener('click', startGame);
