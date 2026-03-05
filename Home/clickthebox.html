@@ -126,11 +126,13 @@ function createBox() {
     }, getDifficultySpeed());
 }
 
+let timeLeft = 300; // 5 minutes in seconds
+
 function startGame() {
     score = 0;
-    timeLeft = 30;
+    timeLeft = 300; // reset to 5 minutes
     scoreboard.textContent = `Score: ${score}`;
-    timerDisplay.textContent = `Time: ${timeLeft}s`;
+    timerDisplay.textContent = `Time: 5:00`;
 
     if (gameInterval) clearInterval(gameInterval);
     if (timerInterval) clearInterval(timerInterval);
@@ -141,7 +143,13 @@ function startGame() {
     gameInterval = setInterval(createBox, getDifficultySpeed());
     timerInterval = setInterval(() => {
         timeLeft--;
-        timerDisplay.textContent = `Time: ${timeLeft}s`;
+
+        // Format minutes and seconds
+        const minutes = Math.floor(timeLeft / 60);
+        const seconds = timeLeft % 60;
+        const formattedSeconds = seconds < 10 ? '0' + seconds : seconds;
+        timerDisplay.textContent = `Time: ${minutes}:${formattedSeconds}`;
+
         if (timeLeft <= 0) {
             clearInterval(gameInterval);
             clearInterval(timerInterval);
