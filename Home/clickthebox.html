@@ -5,266 +5,76 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Click the Box Game</title>
 <style>
-  body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    background-color: #eef2f3;
-  }
-
-  h1 {
-    margin-top: 20px;
-    color: #333;
-  }
-
-  /* Game container */
-  #game-container {
-    position: relative;
-    width: 500px;
-    height: 400px;
-    margin: 20px auto;
-    border: 3px solid #333;
-    border-radius: 10px;
-    background-color: #f9f9f9;
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-  }
-
-  /* Boxes */
-  .box {
-    position: absolute;
-    width: 50px;
-    height: 50px;
-    background-color: red;
-    cursor: pointer;
-    border-radius: 8px;
-    transition: transform 0.1s;
-  }
-  .box:hover {
-    transform: scale(1.1);
-  }
-
-  /* Controls */
-  #controls {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 30px;
-    margin: 20px auto;
-    flex-wrap: wrap;
-  }
-  .btn {
-    padding: 12px 25px;
-    font-size: 18px;
-    font-weight: bold;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: 0.3s;
-  }
-  .btn:hover {
-    background-color: #45a049;
-    transform: scale(1.05);
-  }
-  .difficulty-container {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 18px;
-    font-weight: bold;
-  }
-  .difficulty-select {
-    padding: 6px 12px;
-    font-size: 16px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    cursor: pointer;
-    transition: 0.2s;
-  }
-  .difficulty-select:hover {
-    border-color: #4CAF50;
-  }
-
-  /* Score & Timer */
-  #scoreboard, #timer, #highscore {
-    font-size: 20px;
-    font-weight: bold;
-    margin-top: 10px;
-  }
-  #scoreboard { color: #ff5722; }
-  #timer { color: #2196F3; }
-  #highscore { color: #9C27B0; }
-
-  /* Game Over Overlay */
-  #game-over {
-    display: none;
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background-color: rgba(0,0,0,0.7);
-    color: #fff;
-    font-size: 24px;
-    font-weight: bold;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-  }
-  #game-over button {
-    margin-top: 20px;
-    padding: 10px 20px;
-    font-size: 18px;
-    border: none;
-    border-radius: 6px;
-    background-color: #4CAF50;
-    color: white;
-    cursor: pointer;
-  }
-  #game-over button:hover {
-    background-color: #45a049;
-  }
+body { font-family: Arial, sans-serif; text-align: center; background-color: #eef2f3; }
+h1 { margin-top: 20px; color: #333; }
+#game-container { position: relative; width: 500px; height: 400px; margin: 20px auto; border: 3px solid #333; border-radius: 10px; background-color: #f9f9f9; overflow: hidden; box-shadow: 0 4px 8px rgba(0,0,0,0.2); }
+.box { position: absolute; width: 50px; height: 50px; background-color: red; cursor: pointer; border-radius: 8px; transition: transform 0.1s; }
+.box:hover { transform: scale(1.1); }
+#controls { display: flex; justify-content: center; align-items: center; gap: 30px; margin: 20px auto; flex-wrap: wrap; }
+.btn { padding: 12px 25px; font-size: 18px; font-weight: bold; background-color: #4CAF50; color: white; border: none; border-radius: 8px; cursor: pointer; transition: 0.3s; }
+.btn:hover { background-color: #45a049; transform: scale(1.05); }
+.difficulty-container { display: flex; align-items: center; gap: 10px; font-size: 18px; font-weight: bold; }
+.difficulty-select { padding: 6px 12px; font-size: 16px; border-radius: 6px; border: 1px solid #ccc; cursor: pointer; transition: 0.2s; }
+.difficulty-select:hover { border-color: #4CAF50; }
+#scoreboard,#timer,#highscore,#combo { font-size: 20px; font-weight: bold; margin-top: 10px; }
+#scoreboard { color: #ff5722; }
+#timer { color: #2196F3; }
+#highscore { color: #9C27B0; }
+#combo { color: #FF9800; }
+#game-over { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background-color: rgba(0,0,0,0.7); color:#fff; font-size:24px; font-weight:bold; display:flex; flex-direction:column; justify-content:center; align-items:center; z-index:1000; }
+#game-over button { margin-top:20px; padding:10px 20px; font-size:18px; border:none; border-radius:6px; background-color:#4CAF50; color:white; cursor:pointer; }
+#game-over button:hover { background-color:#45a049; }
 </style>
 </head>
 <body>
-
 <h1>Click the Box Game!</h1>
-
 <div id="controls">
-  <button id="start-btn" class="btn">Start Game</button>
-  <div class="difficulty-container">
-    <span>Difficulty:</span>
-    <select id="difficulty" class="difficulty-select">
-      <option value="easy">Easy</option>
-      <option value="medium" selected>Medium</option>
-      <option value="hard">Hard</option>
-    </select>
-  </div>
+<button id="start-btn" class="btn">Start Game</button>
+<div class="difficulty-container"><span>Difficulty:</span>
+<select id="difficulty" class="difficulty-select">
+<option value="easy">Easy</option>
+<option value="medium" selected>Medium</option>
+<option value="hard">Hard</option>
+</select></div>
 </div>
-
-<!-- Game container -->
 <div id="game-container"></div>
-
-<!-- Game Over Overlay (outside game container!) -->
-<div id="game-over">
-  <div id="game-over-text"></div>
-  <button id="restart-btn">Restart</button>
-</div>
-
+<div id="game-over"><div id="game-over-text"></div><button id="restart-btn">Restart</button></div>
 <div id="scoreboard">Score: 0</div>
+<div id="combo">Combo: 0</div>
 <div id="highscore">High Score: 0</div>
 <div id="timer">Time: 5:00</div>
-
-<!-- Sounds -->
 <audio id="bg-music" src="Wonderful Day.mp3" loop></audio>
 <audio id="click-sound" src="lobotomy.mp3"></audio>
-
 <script>
-const gameContainer = document.getElementById('game-container');
-const scoreboard = document.getElementById('scoreboard');
-const timerDisplay = document.getElementById('timer');
-const highscoreDisplay = document.getElementById('highscore');
-const startBtn = document.getElementById('start-btn');
-const restartBtn = document.getElementById('restart-btn');
-const difficultySelect = document.getElementById('difficulty');
-const bgMusic = document.getElementById('bg-music');
-const clickSound = document.getElementById('click-sound');
-const gameOverOverlay = document.getElementById('game-over');
-const gameOverText = document.getElementById('game-over-text');
+const gameContainer=document.getElementById('game-container');
+const scoreboard=document.getElementById('scoreboard');
+const comboDisplay=document.getElementById('combo');
+const timerDisplay=document.getElementById('timer');
+const highscoreDisplay=document.getElementById('highscore');
+const startBtn=document.getElementById('start-btn');
+const restartBtn=document.getElementById('restart-btn');
+const difficultySelect=document.getElementById('difficulty');
+const bgMusic=document.getElementById('bg-music');
+const clickSound=document.getElementById('click-sound');
+const gameOverOverlay=document.getElementById('game-over');
+const gameOverText=document.getElementById('game-over-text');
+let score=0; let combo=0; let comboTimer; const comboDuration=2000;
+let highScore=localStorage.getItem('highScore')||0; highscoreDisplay.textContent=`High Score: ${highScore}`;
+let gameInterval; let boxExists=false; let timeLeft=300; let timerInterval;
 
-let score = 0;
-let highScore = localStorage.getItem('highScore') || 0;
-highscoreDisplay.textContent = `High Score: ${highScore}`;
-let gameInterval;
-let boxExists = false;
-let timeLeft = 300;
-let timerInterval;
+function getDifficultySpeed(){const difficulty=difficultySelect.value;if(difficulty==='easy') return 1500;if(difficulty==='medium') return 1000;if(difficulty==='hard') return 600;}
 
-function getDifficultySpeed() {
-  const difficulty = difficultySelect.value;
-  if (difficulty === 'easy') return 1500;
-  if (difficulty === 'medium') return 1000;
-  if (difficulty === 'hard') return 600;
-}
+function createBox(){if(boxExists) return; const box=document.createElement('div'); box.classList.add('box'); const maxX=gameContainer.clientWidth-50; const maxY=gameContainer.clientHeight-50; box.style.left=Math.floor(Math.random()*maxX)+'px'; box.style.top=Math.floor(Math.random()*maxY)+'px'; gameContainer.appendChild(box); boxExists=true;
 
-function createBox() {
-  if (boxExists) return;
-  const box = document.createElement('div');
-  box.classList.add('box');
+box.addEventListener('click',()=>{combo++; comboDisplay.textContent=`Combo: ${combo}`; score+=1+combo; scoreboard.textContent=`Score: ${score}`; clickSound.currentTime=0; clickSound.play(); box.remove(); boxExists=false; clearTimeout(comboTimer); comboTimer=setTimeout(()=>{combo=0; comboDisplay.textContent='Combo: 0';},comboDuration); });
 
-  const maxX = gameContainer.clientWidth - 50;
-  const maxY = gameContainer.clientHeight - 50;
-  box.style.left = Math.floor(Math.random() * maxX) + 'px';
-  box.style.top = Math.floor(Math.random() * maxY) + 'px';
+setTimeout(()=>{if(boxExists){box.remove(); boxExists=false; }}, getDifficultySpeed()); }
 
-  gameContainer.appendChild(box);
-  boxExists = true;
+function endGame(){clearInterval(gameInterval); clearInterval(timerInterval); clearTimeout(comboTimer); bgMusic.pause(); gameContainer.innerHTML=''; boxExists=false; let newRecord=false; if(score>highScore){highScore=score; localStorage.setItem('highScore',highScore); newRecord=true;} highscoreDisplay.textContent=`High Score: ${highScore}`; gameOverText.textContent=`Game Over!\nScore: ${score}${newRecord?' 🎉 New Record!':''}`; gameOverOverlay.style.display='flex';}
 
-  box.addEventListener('click', () => {
-    score++;
-    scoreboard.textContent = `Score: ${score}`;
-    clickSound.currentTime = 0;
-    clickSound.play();
-    box.remove();
-    boxExists = false;
-  });
+function startGame(){score=0; combo=0; timeLeft=300; scoreboard.textContent=`Score: ${score}`; comboDisplay.textContent=`Combo: 0`; timerDisplay.textContent='Time: 5:00'; gameOverOverlay.style.display='none'; if(gameInterval) clearInterval(gameInterval); if(timerInterval) clearInterval(timerInterval); if(comboTimer) clearTimeout(comboTimer); bgMusic.currentTime=0; bgMusic.play(); gameInterval=setInterval(createBox,getDifficultySpeed()); timerInterval=setInterval(()=>{timeLeft--; const minutes=Math.floor(timeLeft/60); const seconds=timeLeft%60; timerDisplay.textContent=`Time: ${minutes}:${seconds<10?'0':''}${seconds}`; if(timeLeft<=0) endGame(); },1000); }
 
-  setTimeout(() => {
-    if (boxExists) {
-      box.remove();
-      boxExists = false;
-    }
-  }, getDifficultySpeed());
-}
-
-function endGame() {
-  clearInterval(gameInterval);
-  clearInterval(timerInterval);
-  bgMusic.pause();
-  gameContainer.innerHTML = ''; // Only clears the boxes
-  boxExists = false;
-
-  let newRecord = false;
-  if (score > highScore) {
-    highScore = score;
-    localStorage.setItem('highScore', highScore);
-    newRecord = true;
-  }
-  highscoreDisplay.textContent = `High Score: ${highScore}`;
-  gameOverText.textContent = `Game Over!\nScore: ${score}${newRecord ? ' 🎉 New Record!' : ''}`;
-  gameOverOverlay.style.display = 'flex'; // Show overlay
-}
-
-function startGame() {
-  score = 0;
-  timeLeft = 300;
-  scoreboard.textContent = `Score: ${score}`;
-  timerDisplay.textContent = `Time: 5:00`;
-  gameOverOverlay.style.display = 'none';
-
-  if (gameInterval) clearInterval(gameInterval);
-  if (timerInterval) clearInterval(timerInterval);
-
-  bgMusic.currentTime = 0;
-  bgMusic.play();
-
-  gameInterval = setInterval(createBox, getDifficultySpeed());
-  timerInterval = setInterval(() => {
-    timeLeft--;
-    const minutes = Math.floor(timeLeft / 60);
-    const seconds = timeLeft % 60;
-    const formattedSeconds = seconds < 10 ? '0' + seconds : seconds;
-    timerDisplay.textContent = `Time: ${minutes}:${formattedSeconds}`;
-    if (timeLeft <= 0) {
-      endGame();
-    }
-  }, 1000);
-}
-
-startBtn.addEventListener('click', startGame);
-restartBtn.addEventListener('click', startGame);
+startBtn.addEventListener('click',startGame); restartBtn.addEventListener('click',startGame);
 </script>
-
 </body>
 </html>
