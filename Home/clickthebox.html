@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Click the Box Game</title>
-
 <style>
   body {
     font-family: Arial, sans-serif;
@@ -15,7 +14,7 @@
     position: relative;
     width: 500px;
     height: 400px;
-    margin: 50px auto;
+    margin: 20px auto;
     border: 2px solid #333;
     background-color: #f0f0f0;
     overflow: hidden;
@@ -30,10 +29,14 @@
     border-radius: 8px;
   }
 
-  #scoreboard {
-    margin-top: 20px;
+  #scoreboard, #timer {
+    margin-top: 15px;
     font-size: 20px;
     font-weight: bold;
+  }
+
+  #controls {
+    margin: 20px;
   }
 
   #start-btn {
@@ -41,65 +44,117 @@
     font-size: 16px;
     cursor: pointer;
   }
+
+  select {
+    font-size: 16px;
+    margin-left: 10px;
+  }
 </style>
 </head>
 <body>
 
 <h1>Click the Box Game!</h1>
-<button id="start-btn">Start Game</button>
+
+<div id="controls">
+  <button id="start-btn">Start Game</button>
+  <label>Difficulty:
+    <select id="difficulty">
+      <option value="easy">Easy</option>
+      <option value="medium" selected>Medium</option>
+      <option value="hard">Hard</option>
+    </select>
+  </label>
+</div>
+
 <div id="game-container"></div>
 <div id="scoreboard">Score: 0</div>
+<div id="timer">Time: 30s</div>
+
+<!-- Background music and sound effect -->
+<audio id="bg-music" src="Wonderful Day.mp3" loop></audio>
+<audio id="click-sound" src="lobotomy.mp3"></audio>
 
 <script>
 const gameContainer = document.getElementById('game-container');
 const scoreboard = document.getElementById('scoreboard');
+const timerDisplay = document.getElementById('timer');
 const startBtn = document.getElementById('start-btn');
+const difficultySelect = document.getElementById('difficulty');
+const bgMusic = document.getElementById('bg-music');
+const clickSound = document.getElementById('click-sound');
 
 let score = 0;
 let gameInterval;
 let boxExists = false;
+let timeLeft = 30;
+let timerInterval;
+
+function getDifficultySpeed() {
+  const difficulty = difficultySelect.value;
+  if (difficulty === 'easy') return 1500;
+  if (difficulty === 'medium') return 1000;
+  if (difficulty === 'hard') return 600;
+}
 
 function createBox() {
-    if (boxExists) return; // Only one box at a time
+    if (boxExists) return;
     const box = document.createElement('div');
     box.classList.add('box');
 
-    // Random position inside container
     const maxX = gameContainer.clientWidth - 50;
     const maxY = gameContainer.clientHeight - 50;
-    const x = Math.floor(Math.random() * maxX);
-    const y = Math.floor(Math.random() * maxY);
-
-    box.style.left = x + 'px';
-    box.style.top = y + 'px';
+    box.style.left = Math.floor(Math.random() * maxX) + 'px';
+    box.style.top = Math.floor(Math.random() * maxY) + 'px';
 
     gameContainer.appendChild(box);
     boxExists = true;
 
-    // Click event
     box.addEventListener('click', () => {
         score++;
         scoreboard.textContent = `Score: ${score}`;
+        clickSound.currentTime = 0;
+        clickSound.play();
         box.remove();
         boxExists = false;
     });
 
-    // Remove box after 1.5 seconds if not clicked
     setTimeout(() => {
         if (boxExists) {
             box.remove();
             boxExists = false;
         }
-    }, 1500);
+    }, getDifficultySpeed());
 }
 
-// Start game
-startBtn.addEventListener('click', () => {
+function startGame() {
     score = 0;
+    timeLeft = 30;
     scoreboard.textContent = `Score: ${score}`;
+    timerDisplay.textContent = `Time: ${timeLeft}s`;
+
     if (gameInterval) clearInterval(gameInterval);
-    gameInterval = setInterval(createBox, 1000);
-});
+    if (timerInterval) clearInterval(timerInterval);
+
+    bgMusic.currentTime = 0;
+    bgMusic.play();
+
+    gameInterval = setInterval(createBox, getDifficultySpeed());
+    timerInterval = setInterval(() => {
+        timeLeft--;
+        timerDisplay.textContent = `Time: ${timeLeft}s`;
+        if (timeLeft <= 0) {
+            clearInterval(gameInterval);
+            clearInterval(timerInterval);
+            alert(`Time's up! Your score: ${score}`);
+            bgMusic.pause();
+            gameContainer.innerHTML = '';
+            boxExists = false;
+        }
+    }, 1000);
+}
+
+startBtn.addEventListener('click', startGame);
 </script>
+
 </body>
 </html>
