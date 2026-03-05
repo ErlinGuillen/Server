@@ -3,54 +3,103 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,900;1,900&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,200;1,200&display=swap" rel="stylesheet">
-
-<link rel="icon" type="image/x-icon" href="logo.png">
-<link rel="stylesheet" href="mystyle.css">
-
-<title>Click the Box</title>
+<title>Click the Box Game</title>
 
 <style>
+  body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+  }
 
-.mycontainer2{
-  display:flex;
-}
+  #game-container {
+    position: relative;
+    width: 500px;
+    height: 400px;
+    margin: 50px auto;
+    border: 2px solid #333;
+    background-color: #f0f0f0;
+    overflow: hidden;
+  }
 
-div.mycontainer2 > .navigator{
-  width:100%;
-  float:left;
-}
+  .box {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-color: red;
+    cursor: pointer;
+    border-radius: 8px;
+  }
 
-main{}
-  
+  #scoreboard {
+    margin-top: 20px;
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  #start-btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
 </style>
 </head>
-
 <body>
 
-<header style="text-align:left; padding-top:10px">
-<img src="logo.png" width="50" height="50">
-<hr class="hrlogo">
-<h1 class="sidelogo">Click a box!</h1>
-</header>
+<h1>Click the Box Game!</h1>
+<button id="start-btn">Start Game</button>
+<div id="game-container"></div>
+<div id="scoreboard">Score: 0</div>
 
-<nav>
-<div class="mycontainer2">
-<a href="https://erlinguillen.github.io/Server/Home/version.html" class="navigator">Back</a>
-</div>
-</nav>
-
-<main>
-</main>
-
-<footer>
-<p id="version"></p>
-</footer>
 <script>
+const gameContainer = document.getElementById('game-container');
+const scoreboard = document.getElementById('scoreboard');
+const startBtn = document.getElementById('start-btn');
+
+let score = 0;
+let gameInterval;
+let boxExists = false;
+
+function createBox() {
+    if (boxExists) return; // Only one box at a time
+    const box = document.createElement('div');
+    box.classList.add('box');
+
+    // Random position inside container
+    const maxX = gameContainer.clientWidth - 50;
+    const maxY = gameContainer.clientHeight - 50;
+    const x = Math.floor(Math.random() * maxX);
+    const y = Math.floor(Math.random() * maxY);
+
+    box.style.left = x + 'px';
+    box.style.top = y + 'px';
+
+    gameContainer.appendChild(box);
+    boxExists = true;
+
+    // Click event
+    box.addEventListener('click', () => {
+        score++;
+        scoreboard.textContent = `Score: ${score}`;
+        box.remove();
+        boxExists = false;
+    });
+
+    // Remove box after 1.5 seconds if not clicked
+    setTimeout(() => {
+        if (boxExists) {
+            box.remove();
+            boxExists = false;
+        }
+    }, 1500);
+}
+
+// Start game
+startBtn.addEventListener('click', () => {
+    score = 0;
+    scoreboard.textContent = `Score: ${score}`;
+    if (gameInterval) clearInterval(gameInterval);
+    gameInterval = setInterval(createBox, 1000);
+});
 </script>
-<script src="myscript.js"></script>
 </body>
 </html>
