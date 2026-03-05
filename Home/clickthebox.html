@@ -1,209 +1,90 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect">
 <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,900;1,900&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,200;1,200&display=swap" rel="stylesheet">
 <link rel="icon" type="image/x-icon" href="logo.png">
 <link rel="stylesheet" href="mystyle.css">
-    <title>Click the Box!</title>
-    <style>
-	.mycontainer2{
-	  display: flex;
-    }
-    div.mycontainer2 > .navigator{
-      width: 100%;
-	  float:left;
-    }
-    /* Game */
-  main {
-    margin: 0;
-    font-family: Arial;
-    overflow: hidden;
-    background-image: url("hello.gif");
-	background-attachment: fixed;
-	background-size: 100% 100%;
-	background-color: black;
-    color: white;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+<title>Click the Box</title>
+<style>
+  .mycontainer2{
+	display: flex;
+  }
+  div.mycontainer2 > .navigator{
+    width: 100%;
+	float:left;
+  }
+  main{
+	font-family: Arial;
+    text-align: center;
   }
 
-/* Center container */
-  .ui {
-    text-align: center;
-  } 
-  /* Style button */
-button {
-    padding: 8px 16px;
-    font-size: 16px;
-    margin-top: 5px;
+  #gameArea{
+    width: 600px;
+    height: 400px;
+    border: 3px solid white;
+    margin: auto;
+    position: relative;
+  }
+
+  #box{
+    width: 50px;
+    height: 50px;
+    background: red;
+    position: absolute;s
     cursor: pointer;
-}
-
-/* Game box */
-    #box {
-      width: 100px;
-      height: 100px;
-      background-color: red;
-      position: absolute;
-      top: 200px;
-      left: 200px;
-      cursor: pointer;
-      transition: all 0.25s ease; /* smooth movement */
-	  box-shadow: 0 0 15px rgba(255,0,0,0.7);
-    }
-   .pop {
-   transform: scale(1.3);
-   }
-   .particle {
-    position: absolute;
-    width: 8px;
-    height: 8px;
-    background: orange;
-    border-radius: 50%;
-    pointer-events: none;
-    animation: explode 600ms ease-out forwards;
-   }
-
-@keyframes explode {
-    to {
-        transform: translate(var(--x), var(--y));
-        opacity: 0;
-    }
-}
-    </style>
+  }	
+</style>
 </head>
 <body>
-  <header style="text-align: left; padding-top: 10px">
-	 <img src="logo.png" alt="Logo" width="50px" height="50px" class="logo">
-	 <hr class="hrlogo">
-     <h1 class="sidelogo">Click the Box!</h1>
-  </header>
+<header style="text-align: left; padding-top: 10px">
+  <img src="logo.png" alt="Logo" width="50px" height="50px" class="logo">
+  <hr class="hrlogo">
+  <h1 class="sidelogo">Click a box!</h1>
+</header>
   <nav>
 	<div class="mycontainer2">
-    <a href="https://erlinguillen.github.io/Server/Home/index.html" class="navigator">Back</a>
+    <a href="https://erlinguillen.github.io/Server/Home/version.html" class="navigator">Back</a>
 	</div>
   </nav>
-  <main>
-  <div class="ui">
-    <h1>Click the Box!</h1>
-    <p>Score: <span id="score">0</span></p>
-    <p>Time Left: <span id="time">30</span></p>
-    <button id="restartBtn">Restart Game</button>
-	<p>High Score: <span id="highScore">0</span></p>
-  </div>
+<main>
+<h1>Click the Box Game</h1>
+<h2>Score: <span id="score">0</span></h2>
 
-  <div id="box"></div>
-    <script>
-	let highScore = localStorage.getItem("highScore") || 0;
-    document.getElementById("highScore").innerText = highScore;
-		
-    let score = 0;
-    let timeLeft = 30;
-    let timer;
-
-    let box = document.getElementById("box");
-    let restartBtn = document.getElementById("restartBtn");
-
-    startGame();
-
-    function startGame() {
-        score = 0;
-        timeLeft = 30;
-
-        document.getElementById("score").innerText = score;
-        document.getElementById("time").innerText = timeLeft;
-
-        box.style.display = "block";
-        restartBtn.style.display = "none";
-
-        timer = setInterval(countdown, 1000);
-    }
-
-box.onclick = function() {
-    if (timeLeft > 0) {
-        score++;
-        document.getElementById("score").innerText = score;
-
-        let rect = box.getBoundingClientRect();
-        let centerX = rect.left + rect.width / 2;
-        let centerY = rect.top + rect.height / 2;
-
-        createExplosion(centerX, centerY);
-
-        moveBox();
-    }
-};
-	
-    function moveBox() {
-        // Get full screen size
-        let maxX = window.innerWidth - box.offsetWidth;
-        let maxY = window.innerHeight - box.offsetHeight;
-
-        let x = Math.random() * maxX;
-        let y = Math.random() * maxY;
-
-        box.style.left = x + "px";
-        box.style.top = y + "px";
-    }
-
-    function countdown() {
-        timeLeft--;
-        document.getElementById("time").innerText = timeLeft;
-		
-		if (score > highScore) {
-           highScore = score;
-           localStorage.setItem("highScore", highScore);
-           document.getElementById("highScore").innerText = highScore;
-        }   
-
-        if (timeLeft <= 0) {
-            clearInterval(timer);
-            box.style.display = "none";
-            restartBtn.style.display = "inline-block";
-        }
-    }
-	
-function createExplosion(x, y) {
-    for (let i = 0; i < 15; i++) {
-
-        let particle = document.createElement("div");
-        particle.classList.add("particle");
-
-        // random direction
-        let randomX = (Math.random() - 0.5) * 200 + "px";
-        let randomY = (Math.random() - 0.5) * 200 + "px";
-
-        particle.style.setProperty("--x", randomX);
-        particle.style.setProperty("--y", randomY);
-
-        particle.style.left = x + "px";
-        particle.style.top = y + "px";
-
-        document.body.appendChild(particle);
-
-        // remove after animation
-        setTimeout(() => {
-            particle.remove();
-        }, 600);
-    }
-}
-	
-    restartBtn.onclick = function() {
-        clearInterval(timer);
-        startGame();
-    };
-</script>
+<div id="gameArea">
+<div id="box"></div>
+</div>
 </main>
-<footer>
-  <p id="version"></p>
-</footer>
+  <footer>
+	  <p id="version"></p>
+  </footer>
+<script>
+
+let score = 0;
+let box = document.getElementById("box");
+let gameArea = document.getElementById("gameArea");
+
+function moveBox(){
+    let x = Math.random() * (gameArea.clientWidth - 50);
+    let y = Math.random() * (gameArea.clientHeight - 50);
+
+    box.style.left = x + "px";
+    box.style.top = y + "px";
+}
+
+box.onclick = function(){
+    score++;
+    document.getElementById("score").innerText = score;
+    moveBox();
+}
+
+moveBox();
+
+</script>
 <script src="myscript.js"></script>
 </body>
 </html>
