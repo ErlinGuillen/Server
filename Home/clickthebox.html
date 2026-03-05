@@ -25,25 +25,32 @@ div.mycontainer2 > .navigator{
 }
 
 main{
-  text-align:center;
-  font-family:Arial;
-}
+    font-family: Arial, sans-serif;
+    text-align: center;
+    color: white;
+  }
 
-#gameArea{
-  width:500px;
-  height:400px;
-  border:2px solid white;
-  margin:auto;
-  position:relative;
-}
+  #gameArea {
+    width: 500px;
+    height: 400px;
+    border: 2px solid white;
+    margin: 20px auto;
+    position: relative;
+    background-color: #444;
+  }
 
-#box{
-  width:50px;
-  height:50px;
-  background:red;
-  position:absolute;
-  cursor:pointer;
-}
+  #box {
+    width: 50px;
+    height: 50px;
+    background: red;
+    position: absolute;
+    cursor: pointer;
+  }
+
+  button, select {
+    font-size: 16px;
+    margin: 5px;
+  }
 
 </style>
 </head>
@@ -65,7 +72,7 @@ main{
 <main>
 
 <h1>Click the Box!</h1>
-  
+
 <button id="startBtn">Start Game</button>
 
 <p>
@@ -77,16 +84,20 @@ Difficulty:
 </select>
 </p>
 
-<p>Time: <span id="time">30</span></p>
+<p>Time: <span id="time">30</span> | Score: <span id="score">0</span></p>
+
+<div id="gameArea">
+  <div id="box"></div>
+</div>
 
 <!-- Background Music -->
-<audio id="bgMusic" autoplay loop>
-<source src="Wonderful Day.mp3" type="audio/mpeg">
+<audio id="bgMusic" loop>
+  <source src="Wonderful Day.mp3" type="audio/mpeg">
 </audio>
 
 <!-- Click Sound -->
 <audio id="clickSound">
-<source src="lobotomy.mp3" type="audio/mpeg">
+  <source src="lobotomy.mp3" type="audio/mpeg">
 </audio>
 
 </main>
@@ -102,15 +113,15 @@ let gameInterval;
 let timerInterval;
 
 const box = document.getElementById("box");
+const gameArea = document.getElementById("gameArea");
 const clickSound = document.getElementById("clickSound");
 const bgMusic = document.getElementById("bgMusic");
 const startBtn = document.getElementById("startBtn");
 const difficulty = document.getElementById("difficulty");
 const scoreDisplay = document.getElementById("score");
 const timeDisplay = document.getElementById("time");
-const gameArea = document.getElementById("gameArea");
 
-// Allow background music after first click
+// Allow music to play after first click
 document.body.addEventListener("click", function() {
   bgMusic.play();
 }, { once: true });
@@ -127,7 +138,7 @@ function moveBox() {
   box.style.top = y + "px";
 }
 
-// Click on box
+// Click on the box
 box.onclick = function() {
   clickSound.play();
   score++;
@@ -135,7 +146,7 @@ box.onclick = function() {
   moveBox();
 }
 
-// Start Game
+// Start Game button
 startBtn.onclick = function() {
   score = 0;
   time = 30;
