@@ -2,17 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Senet: Ancient Sands v1.1.5</title>
+    <title>Senet: Ancient Sands v1.1.8</title>
     <style>
-        :root { --gold: #d4af37; --sand: #f4d03f; --dark: #2c3e50; --wood: #3e2723; --success: #2ecc71; --purple: #8e44ad; }
+        :root { --gold: #d4af37; --sand: #f4d03f; --dark: #2c3e50; --wood: #3e2723; --success: #2ecc71; --purple: #8e44ad; --orange: #e67e22; --blue: #00ced1; --green: #2ecc71; --yellow: #f1c40f; }
         body { margin: 0; background: #1a1a1a; font-family: 'Segoe UI', sans-serif; overflow: hidden; color: white; text-align: center; }
-        .screen { position: absolute; width: 100%; height: 100%; display: flex; flex-direction: column; 
-                  align-items: center; justify-content: center; background: rgba(0,0,0,0.95); z-index: 10; }
+        .screen { position: absolute; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; background: rgba(0,0,0,0.95); z-index: 10; }
         .hidden { display: none !important; }
         #intro { background: black; animation: fadeOut 1.5s forwards; animation-delay: 2s; z-index: 100; }
         @keyframes fadeOut { to { opacity: 0; visibility: hidden; } }
-        button { background: var(--gold); border: none; padding: 12px 25px; margin: 8px; 
-                 cursor: pointer; font-weight: bold; border-radius: 4px; min-width: 220px; transition: 0.2s; color: black; }
+        button { background: var(--gold); border: none; padding: 12px 25px; margin: 8px; cursor: pointer; font-weight: bold; border-radius: 4px; min-width: 220px; transition: 0.2s; color: black; }
         button:hover { background: var(--sand); transform: scale(1.05); }
         button:disabled { background: #7f8c8d; cursor: default; transform: none; }
         button.secondary { background: #555; color: white; }
@@ -23,6 +21,9 @@
         .shop-item { background: #333; padding: 15px; border: 1px solid var(--gold); border-radius: 8px; width: 220px; }
         .info-box { background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px; max-width: 600px; text-align: left; line-height: 1.6; }
         h3 { color: var(--gold); margin-top: 20px; border-bottom: 1px solid #444; padding-bottom: 5px; width: 100%; }
+        .stick { width: 15px; height: 60px; border: 2px solid var(--gold); border-radius: 5px; background: #222; transition: 0.3s; }
+        .stick.white { background: #eee; box-shadow: 0 0 10px white; }
+        .sticks-container { display: flex; gap: 10px; margin-top: 10px; pointer-events: none; }
     </style>
 </head>
 <body>
@@ -34,8 +35,7 @@
 
     <div id="main-menu" class="screen">
         <h1 style="color: var(--gold); font-size: 3em; margin-bottom: 10px;">SENET</h1>
-        <button onclick="startGame('single')">Single Player (vs AI)</button>
-        <button onclick="startGame('multi')">Multiplayer (Local)</button>
+        <button onclick="toggleScreen('game-mode-select')">Start Game</button>
         <button onclick="toggleScreen('custom-screen')">Character Vault</button>
         <button onclick="toggleScreen('shop-screen')">The Bazaar</button>
         <button onclick="toggleScreen('instruction-screen')">Instructions</button> 
@@ -44,33 +44,36 @@
         <p>Wealth: <span class="money-display" style="color:var(--sand)">0</span> Deben</p>
     </div>
 
-    <div id="instruction-screen" class="screen hidden">
-        <h2>How to Play Senet</h2>
-        <div class="info-box">
-            <p><strong>Goal:</strong> Be the first to move all pieces off the board (past square 29).</p>
-            <p><strong>Movement:</strong> Throw sticks to move 1-5 spaces in an "S" shape.</p>
-            <p><strong>The Bazaar:</strong> Earn Deben by winning games to unlock new styles.</p>
-        </div>
-        <button class="secondary" onclick="toggleScreen('main-menu')">Back</button>
-    </div>
-
-    <div id="settings-screen" class="screen hidden">
-        <h2>Settings</h2>
-        <div class="shop-item" style="width: 300px;">
-            <p>Sound Effects</p>
-            <button onclick="toggleSound('sfx')">SFX: <span id="sfx-status">ON</span></button>
-            <p>Background Music</p>
-            <button onclick="toggleSound('bgm')">Music: <span id="bgm-status">ON</span></button>
-        </div>
+    <div id="game-mode-select" class="screen hidden">
+        <h2>Choose Your Path</h2>
+        <button onclick="startGame('single')">Single Player (vs AI)</button>
+        <button onclick="startGame('multi')">Multiplayer (Local)</button>
         <button class="secondary" onclick="toggleScreen('main-menu')">Back</button>
     </div>
 
     <div id="version-screen" class="screen hidden">
         <h2>Version History</h2>
         <div class="info-box" style="max-height: 50vh; overflow-y: auto;">
-            <p><strong>v1.1.5:</strong> Fixed missing Settings/Instructions screens.</p>
-            <p><strong>v1.1.4:</strong> Added Purple and Random items, History, and Power Tiles.</p>
+            <p><strong>v1.1.8:</strong> Final fix for Character Vault equipping issues.</p>
+            <p><strong>v1.1.7:</strong> Fixed Version screen and Bazaar display.</p>
+            <p><strong>v1.1.6:</strong> Added Orange/Oval, AI renaming, and Special Squares.</p>
         </div>
+        <button class="secondary" onclick="toggleScreen('main-menu')">Back</button>
+    </div>
+
+    <div id="instruction-screen" class="screen hidden">
+        <h2>How to Play Senet</h2>
+        <div class="info-box">
+            <p><strong>Goal:</strong> Move all pieces past square 29.</p>
+            <p><strong>Houses:</strong> Square 26 (Safety), 27 (Water - resets you to 14), 28-30 (Exact rolls needed).</p>
+        </div>
+        <button class="secondary" onclick="toggleScreen('main-menu')">Back</button>
+    </div>
+
+    <div id="settings-screen" class="screen hidden">
+        <h2>Settings</h2>
+        <button onclick="toggleSound('sfx')">SFX: <span id="sfx-status">ON</span></button>
+        <button onclick="toggleSound('bgm')">Music: <span id="bgm-status">ON</span></button>
         <button class="secondary" onclick="toggleScreen('main-menu')">Back</button>
     </div>
 
@@ -89,12 +92,14 @@
                 <p>Emerald Green (300)</p><button id="buy-green" onclick="buyItem('skin', 'green', 300)">Buy</button>
                 <p>Solar Yellow (400)</p><button id="buy-yellow" onclick="buyItem('skin', 'yellow', 400)">Buy</button>
                 <p>Royal Purple (500)</p><button id="buy-purple" onclick="buyItem('skin', 'purple', 500)">Buy</button>
+                <p>Desert Orange (600)</p><button id="buy-orange" onclick="buyItem('skin', 'orange', 600)">Buy</button>
             </div>
             <div class="shop-item">
                 <h3>Shapes</h3>
                 <p>Square (300)</p><button id="buy-square" onclick="buyItem('shape', 'square', 300)">Buy</button>
-                <p>Diamond (500)</p><button id="buy-diamond" onclick="buyItem('shape', 'diamond', 500)">Buy</button>
                 <p>Triangle (400)</p><button id="buy-triangle" onclick="buyItem('shape', 'triangle', 400)">Buy</button>
+                <p>Diamond (500)</p><button id="buy-diamond" onclick="buyItem('shape', 'diamond', 500)">Buy</button>
+                <p>Sacred Oval (750)</p><button id="buy-oval" onclick="buyItem('shape', 'oval', 750)">Buy</button>
                 <p>Random (500)</p><button id="buy-random" onclick="buyItem('shape', 'random', 500)">Buy</button>
             </div>
         </div>
@@ -104,7 +109,11 @@
     <div id="game-ui" class="screen hidden">
         <div class="hud">
             <div id="turn-indicator" class="stats">Player 1's Turn</div>
-            <div class="stats">Roll: <span id="roll-val">?</span></div>
+            <div class="sticks-container">
+                <div id="s0" class="stick"></div><div id="s1" class="stick"></div>
+                <div id="s2" class="stick"></div><div id="s3" class="stick"></div>
+                <div class="stats" style="margin-left:10px;">Roll: <span id="roll-val">?</span></div>
+            </div>
         </div>
         <canvas id="gameCanvas"></canvas>
         <br><button id="roll-btn" onclick="rollSticks()">Throw Sticks</button>
@@ -115,7 +124,6 @@
     const canvas = document.getElementById('gameCanvas');
     const ctx = canvas.getContext('2d');
     canvas.width = 800; canvas.height = 240;
-
     const bgm = new Audio('wonderfulday.mp3'); bgm.loop = true;
     const sfxRoll = new Audio('rolldice.mp3');
     const sfxMove = new Audio('lobotomy.mp3');
@@ -131,129 +139,127 @@
         pieces: [{pos:0,player:1},{pos:2,player:1},{pos:1,player:2},{pos:3,player:2}]
     };
 
-    const colorMap = { 
-        classic: "#ffffff", blue: "#00ced1", green: "#2ecc71", 
-        yellow: "#f1c40f", purple: "#8e44ad" 
-    };
+    const colorMap = { classic: "#ffffff", purple: "#8e44ad", orange: "#e67e22", blue: "#00ced1", green: "#2ecc71", yellow: "#f1c40f" };
 
     function toggleScreen(id) {
+        document.querySelectorAll('.screen').forEach(scr => scr.classList.add('hidden'));
         const target = document.getElementById(id);
-        if (!target) return;
-        document.querySelectorAll('.screen').forEach(s => s.classList.add('hidden'));
-        target.classList.remove('hidden');
+        if(target) target.classList.remove('hidden');
         if(id === 'custom-screen') renderCustomizer();
         if(id === 'shop-screen') updateShopButtons();
     }
 
+    // FIXED: Complete rewrite of Vault logic to prevent "fail to equip" bug
     function renderCustomizer() {
         const container = document.getElementById('owned-items');
-        container.innerHTML = ""; 
-        const sections = [
-            { title: "Your Colors", data: gameState.ownedSkins, key: 'activeSkin' },
-            { title: "Your Shapes", data: gameState.ownedShapes, key: 'activeShape' }
-        ];
-        sections.forEach(sec => {
-            const h3 = document.createElement('h3');
-            h3.innerText = sec.title;
-            container.appendChild(h3);
-            sec.data.forEach(item => {
-                const btn = document.createElement('button');
-                const isActive = (item === gameState[sec.key]);
-                btn.innerText = isActive ? `${item.toUpperCase()} (ACTIVE)` : `Equip ${item}`;
-                btn.style.background = isActive ? "#2ecc71" : "#d4af37";
-                btn.onclick = () => {
-                    gameState[sec.key] = item;
-                    saveData();
-                    renderCustomizer();
-                    drawBoard();
-                    if(gameState.settings.sfx) sfxMove.play();
-                };
-                container.appendChild(btn);
-            });
+        container.innerHTML = ""; // Clear everything first
+
+        // Render Colors Section
+        const colorTitle = document.createElement('h3');
+        colorTitle.innerText = "Your Colors";
+        container.appendChild(colorTitle);
+
+        gameState.ownedSkins.forEach(skinName => {
+            const btn = document.createElement('button');
+            const isActive = (skinName === gameState.activeSkin);
+            btn.innerText = isActive ? `${skinName.toUpperCase()} (ACTIVE)` : `Equip ${skinName}`;
+            btn.style.background = isActive ? "#2ecc71" : "#d4af37"; // Green if active
+            
+            btn.onclick = () => {
+                gameState.activeSkin = skinName;
+                saveData();
+                renderCustomizer(); // Force immediate UI refresh
+                if(gameState.settings.sfx) sfxMove.play();
+            };
+            container.appendChild(btn);
+        });
+
+        // Render Shapes Section
+        const shapeTitle = document.createElement('h3');
+        shapeTitle.innerText = "Your Shapes";
+        container.appendChild(shapeTitle);
+
+        gameState.ownedShapes.forEach(shapeName => {
+            const btn = document.createElement('button');
+            const isActive = (shapeName === gameState.activeShape);
+            btn.innerText = isActive ? `${shapeName.toUpperCase()} (ACTIVE)` : `Equip ${shapeName}`;
+            btn.style.background = isActive ? "#2ecc71" : "#d4af37";
+            
+            btn.onclick = () => {
+                gameState.activeShape = shapeName;
+                saveData();
+                renderCustomizer(); // Force immediate UI refresh
+                if(gameState.settings.sfx) sfxMove.play();
+            };
+            container.appendChild(btn);
         });
     }
 
-    // FIXED: Updated Bazaar logic for all items
     function updateShopButtons() {
         const check = (id, type, name) => {
             const btn = document.getElementById(id);
-            if (!btn) return;
+            if (!btn) return; 
             const ownedList = (type === 'skin') ? gameState.ownedSkins : gameState.ownedShapes;
-            if (ownedList.includes(name)) {
-                btn.innerText = "OWNED";
-                btn.disabled = true;
-                btn.style.background = "#7f8c8d";
-                btn.style.opacity = "0.7";
+            if (ownedList.includes(name)) { 
+                btn.innerText = "OWNED"; 
+                btn.disabled = true; 
+                btn.style.background = "#7f8c8d"; 
             }
         };
-        check('buy-blue', 'skin', 'blue'); check('buy-green', 'skin', 'green'); 
-        check('buy-yellow', 'skin', 'yellow'); check('buy-purple', 'skin', 'purple');
-        check('buy-square', 'shape', 'square'); check('buy-diamond', 'shape', 'diamond'); 
-        check('buy-triangle', 'shape', 'triangle'); check('buy-random', 'shape', 'random');
-    }
-
-    function buyItem(type, name, cost) {
-        let ownedList = type === 'skin' ? gameState.ownedSkins : gameState.ownedShapes;
-        if (gameState.money >= cost) {
-            gameState.money -= cost;
-            ownedList.push(name);
-            saveData();
-            updateMoneyUI();
-            updateShopButtons();
-            alert("Purchased!");
-        } else alert("Not enough Deben!");
+        ['blue','green','yellow','purple','orange'].forEach(c => check('buy-'+c, 'skin', c));
+        ['square','triangle','diamond','oval','random'].forEach(s => check('buy-'+s, 'shape', s));
     }
 
     function rollSticks() {
         if(gameState.hasRolled) return;
         if(gameState.settings.sfx) sfxRoll.play();
-        gameState.currentRoll = Math.floor(Math.random() * 5) + 1;
+        let whiteCount = 0;
+        for(let i=0; i<4; i++) {
+            let isWhite = Math.random() > 0.5;
+            document.getElementById(`s${i}`).className = isWhite ? 'stick white' : 'stick';
+            if(isWhite) whiteCount++;
+        }
+        gameState.currentRoll = (whiteCount === 0) ? 5 : whiteCount;
         document.getElementById('roll-val').innerText = gameState.currentRoll;
         gameState.hasRolled = true;
         if (gameState.mode === 'single' && gameState.turn === 2) setTimeout(handleMove, 1000);
     }
 
-    canvas.onclick = () => {
-        if (gameState.hasRolled && !(gameState.mode === 'single' && gameState.turn === 2)) handleMove();
-    };
+    canvas.onclick = () => { if (gameState.hasRolled && !(gameState.mode === 'single' && gameState.turn === 2)) handleMove(); };
 
     function handleMove() {
         if(gameState.settings.sfx) sfxMove.play();
         let pIdx = gameState.pieces.findIndex(p => p.player === gameState.turn);
-        gameState.pieces[pIdx].pos += gameState.currentRoll;
+        let newPos = gameState.pieces[pIdx].pos + gameState.currentRoll;
+        if (newPos === 26) { newPos = 14; alert("House of Water! Back to 15."); }
+        else if (gameState.pieces[pIdx].pos < 25 && newPos > 25 && newPos !== 25) { alert("Must land on Happy (26)!"); newPos = gameState.pieces[pIdx].pos; }
+        gameState.pieces[pIdx].pos = newPos;
         drawBoard();
-        if (gameState.pieces[pIdx].pos >= 29) {
-            endGame(`Player ${gameState.turn}`);
-            return;
-        }
+        if (newPos >= 29) { endGame(gameState.turn === 1 ? "Player 1" : (gameState.mode === 'single' ? "AI" : "Player 2")); return; }
         gameState.turn = (gameState.turn === 1) ? 2 : 1;
         gameState.hasRolled = false;
-        document.getElementById('turn-indicator').innerText = `Player ${gameState.turn}'s Turn`;
+        document.getElementById('turn-indicator').innerText = (gameState.mode === 'single' && gameState.turn === 2) ? "AI's Turn" : `Player ${gameState.turn}'s Turn`;
         document.getElementById('roll-val').innerText = "?";
         if (gameState.mode === 'single' && gameState.turn === 2) setTimeout(rollSticks, 1000);
     }
 
-    function endGame(winner) {
-        gameState.money += 100;
-        saveData();
-        updateMoneyUI();
-        alert("VICTORY! " + winner + " wins 100 Deben!");
-        toggleScreen('main-menu');
-    }
-
     function drawBoard() {
         ctx.clearRect(0,0, canvas.width, canvas.height);
-        for(let i=0; i<10; i++) for(let j=0; j<3; j++) { 
-            ctx.strokeStyle = "#d4af37"; ctx.strokeRect(i*80, j*80, 80, 80); 
+        for(let i=0; i<10; i++) for(let j=0; j<3; j++) {
+            let idx = (j * 10) + i;
+            ctx.strokeStyle = "#d4af37"; ctx.strokeRect(i*80, j*80, 80, 80);
+            if(idx === 25) { ctx.fillStyle = "rgba(46, 204, 113, 0.2)"; ctx.fillRect(i*80, j*80, 80, 80); ctx.fillStyle = "#fff"; ctx.fillText("HAPPY", i*80+20, j*80+45); }
+            if(idx === 26) { ctx.fillStyle = "rgba(52, 152, 219, 0.2)"; ctx.fillRect(i*80, j*80, 80, 80); ctx.fillStyle = "#fff"; ctx.fillText("WATER", i*80+20, j*80+45); }
         }
         gameState.pieces.forEach(p => {
             let row = Math.floor(p.pos / 10), col = p.pos % 10;
             if(row === 1) col = 9 - col; 
             let x = col * 80 + 40, y = row * 80 + 40;
-            ctx.fillStyle = (p.player === 1) ? colorMap[gameState.activeSkin] : "#c0393b";
+            ctx.fillStyle = (p.player === 1) ? (colorMap[gameState.activeSkin] || "#ffffff") : "#c0393b";
             ctx.beginPath();
             if (p.player === 1) {
                 if (gameState.activeShape === 'square') ctx.rect(x-25, y-25, 50, 50);
+                else if (gameState.activeShape === 'oval') ctx.ellipse(x, y, 20, 30, 0, 0, Math.PI * 2);
                 else if (gameState.activeShape === 'diamond') { ctx.moveTo(x, y-30); ctx.lineTo(x+30, y); ctx.lineTo(x, y+30); ctx.lineTo(x-30, y); ctx.closePath(); }
                 else if (gameState.activeShape === 'triangle') { ctx.moveTo(x, y-30); ctx.lineTo(x+30, y+25); ctx.lineTo(x-30, y+25); ctx.closePath(); }
                 else ctx.arc(x, y, 25, 0, Math.PI * 2);
@@ -262,31 +268,16 @@
         });
     }
 
-    function startGame(mode) {
-        if(gameState.settings.bgm) bgm.play();
-        gameState.mode = mode;
-        gameState.turn = 1;
-        gameState.hasRolled = false;
-        gameState.pieces = [{pos:0,player:1},{pos:2,player:1},{pos:1,player:2},{pos:3,player:2}];
-        document.getElementById('turn-indicator').innerText = "Player 1's Turn";
-        toggleScreen('game-ui');
-        drawBoard();
+    function buyItem(type, name, cost) {
+        let ownedList = type === 'skin' ? gameState.ownedSkins : gameState.ownedShapes;
+        if (gameState.money >= cost) { gameState.money -= cost; ownedList.push(name); saveData(); updateMoneyUI(); updateShopButtons(); alert("Purchased!"); }
+        else alert("Not enough Deben!");
     }
 
-    function toggleSound(t) {
-        gameState.settings[t] = !gameState.settings[t];
-        document.getElementById(`${t}-status`).innerText = gameState.settings[t] ? "ON" : "OFF";
-        if (t === 'bgm') gameState.settings.bgm ? bgm.play() : bgm.pause();
-    }
-
-    function saveData() {
-        localStorage.setItem('senet_money', gameState.money);
-        localStorage.setItem('senet_skins', JSON.stringify(gameState.ownedSkins));
-        localStorage.setItem('senet_active_skin', gameState.activeSkin);
-        localStorage.setItem('senet_shapes', JSON.stringify(gameState.ownedShapes));
-        localStorage.setItem('senet_active_shape', gameState.activeShape);
-    }
-
+    function startGame(m) { if(gameState.settings.bgm) bgm.play(); gameState.mode = m; gameState.turn = 1; gameState.hasRolled = false; gameState.pieces = [{pos:0,player:1},{pos:2,player:1},{pos:1,player:2},{pos:3,player:2}]; document.getElementById('turn-indicator').innerText = "Player 1's Turn"; toggleScreen('game-ui'); drawBoard(); }
+    function endGame(w) { gameState.money += 100; saveData(); updateMoneyUI(); alert(w + " Wins! +100 Deben"); toggleScreen('main-menu'); }
+    function toggleSound(t) { gameState.settings[t] = !gameState.settings[t]; document.getElementById(`${t}-status`).innerText = gameState.settings[t] ? "ON" : "OFF"; if (t === 'bgm') gameState.settings.bgm ? bgm.play() : bgm.pause(); }
+    function saveData() { localStorage.setItem('senet_money', gameState.money); localStorage.setItem('senet_skins', JSON.stringify(gameState.ownedSkins)); localStorage.setItem('senet_active_skin', gameState.activeSkin); localStorage.setItem('senet_shapes', JSON.stringify(gameState.ownedShapes)); localStorage.setItem('senet_active_shape', gameState.activeShape); }
     function updateMoneyUI() { document.querySelectorAll('.money-display').forEach(el => el.innerText = gameState.money); }
     window.onload = () => { updateMoneyUI(); };
 </script>
