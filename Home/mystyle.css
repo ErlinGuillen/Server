@@ -28,7 +28,7 @@
   	font-variation-settings: "wdth" 100;
 	color: white;
   }
-  q, p, table, li, button, a {
+  q, p, table, li, button, a, form {
 	font-family: "Roboto", sans-serif;
   	font-optical-sizing: auto;
   	font-weight: 200;
@@ -44,33 +44,6 @@
 	width: 20%;
 	padding: 5px 0px;
   }	
-  button{
-	background-color: black;
-    color: white;
-    text-align: center;
-    padding: 16px;
-    text-decoration: none;
-	border: none;
-  }
-  button:hover{
-	background-color: white;
-    color: black;
-    text-align: center;
-    text-decoration: none;
-    border: none;
-    padding: 8px 16px;
-    font-size: 16px;
-    margin-top: 5px;
-    cursor: pointer;
-  }
-  button:active{
-	background-color: black;
-    color: white;
-    text-align: center;
-    padding: 16px;
-    text-decoration: none;
-    border: none;
-  }
   a {
     text-decoration: none;
   }
@@ -154,8 +127,24 @@
   .navigator{
 	background-color: black;
 	padding: 10px;
+	cursor: pointer;
   }
   .game{
     background-color: rgba(0,0,0,0.1);	
 	padding: 10px;
+  }
+  #stats{
+	color: white;
+  }
+  button{
+	background-color: black;
+	border: none;
+	padding: 10px;
+  }
+
+  button:hover{
+	background-color: white;
+	border: none;
+	padding: 10px;
+	color: black;
   }

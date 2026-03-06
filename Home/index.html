@@ -22,7 +22,7 @@
 	display: flex;
   }
   div.mycontainer2 > .navigator{
-    width: 25%;
+    width: 20%;
 	float:left;
   }
   div.mycontainer > .welcome{
@@ -50,6 +50,7 @@
     <a href="https://erlinguillen.github.io/Server/Home/version.html" class="navigator">Game</a>
     <a href="https://erlinguillen.github.io/Server/Home/project.html" class="navigator">Project</a>
     <a href="https://erlinguillen.github.io/Server/Home/stats.html" class="navigator">Stats</a>
+	<a class="navigator">Coming Soon</a>
     <a href="#SocialMedia" class="navigator">Bottom</a>
 	</div>
   </nav>
@@ -81,22 +82,30 @@
 	 </div>
 	</div>
   </section>
+	    <p id="code"></p>
+	    <form action="https://erlinguillen.github.io/Server/Home/Senet%20Game/senet.html">
+        <input type="text" name="fname"><br><br>
+        <button disabled type="submit">Submit Form</button>
+        <button disabled type="reset">Reset Form</button>
+		</form>
   <section>
 	  <div class="game">
 		<h1>Game</h1>
 		<hr>
 		<p>Try out my game! Click the button below to start playing.</p>
-	    <p><a href="https://erlinguillen.github.io/Server/Home/clickthebox.html" class="navigator">Play "Click the Box" – Version 1.1</a></p>
-		<img src="imageicon.png" alt="icon" width="25%">
+	    <p><a href="https://erlinguillen.github.io/Server/Home/Senet%20Game/senet.html" class="navigator">Play "Senet" – Version 1.1.8 Full Screen</a></p>
+		<p><iframe src="https://erlinguillen.github.io/Server/Home/Senet%20Game/senet.html" style="height:1000px;width:90%;border:none;" title="Iframe Example"></iframe></p>
 	  </div>
    </section>
+   <button type="button" onclick="mystyle()">Click Me!</button>
   </main>
   <footer>
 	  <h3 id="SocialMedia">Social Media</h3>
-	  <p>Follow me on social media to see more content and updates.</p>
+	  <p id="demo">Follow me on social media to see more content and updates.</p>
 	  <a href="https://www.youtube.com/@ErlinGuillen_YT" target="_blank" alt="youtube"><img src="youtube.png" alt="Logo" width="200" height="200"></a>
 	  <a href="https://www.roblox.com/users/2625249323/profile" target="_blank" alt="youtube"><img src="roblox.png" alt="Logo" width="200" height="200"></a>
 	  <p id="version"></p>
+	  <p id="time"></p>
   </footer>
   </wrapper>
   <script src="myscript.js"></script>
