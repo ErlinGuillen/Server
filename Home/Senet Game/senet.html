@@ -2,30 +2,23 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Senet: Ancient Sands v1.1.1</title>
+    <title>Senet: Ancient Sands v1.1.5</title>
     <style>
-        :root { --gold: #d4af37; --sand: #f4d03f; --dark: #2c3e50; --wood: #3e2723; --success: #2ecc71; }
+        :root { --gold: #d4af37; --sand: #f4d03f; --dark: #2c3e50; --wood: #3e2723; --success: #2ecc71; --purple: #8e44ad; }
         body { margin: 0; background: #1a1a1a; font-family: 'Segoe UI', sans-serif; overflow: hidden; color: white; text-align: center; }
-        
-        /* UI Layers */
         .screen { position: absolute; width: 100%; height: 100%; display: flex; flex-direction: column; 
                   align-items: center; justify-content: center; background: rgba(0,0,0,0.95); z-index: 10; }
         .hidden { display: none !important; }
-        
-        /* FIXED: Intro Animation */
         #intro { background: black; animation: fadeOut 1.5s forwards; animation-delay: 2s; z-index: 100; }
         @keyframes fadeOut { to { opacity: 0; visibility: hidden; } }
-
         button { background: var(--gold); border: none; padding: 12px 25px; margin: 8px; 
                  cursor: pointer; font-weight: bold; border-radius: 4px; min-width: 220px; transition: 0.2s; color: black; }
         button:hover { background: var(--sand); transform: scale(1.05); }
         button:disabled { background: #7f8c8d; cursor: default; transform: none; }
         button.secondary { background: #555; color: white; }
-        
         canvas { background: var(--wood); border: 8px solid var(--gold); box-shadow: 0 0 20px rgba(0,0,0,0.5); cursor: pointer; }
         .hud { position: absolute; top: 20px; width: 100%; display: flex; justify-content: space-around; pointer-events: none; }
         .stats { font-size: 24px; color: var(--gold); text-shadow: 2px 2px black; font-weight: bold; }
-        
         .shop-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; max-width: 900px; padding: 20px; overflow-y: auto; max-height: 70vh; }
         .shop-item { background: #333; padding: 15px; border: 1px solid var(--gold); border-radius: 8px; width: 220px; }
         .info-box { background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px; max-width: 600px; text-align: left; line-height: 1.6; }
@@ -45,24 +38,39 @@
         <button onclick="startGame('multi')">Multiplayer (Local)</button>
         <button onclick="toggleScreen('custom-screen')">Character Vault</button>
         <button onclick="toggleScreen('shop-screen')">The Bazaar</button>
-        <button onclick="toggleScreen('instruction-screen')">Instructions</button> <button onclick="toggleScreen('settings-screen')">Settings</button>
+        <button onclick="toggleScreen('instruction-screen')">Instructions</button> 
+        <button onclick="toggleScreen('version-screen')">Version Options</button> 
+        <button onclick="toggleScreen('settings-screen')">Settings</button>
         <p>Wealth: <span class="money-display" style="color:var(--sand)">0</span> Deben</p>
     </div>
 
     <div id="instruction-screen" class="screen hidden">
-        <h2>Instructions</h2>
+        <h2>How to Play Senet</h2>
         <div class="info-box">
-            <p><strong>Goal:</strong> Move all pieces off the board (past square 29).</p>
-            <p><strong>Movement:</strong> Throw sticks to move 1-5 spaces in an S-shape.</p>
-            <p><strong>Bazaar:</strong> Win games to earn Deben and unlock new styles.</p>
+            <p><strong>Goal:</strong> Be the first to move all pieces off the board (past square 29).</p>
+            <p><strong>Movement:</strong> Throw sticks to move 1-5 spaces in an "S" shape.</p>
+            <p><strong>The Bazaar:</strong> Earn Deben by winning games to unlock new styles.</p>
         </div>
         <button class="secondary" onclick="toggleScreen('main-menu')">Back</button>
     </div>
 
     <div id="settings-screen" class="screen hidden">
         <h2>Settings</h2>
-        <button onclick="toggleSound('sfx')">Sound FX: <span id="sfx-status">ON</span></button>
-        <button onclick="toggleSound('bgm')">Music: <span id="bgm-status">ON</span></button>
+        <div class="shop-item" style="width: 300px;">
+            <p>Sound Effects</p>
+            <button onclick="toggleSound('sfx')">SFX: <span id="sfx-status">ON</span></button>
+            <p>Background Music</p>
+            <button onclick="toggleSound('bgm')">Music: <span id="bgm-status">ON</span></button>
+        </div>
+        <button class="secondary" onclick="toggleScreen('main-menu')">Back</button>
+    </div>
+
+    <div id="version-screen" class="screen hidden">
+        <h2>Version History</h2>
+        <div class="info-box" style="max-height: 50vh; overflow-y: auto;">
+            <p><strong>v1.1.5:</strong> Fixed missing Settings/Instructions screens.</p>
+            <p><strong>v1.1.4:</strong> Added Purple and Random items, History, and Power Tiles.</p>
+        </div>
         <button class="secondary" onclick="toggleScreen('main-menu')">Back</button>
     </div>
 
@@ -80,12 +88,14 @@
                 <p>Royal Blue (150)</p><button id="buy-blue" onclick="buyItem('skin', 'blue', 150)">Buy</button>
                 <p>Emerald Green (300)</p><button id="buy-green" onclick="buyItem('skin', 'green', 300)">Buy</button>
                 <p>Solar Yellow (400)</p><button id="buy-yellow" onclick="buyItem('skin', 'yellow', 400)">Buy</button>
+                <p>Royal Purple (500)</p><button id="buy-purple" onclick="buyItem('skin', 'purple', 500)">Buy</button>
             </div>
             <div class="shop-item">
                 <h3>Shapes</h3>
                 <p>Square (300)</p><button id="buy-square" onclick="buyItem('shape', 'square', 300)">Buy</button>
                 <p>Diamond (500)</p><button id="buy-diamond" onclick="buyItem('shape', 'diamond', 500)">Buy</button>
                 <p>Triangle (400)</p><button id="buy-triangle" onclick="buyItem('shape', 'triangle', 400)">Buy</button>
+                <p>Random (500)</p><button id="buy-random" onclick="buyItem('shape', 'random', 500)">Buy</button>
             </div>
         </div>
         <button class="secondary" onclick="toggleScreen('main-menu')">Back</button>
@@ -106,7 +116,6 @@
     const ctx = canvas.getContext('2d');
     canvas.width = 800; canvas.height = 240;
 
-    // Load Assets
     const bgm = new Audio('wonderfulday.mp3'); bgm.loop = true;
     const sfxRoll = new Audio('rolldice.mp3');
     const sfxMove = new Audio('lobotomy.mp3');
@@ -122,36 +131,38 @@
         pieces: [{pos:0,player:1},{pos:2,player:1},{pos:1,player:2},{pos:3,player:2}]
     };
 
-    const colorMap = { classic: "#ffffff", blue: "#00ced1", green: "#2ecc71", yellow: "#f1c40f" };
+    const colorMap = { 
+        classic: "#ffffff", blue: "#00ced1", green: "#2ecc71", 
+        yellow: "#f1c40f", purple: "#8e44ad" 
+    };
 
     function toggleScreen(id) {
+        const target = document.getElementById(id);
+        if (!target) return;
         document.querySelectorAll('.screen').forEach(s => s.classList.add('hidden'));
-        document.getElementById(id).classList.remove('hidden');
+        target.classList.remove('hidden');
         if(id === 'custom-screen') renderCustomizer();
-        if(id === 'shop-screen') updateShopButtons(); // FIXED: Now correctly triggers Bazaar refresh
+        if(id === 'shop-screen') updateShopButtons();
     }
 
     function renderCustomizer() {
         const container = document.getElementById('owned-items');
         container.innerHTML = ""; 
-
         const sections = [
-            { title: "Your Colors", data: gameState.ownedSkins, active: 'activeSkin' },
-            { title: "Your Shapes", data: gameState.ownedShapes, active: 'activeShape' }
+            { title: "Your Colors", data: gameState.ownedSkins, key: 'activeSkin' },
+            { title: "Your Shapes", data: gameState.ownedShapes, key: 'activeShape' }
         ];
-
         sections.forEach(sec => {
             const h3 = document.createElement('h3');
             h3.innerText = sec.title;
             container.appendChild(h3);
-
             sec.data.forEach(item => {
                 const btn = document.createElement('button');
-                const isActive = (item === gameState[sec.active]);
+                const isActive = (item === gameState[sec.key]);
                 btn.innerText = isActive ? `${item.toUpperCase()} (ACTIVE)` : `Equip ${item}`;
                 btn.style.background = isActive ? "#2ecc71" : "#d4af37";
                 btn.onclick = () => {
-                    gameState[sec.active] = item;
+                    gameState[sec.key] = item;
                     saveData();
                     renderCustomizer();
                     drawBoard();
@@ -162,7 +173,7 @@
         });
     }
 
-    // FIXED: Bazaar "Owned" display logic
+    // FIXED: Updated Bazaar logic for all items
     function updateShopButtons() {
         const check = (id, type, name) => {
             const btn = document.getElementById(id);
@@ -173,14 +184,12 @@
                 btn.disabled = true;
                 btn.style.background = "#7f8c8d";
                 btn.style.opacity = "0.7";
-            } else {
-                btn.disabled = false;
-                btn.style.background = "#d4af37";
-                btn.style.opacity = "1";
             }
         };
-        check('buy-blue', 'skin', 'blue'); check('buy-green', 'skin', 'green'); check('buy-yellow', 'skin', 'yellow');
-        check('buy-square', 'shape', 'square'); check('buy-diamond', 'shape', 'diamond'); check('buy-triangle', 'shape', 'triangle');
+        check('buy-blue', 'skin', 'blue'); check('buy-green', 'skin', 'green'); 
+        check('buy-yellow', 'skin', 'yellow'); check('buy-purple', 'skin', 'purple');
+        check('buy-square', 'shape', 'square'); check('buy-diamond', 'shape', 'diamond'); 
+        check('buy-triangle', 'shape', 'triangle'); check('buy-random', 'shape', 'random');
     }
 
     function buyItem(type, name, cost) {
@@ -191,7 +200,7 @@
             saveData();
             updateMoneyUI();
             updateShopButtons();
-            alert("Purchased! Head to the Vault to equip.");
+            alert("Purchased!");
         } else alert("Not enough Deben!");
     }
 
@@ -213,13 +222,10 @@
         let pIdx = gameState.pieces.findIndex(p => p.player === gameState.turn);
         gameState.pieces[pIdx].pos += gameState.currentRoll;
         drawBoard();
-        
-        // FIXED: Win Condition Check
         if (gameState.pieces[pIdx].pos >= 29) {
             endGame(`Player ${gameState.turn}`);
             return;
         }
-
         gameState.turn = (gameState.turn === 1) ? 2 : 1;
         gameState.hasRolled = false;
         document.getElementById('turn-indicator').innerText = `Player ${gameState.turn}'s Turn`;
@@ -227,20 +233,18 @@
         if (gameState.mode === 'single' && gameState.turn === 2) setTimeout(rollSticks, 1000);
     }
 
-    // FIXED: Added missing win screen/end game logic
     function endGame(winner) {
         gameState.money += 100;
         saveData();
         updateMoneyUI();
-        alert("VICTORY! " + winner + " has passed through the Duat. Earned 100 Deben.");
+        alert("VICTORY! " + winner + " wins 100 Deben!");
         toggleScreen('main-menu');
     }
 
     function drawBoard() {
         ctx.clearRect(0,0, canvas.width, canvas.height);
         for(let i=0; i<10; i++) for(let j=0; j<3; j++) { 
-            ctx.strokeStyle = "#d4af37"; 
-            ctx.strokeRect(i*80, j*80, 80, 80); 
+            ctx.strokeStyle = "#d4af37"; ctx.strokeRect(i*80, j*80, 80, 80); 
         }
         gameState.pieces.forEach(p => {
             let row = Math.floor(p.pos / 10), col = p.pos % 10;
