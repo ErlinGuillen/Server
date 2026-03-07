@@ -3,44 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Senet: Ancient Sands v1.2.2</title>
+    <title>Senet: Ancient Sands v1.3.6 - STABLE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=Proza+Libre&display=swap" rel="stylesheet">
     <style>
-        :root { --gold: #d4af37; --sand: #f4d03f; --dark: #1a1a1a; --wood: #3e2723; --success: #2ecc71; --accent: #e67e22; --water: #3498db; }
+        :root { --gold: #d4af37; --sand: #f4d03f; --dark: #1a1a1a; --wood: #3e2723; --success: #2ecc71; --accent: #e67e22; --water: #3498db; --truth: #9b59b6; }
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        body { margin: 0; background: var(--dark); font-family: 'Segoe UI', sans-serif; overflow: hidden; color: white; text-align: center; touch-action: manipulation; }
+        body { margin: 0; background: var(--dark); font-family: 'Proza Libre', sans-serif; overflow: hidden; color: white; text-align: center; touch-action: manipulation; }
+        h1, h2, .stats { font-family: 'Cormorant Garamond', serif; }
         
-        .screen { position: absolute; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; background: rgba(0,0,0,0.98); z-index: 10; padding: 20px; }
+        .screen { position: absolute; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; background: rgba(0,0,0,0.98); z-index: 10; padding: 20px; transition: 0.3s; }
         .hidden { display: none !important; }
         
         #intro { background: black; animation: fadeOut 1.5s forwards; animation-delay: 2s; z-index: 100; }
         @keyframes fadeOut { to { opacity: 0; visibility: hidden; } }
 
-        .menu-card { background: #222; border: 2px solid var(--gold); border-radius: 15px; padding: 25px; box-shadow: 0 0 30px rgba(0,0,0,0.8); width: 100%; max-width: 500px; }
-        h1 { color: var(--gold); letter-spacing: 4px; text-shadow: 2px 2px black; margin: 10px 0; }
-        h2 { color: var(--sand); margin-bottom: 20px; text-transform: uppercase; font-size: 1.2em; }
-        .version-tag { font-size: 0.7em; color: #666; margin-top: -10px; margin-bottom: 15px; }
+        .menu-card { background: #222; border: 2px solid var(--gold); border-radius: 15px; padding: 25px; box-shadow: 0 0 30px rgba(0,0,0,0.8); width: 100%; max-width: 500px; overflow-y: auto; max-height: 90vh; }
+        h1 { color: var(--gold); letter-spacing: 4px; text-shadow: 2px 2px black; margin: 10px 0; font-size: 2.5em; }
+        h2 { color: var(--sand); margin-bottom: 20px; text-transform: uppercase; font-size: 1.5em; }
 
-        button { background: var(--gold); border: none; padding: 15px 20px; margin: 5px; cursor: pointer; font-weight: bold; border-radius: 8px; width: 100%; max-width: 280px; transition: 0.3s; color: black; font-size: 1em; display: inline-block; }
+        button { background: var(--gold); border: none; padding: 12px 20px; margin: 5px; cursor: pointer; font-weight: bold; border-radius: 8px; width: 100%; max-width: 280px; transition: 0.3s; color: black; font-size: 1em; }
         button:hover { background: var(--sand); transform: translateY(-2px); }
-        button:active { transform: scale(0.95); }
-        button:disabled { background: #444; color: #777; cursor: default; transform: none; }
         button.secondary { background: #444; color: white; }
 
-        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; width: 100%; max-height: 40vh; overflow-y: auto; padding: 10px; border-radius: 10px; background: rgba(0,0,0,0.3); margin: 15px 0; }
+        .grid-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 10px; width: 100%; max-height: 40vh; overflow-y: auto; padding: 10px; border-radius: 10px; background: rgba(0,0,0,0.3); margin: 15px 0; }
         .item-box { background: #333; border: 1px solid #444; padding: 10px; border-radius: 8px; display: flex; flex-direction: column; align-items: center; }
         
-        .instruction-text { text-align: left; font-size: 0.9em; line-height: 1.6; max-height: 50vh; overflow-y: auto; padding-right: 10px; }
-        .instruction-text b { color: var(--gold); }
+        .icon-container { width: 50px; height: 50px; background: #111; border: 2px solid var(--gold); margin-bottom: 8px; border-radius: 6px; display: flex; align-items: center; justify-content: center; }
+        svg { width: 35px; height: 35px; filter: drop-shadow(0 0 2px rgba(0,0,0,0.5)); }
 
-        canvas { background: var(--wood); border: 4px solid var(--gold); box-shadow: 0 0 20px rgba(0,0,0,0.5); max-width: 95vw; max-height: 50vh; cursor: pointer; border-radius: 5px; }
-        .hud { width: 100%; max-width: 800px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
-        .stats { font-size: 18px; color: var(--gold); font-weight: bold; }
-        .sticks-container { display: flex; gap: 8px; }
+        input[type="text"] { background: #111; border: 1px solid var(--gold); color: white; padding: 10px; border-radius: 5px; text-align: center; margin-bottom: 15px; width: 80%; }
+        canvas#gameCanvas { background: var(--wood); border: 4px solid var(--gold); max-width: 95vw; max-height: 50vh; cursor: pointer; border-radius: 5px; }
         .stick { width: 12px; height: 45px; border: 1px solid var(--gold); border-radius: 3px; background: #222; }
         .stick.white { background: #eee; box-shadow: 0 0 8px white; }
     </style>
 </head>
-<body>
+<body onclick="initAudio()">
 
     <div id="intro" class="screen">
         <h1 style="letter-spacing: 12px;">SENET</h1>
@@ -50,144 +47,237 @@
     <div id="main-menu" class="screen">
         <div class="menu-card">
             <h1>SENET</h1>
-            <div class="version-tag">v1.2.2</div>
+            <p style="font-size: 0.8em; color: #666; margin-top: -15px;">v1.3.6 STABLE</p>
             <p>Wealth: <span class="money-display" style="color:var(--sand)">0</span> Deben</p>
-            <button onclick="toggleScreen('game-mode-select')">Start Game</button>
-            <button onclick="toggleScreen('instruction-screen')">How to Play</button>
-            <button onclick="toggleScreen('custom-screen')">Character Vault</button>
-            <button onclick="toggleScreen('shop-screen')">The Bazaar</button>
-            <button onclick="toggleScreen('leaderboard-screen')">Hall of Pharaohs</button>
-            <button class="secondary" onclick="toggleScreen('settings-screen')">Settings</button>
+            <button onclick="playClick(); toggleScreen('game-mode-select')">Start Game</button>
+            <button onclick="playClick(); toggleScreen('instruction-screen')">How to Play</button>
+            <button onclick="playClick(); toggleScreen('custom-screen')">Character Vault</button>
+            <button onclick="playClick(); toggleScreen('shop-screen')">The Bazaar</button>
+            <button onclick="playClick(); toggleScreen('leaderboard-screen')">Hall of Pharaohs</button>
+            <button class="secondary" onclick="playClick(); toggleScreen('settings-screen')">Settings</button>
         </div>
     </div>
 
     <div id="instruction-screen" class="screen hidden">
         <div class="menu-card">
             <h2>Instructions</h2>
-            <div class="instruction-text">
-                <p>1. <b>Objective:</b> Move all pieces off the board (past square 30).</p>
-                <p>2. <b>Movement:</b> Throw 4 sticks. White sides up = 1, 2, 3, or 4 steps. 0 white sides = 5 steps.</p>
-                <p>3. <b>Board:</b> Move in an S-shape across 30 squares.</p>
-                <p>4. <b>House of Happiness (26):</b> Safe square. Landing here is required to proceed.</p>
-                <p>5. <b>House of Water (27):</b> Hazard! Landing here sends you back to Square 15.</p>
+            <div style="text-align: left; font-size: 0.9em; line-height: 1.4; color: #ddd; margin-bottom: 15px;">
+                <p>1. <b>Goal:</b> Move pieces off the board past square 30.</p>
+                <p>2. <b>Sticks:</b> White sides up (1-4). 0 white sides = 5 steps.</p>
+                <p>3. <b>Sq 26 (Happy):</b> Safe zone before the final trials</p>
+                <p>4. <b>Sq 27 (Water):</b> Falling here resets piece to Sq 15.</p>
+                <p>5. <b>Sq 28 (Truth):</b> Piece is stuck until you roll exactly a <b>3</b>.</p>
             </div>
-            <button class="secondary" onclick="toggleScreen('main-menu')">Back</button>
-        </div>
-    </div>
-
-    <div id="game-mode-select" class="screen hidden">
-        <div class="menu-card">
-            <h2>Choose Your Path</h2>
-            <button onclick="startGame('single')">Single Player (vs AI)</button>
-            <button onclick="startGame('multi')">Multiplayer (Local)</button>
-            <button class="secondary" onclick="toggleScreen('main-menu')">Back</button>
-        </div>
-    </div>
-
-    <div id="leaderboard-screen" class="screen hidden">
-        <div class="menu-card">
-            <h2>Hall of Pharaohs</h2>
-            <table class="leaderboard-list" id="leaderboard-list" style="width:100%"></table>
-            <button class="secondary" onclick="toggleScreen('main-menu')">Back</button>
-        </div>
-    </div>
-
-    <div id="settings-screen" class="screen hidden">
-        <div class="menu-card">
-            <h2>Settings</h2>
-            <button onclick="toggleSound('sfx')">SFX: <span id="sfx-status">ON</span></button>
-            <button onclick="toggleSound('bgm')">Music: <span id="bgm-status">ON</span></button>
-            <button class="secondary" onclick="toggleScreen('main-menu')">Back</button>
+            <button class="secondary" onclick="playClick(); toggleScreen('main-menu')">Back</button>
         </div>
     </div>
 
     <div id="custom-screen" class="screen hidden">
         <div class="menu-card" style="max-width: 600px;">
             <h2>Character Vault</h2>
+            <input type="text" id="nickname-input" maxlength="12" onchange="updateNickname()">
             <div style="display: flex; gap: 10px; margin-bottom: 10px;">
-                <button id="p1-vault-tab" onclick="setVaultPlayer(1)">Player 1</button>
-                <button id="p2-vault-tab" class="secondary" onclick="setVaultPlayer(2)">Player 2</button>
+                <button id="p1-vault-tab" onclick="playClick(); setVaultPlayer(1)">Player 1</button>
+                <button id="p2-vault-tab" class="secondary" onclick="playClick(); setVaultPlayer(2)">Player 2</button>
             </div>
             <div id="owned-items" class="grid-container"></div>
-            <button class="secondary" onclick="toggleScreen('main-menu')">Back</button>
+            <button class="secondary" onclick="playClick(); toggleScreen('main-menu')">Back</button>
         </div>
     </div>
 
     <div id="shop-screen" class="screen hidden">
         <div class="menu-card" style="max-width: 800px;">
             <h2>The Bazaar</h2>
-            <div id="shop-items" class="grid-container" style="max-height: 50vh;">
-                <div class="item-box"><h3>Colors</h3></div>
-                <div class="item-box"><p>Blue (150)</p><button id="buy-blue" onclick="buyItem('skin', 'blue', 150)">Buy</button></div>
-                <div class="item-box"><p>Green (300)</p><button id="buy-green" onclick="buyItem('skin', 'green', 300)">Buy</button></div>
-                <div class="item-box"><p>Yellow (400)</p><button id="buy-yellow" onclick="buyItem('skin', 'yellow', 400)">Buy</button></div>
-                <div class="item-box"><p>Purple (500)</p><button id="buy-purple" onclick="buyItem('skin', 'purple', 500)">Buy</button></div>
-                <div class="item-box"><p>Orange (600)</p><button id="buy-orange" onclick="buyItem('skin', 'orange', 600)">Buy</button></div>
-                <div class="item-box"><p>Black (700)</p><button id="buy-black" onclick="buyItem('skin', 'black', 700)">Buy</button></div>
-                <div class="item-box"><h3>Shapes</h3></div>
-                <div class="item-box"><p>Square (300)</p><button id="buy-square" onclick="buyItem('shape', 'square', 300)">Buy</button></div>
-                <div class="item-box"><p>Triangle (400)</p><button id="buy-triangle" onclick="buyItem('shape', 'triangle', 400)">Buy</button></div>
-                <div class="item-box"><p>Diamond (500)</p><button id="buy-diamond" onclick="buyItem('shape', 'diamond', 500)">Buy</button></div>
-                <div class="item-box"><p>Oval (750)</p><button id="buy-oval" onclick="buyItem('shape', 'oval', 750)">Buy</button></div>
-                <div class="item-box"><p>Pentagon (1000)</p><button id="buy-pentagon" onclick="buyItem('shape', 'pentagon', 1000)">Buy</button></div>
-            </div>
-            <button class="secondary" onclick="toggleScreen('main-menu')">Back</button>
+            <div id="shop-items" class="grid-container"></div>
+            <button class="secondary" onclick="playClick(); toggleScreen('main-menu')">Back</button>
         </div>
     </div>
 
     <div id="game-ui" class="screen hidden">
-        <div class="hud">
-            <div id="turn-indicator" class="stats">Player 1's Turn</div>
-            <div class="stats">Roll: <span id="roll-val">?</span></div>
-        </div>
-        <div class="sticks-container" style="margin-bottom: 15px;">
+        <div id="turn-indicator" class="stats">...</div>
+        <div style="display: flex; gap: 8px; margin: 15px 0;">
             <div id="s0" class="stick"></div><div id="s1" class="stick"></div>
             <div id="s2" class="stick"></div><div id="s3" class="stick"></div>
         </div>
         <canvas id="gameCanvas"></canvas>
-        <div style="width: 100%; max-width: 400px; display: flex; gap: 10px; margin-top: 15px;">
-            <button id="roll-btn" onclick="rollSticks()">Throw Sticks</button>
-            <button class="secondary" onclick="toggleScreen('main-menu')">Quit</button>
+        <div style="margin-top: 15px;">
+            <button id="roll-btn" onclick="playClick(); rollSticks()">Throw Sticks</button>
+            <button class="secondary" onclick="playClick(); toggleScreen('main-menu')">Quit</button>
         </div>
     </div>
+
+    <div id="game-mode-select" class="screen hidden"><div class="menu-card"><h2>Path</h2><button onclick="playClick(); startGame('single')">Single</button><button onclick="playClick(); startGame('multi')">Multi</button><button class="secondary" onclick="playClick(); toggleScreen('main-menu')">Back</button></div></div>
+    <div id="leaderboard-screen" class="screen hidden"><div class="menu-card"><h2>Leaderboard</h2><table id="leaderboard-list" style="width:100%"></table><button class="secondary" onclick="playClick(); toggleScreen('main-menu')">Back</button></div></div>
+    <div id="settings-screen" class="screen hidden"><div class="menu-card"><h2>Settings</h2><button onclick="playClick(); toggleSound('sfx')">SFX: <span id="sfx-status">ON</span></button><button onclick="playClick(); toggleSound('bgm')">Music: <span id="bgm-status">ON</span></button><button class="secondary" onclick="playClick(); toggleScreen('main-menu')">Back</button></div></div>
 
 <script>
     const canvas = document.getElementById('gameCanvas');
     const ctx = canvas.getContext('2d');
     canvas.width = 800; canvas.height = 240;
+
     const bgm = new Audio('wonderfulday.mp3'); bgm.loop = true;
+    const sfxClick = new Audio('windowsxpclick.mp3');
     const sfxRoll = new Audio('rolldice.mp3');
     const sfxMove = new Audio('lobotomy.mp3');
+    let audioInitialized = false;
 
+    const colorMap = { classic: "#ffffff", purple: "#8e44ad", orange: "#e67e22", blue: "#00ced1", green: "#2ecc71", yellow: "#f1c40f", black: "#222222", brown: "#795548" };
+    
     let vaultPlayer = 1;
     let gameState = {
         money: parseInt(localStorage.getItem('senet_money')) || 0,
         leaderboard: JSON.parse(localStorage.getItem('senet_leaderboard')) || [],
-        p1: {
-            ownedSkins: JSON.parse(localStorage.getItem('senet_p1_skins')) || ['classic'],
-            activeSkin: localStorage.getItem('senet_p1_active_skin') || 'classic',
-            ownedShapes: JSON.parse(localStorage.getItem('senet_p1_shapes')) || ['circle'],
-            activeShape: localStorage.getItem('senet_p1_active_shape') || 'circle'
-        },
-        p2: {
-            ownedSkins: JSON.parse(localStorage.getItem('senet_p2_skins')) || ['classic'],
-            activeSkin: localStorage.getItem('senet_p2_active_skin') || 'classic',
-            ownedShapes: JSON.parse(localStorage.getItem('senet_p2_shapes')) || ['circle'],
-            activeShape: localStorage.getItem('senet_p2_active_shape') || 'circle'
-        },
+        p1: { name: localStorage.getItem('senet_p1_name') || "Player 1", ownedSkins: JSON.parse(localStorage.getItem('senet_p1_skins')) || ['classic'], activeSkin: localStorage.getItem('senet_p1_active_skin') || 'classic', ownedShapes: JSON.parse(localStorage.getItem('senet_p1_shapes')) || ['circle'], activeShape: localStorage.getItem('senet_p1_active_shape') || 'circle' },
+        p2: { name: localStorage.getItem('senet_p2_name') || "Player 2", ownedSkins: JSON.parse(localStorage.getItem('senet_p2_skins')) || ['classic'], activeSkin: localStorage.getItem('senet_p2_active_skin') || 'classic', ownedShapes: JSON.parse(localStorage.getItem('senet_p2_shapes')) || ['circle'], activeShape: localStorage.getItem('senet_p2_active_shape') || 'circle' },
         settings: { sfx: true, bgm: true },
         mode: 'single', turn: 1, currentRoll: 0, hasRolled: false,
         pieces: [{pos:0,player:1},{pos:2,player:1},{pos:1,player:2},{pos:3,player:2}]
     };
 
-    const colorMap = { classic: "#ffffff", purple: "#8e44ad", orange: "#e67e22", blue: "#00ced1", green: "#2ecc71", yellow: "#f1c40f", black: "#222222" };
+    const shopItems = {
+        skins: [{n:'blue', c:100}, {n:'green', c:100}, {n:'yellow', c:100}, {n:'purple', c:100}, {n:'orange', c:100}, {n:'black', c:100}, {n:'brown', c:100}],
+        shapes: [{n:'square', c:300}, {n:'triangle', c:400}, {n:'diamond', c:500}, {n:'oval', c:750}, {n:'pentagon', c:1000}, {n:'hexagon', c:1250}]
+    };
+
+    function initAudio() { if (!audioInitialized) { if(gameState.settings.bgm) bgm.play().catch(()=>{}); audioInitialized = true; } }
+    function playClick() { if(gameState.settings.sfx) sfxClick.play().catch(()=>{}); }
 
     function toggleScreen(id) {
         document.querySelectorAll('.screen').forEach(scr => scr.classList.add('hidden'));
         document.getElementById(id).classList.remove('hidden');
         if(id === 'custom-screen') renderCustomizer();
-        if(id === 'shop-screen') updateShopButtons();
+        if(id === 'shop-screen') renderShop();
         if(id === 'leaderboard-screen') renderLeaderboard();
+    }
+
+    function getIconSVG(shape, color) {
+        const hex = colorMap[color] || '#fff';
+        let path = '';
+        if (shape === 'circle') path = '<circle cx="50" cy="50" r="40" />';
+        else if (shape === 'square') path = '<rect x="15" y="15" width="70" height="70" />';
+        else if (shape === 'triangle') path = '<polygon points="50,15 90,85 10,85" />';
+        else if (shape === 'diamond') path = '<polygon points="50,10 90,50 50,90 10,50" />';
+        else if (shape === 'pentagon') path = '<polygon points="50,10 95,45 78,92 22,92 5,45" />';
+        else if (shape === 'hexagon') path = '<polygon points="50,10 90,30 90,70 50,90 10,70 10,30" />';
+        else if (shape === 'oval') path = '<ellipse cx="50" cy="50" rx="30" ry="40" />';
+        else path = '<circle cx="50" cy="50" r="40" />';
+
+        return `<div class="icon-container"><svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            ${path.replace('/>', ` fill="${hex}" stroke="#d4af37" stroke-width="6" />`)}
+        </svg></div>`;
+    }
+
+    function renderCustomizer() {
+        const container = document.getElementById('owned-items');
+        container.innerHTML = "";
+        const pData = vaultPlayer === 1 ? gameState.p1 : gameState.p2;
+        document.getElementById('nickname-input').value = pData.name;
+
+        const createBox = (name, type) => {
+            const box = document.createElement('div'); box.className = "item-box";
+            const active = type === 'skin' ? pData.activeSkin : pData.activeShape;
+            box.innerHTML = getIconSVG(type==='shape'?name:pData.activeShape, type==='skin'?name:pData.activeSkin);
+            box.innerHTML += `<p style="font-size:0.75em; margin: 5px 0;">${name.toUpperCase()}</p>`;
+            const btn = document.createElement('button'); btn.innerText = name === active ? "Equipped" : "Equip";
+            btn.disabled = (name === active); btn.style.width="90%"; btn.style.padding="6px";
+            btn.onclick = () => { if(type==='skin') pData.activeSkin=name; else pData.activeShape=name; saveData(); renderCustomizer(); };
+            box.appendChild(btn); container.appendChild(box);
+        };
+        pData.ownedSkins.forEach(s => createBox(s, 'skin'));
+        pData.ownedShapes.forEach(s => createBox(s, 'shape'));
+    }
+
+    function renderShop() {
+        const container = document.getElementById('shop-items'); container.innerHTML = "";
+        const createShopItem = (item, type) => {
+            const owned = (vaultPlayer === 1 ? gameState.p1 : gameState.p2)[type==='skin'?'ownedSkins':'ownedShapes'].includes(item.n);
+            const box = document.createElement('div'); box.className = "item-box";
+            box.innerHTML = getIconSVG(type==='shape'?item.n:'circle', type==='skin'?item.n:'classic');
+            box.innerHTML += `<p style="font-size:0.75em; margin: 5px 0;">${item.n.toUpperCase()} (${item.c})</p>`;
+            const btn = document.createElement('button'); btn.innerText = owned ? "Owned" : "Buy";
+            btn.disabled = owned; btn.style.width="90%"; btn.style.padding="6px";
+            btn.onclick = () => buyItem(type, item.n, item.c);
+            box.appendChild(btn); container.appendChild(box);
+        };
+        shopItems.skins.forEach(s => createShopItem(s, 'skin'));
+        shopItems.shapes.forEach(s => createShopItem(s, 'shape'));
+    }
+
+    function buyItem(type, name, cost) {
+        if(gameState.money >= cost) {
+            gameState.money -= cost;
+            const target = vaultPlayer === 1 ? gameState.p1 : gameState.p2;
+            if(type === 'skin') target.ownedSkins.push(name);
+            else target.ownedShapes.push(name);
+            saveData(); renderShop(); updateMoneyUI();
+        } else alert("Insufficient Deben!");
+    }
+
+    function rollSticks() {
+        if(gameState.hasRolled) return;
+        if(gameState.settings.sfx) sfxRoll.play();
+        let count = 0;
+        for(let i=0; i<4; i++) {
+            let isWhite = Math.random() > 0.5;
+            document.getElementById(`s${i}`).className = isWhite ? 'stick white' : 'stick';
+            if(isWhite) count++;
+        }
+        gameState.currentRoll = count === 0 ? 5 : count;
+        gameState.hasRolled = true;
+        if(gameState.mode === 'single' && gameState.turn === 2) setTimeout(handleMove, 800);
+    }
+
+    function handleMove() {
+        if(gameState.settings.sfx) sfxMove.play();
+        let pIdx = gameState.pieces.findIndex(p => p.player === gameState.turn);
+        let curPos = gameState.pieces[pIdx].pos;
+        let newPos = curPos + gameState.currentRoll;
+
+        if (curPos === 27 && gameState.currentRoll !== 3) { newPos = curPos; alert("Must roll 3 to leave Square 28!"); }
+        else if (newPos === 26) { newPos = 14; }
+        else if (curPos < 25 && newPos > 25 && newPos !== 25) newPos = curPos;
+
+        gameState.pieces[pIdx].pos = newPos;
+        drawBoard();
+        if(newPos >= 29) { endGame(gameState.turn === 1 ? gameState.p1.name : (gameState.mode==='single'?"AI":gameState.p2.name)); return; }
+        
+        gameState.turn = gameState.turn === 1 ? 2 : 1;
+        gameState.hasRolled = false;
+        document.getElementById('turn-indicator').innerText = (gameState.mode === 'single' && gameState.turn === 2) ? "AI's Turn" : `${gameState.turn === 1 ? gameState.p1.name : gameState.p2.name}'s Turn`;
+        if(gameState.mode === 'single' && gameState.turn === 2) setTimeout(rollSticks, 1000);
+    }
+
+    function drawBoard() {
+        ctx.clearRect(0,0,800,240);
+        ctx.textAlign = "center"; ctx.font = "bold 12px Cormorant Garamond";
+        for(let i=0; i<30; i++) {
+            let r = Math.floor(i/10), c = i%10; if(r===1) c = 9-c;
+            ctx.strokeStyle = "#d4af37"; ctx.strokeRect(c*80, r*80, 80, 80);
+            if(i === 25) { ctx.fillStyle = "rgba(46,204,113,0.2)"; ctx.fillRect(c*80,r*80,80,80); ctx.fillStyle="#fff"; ctx.fillText("HAPPY", c*80+40, r*80+45); }
+            if(i === 26) { ctx.fillStyle = "rgba(52,152,219,0.3)"; ctx.fillRect(c*80,r*80,80,80); ctx.fillStyle="#fff"; ctx.fillText("WATER", c*80+40, r*80+45); }
+            if(i === 27) { ctx.fillStyle = "rgba(155,89,182,0.3)"; ctx.fillRect(c*80,r*80,80,80); ctx.fillStyle="#fff"; ctx.fillText("TRUTH", c*80+40, r*80+45); }
+        }
+        gameState.pieces.forEach(p => {
+            let r = Math.floor(p.pos/10), c = p.pos%10; if(r===1) c = 9-c;
+            let x = c*80+40, y = r*80+40;
+            const pData = p.player === 1 ? gameState.p1 : gameState.p2;
+            ctx.fillStyle = colorMap[pData.activeSkin]; ctx.beginPath();
+            const s = pData.activeShape;
+            if(s === 'square') ctx.rect(x-25,y-25,50,50);
+            else if(s === 'oval') ctx.ellipse(x, y, 18, 28, 0, 0, Math.PI*2);
+            else if(s === 'hexagon') { for(let i=0;i<6;i++) ctx.lineTo(x+28*Math.cos(i*Math.PI/3), y+28*Math.sin(i*Math.PI/3)); ctx.closePath(); }
+            else if(s === 'pentagon') { for(let i=0;i<5;i++) ctx.lineTo(x+28*Math.cos(i*0.4*Math.PI-Math.PI/2), y+28*Math.sin(i*0.4*Math.PI-Math.PI/2)); ctx.closePath(); }
+            else if(s === 'triangle') { ctx.moveTo(x, y-28); ctx.lineTo(x+28, y+28); ctx.lineTo(x-28, y+28); ctx.closePath(); }
+            else if(s === 'diamond') { ctx.moveTo(x, y-28); ctx.lineTo(x+28, y); ctx.lineTo(x, y+28); ctx.lineTo(x-28, y); ctx.closePath(); }
+            else ctx.arc(x,y,25,0,Math.PI*2);
+            ctx.fill(); ctx.strokeStyle = "#000"; ctx.lineWidth = 2; ctx.stroke();
+        });
+    }
+
+    function updateNickname() {
+        const val = document.getElementById('nickname-input').value;
+        if(vaultPlayer === 1) gameState.p1.name = val; else gameState.p2.name = val;
+        saveData();
     }
 
     function setVaultPlayer(num) {
@@ -197,181 +287,13 @@
         renderCustomizer();
     }
 
-    function renderCustomizer() {
-        const container = document.getElementById('owned-items');
-        container.innerHTML = "";
-        const pData = vaultPlayer === 1 ? gameState.p1 : gameState.p2;
-        const addSection = (items, active, type) => {
-            items.forEach(name => {
-                const box = document.createElement('div');
-                box.className = "item-box";
-                const isActive = name === active;
-                box.innerHTML = `<p>${name.toUpperCase()}</p>`;
-                const btn = document.createElement('button');
-                btn.innerText = isActive ? "ACTIVE" : "EQUIP";
-                btn.disabled = isActive;
-                btn.style.padding = "5px";
-                btn.onclick = () => {
-                    if(type === 'skin') pData.activeSkin = name;
-                    else pData.activeShape = name;
-                    saveData(); renderCustomizer(); drawBoard();
-                };
-                box.appendChild(btn);
-                container.appendChild(box);
-            });
-        };
-        addSection(pData.ownedSkins, pData.activeSkin, 'skin');
-        addSection(pData.ownedShapes, pData.activeShape, 'shape');
-    }
-
-    function updateShopButtons() {
-        const check = (id, type, name) => {
-            const btn = document.getElementById(id);
-            if (!btn) return;
-            const owned = gameState.p1.ownedSkins.includes(name) || gameState.p1.ownedShapes.includes(name);
-            if (owned) { btn.innerText = "OWNED"; btn.disabled = true; }
-        };
-        ['blue','green','yellow','purple','orange','black'].forEach(c => check('buy-'+c, 'skin', c));
-        ['square','triangle','diamond','oval','pentagon'].forEach(s => check('buy-'+s, 'shape', s));
-    }
-
-    function rollSticks() {
-        if(gameState.hasRolled) return;
-        if(gameState.settings.sfx) sfxRoll.play();
-        let whiteCount = 0;
-        for(let i=0; i<4; i++) {
-            let isWhite = Math.random() > 0.5;
-            document.getElementById(`s${i}`).className = isWhite ? 'stick white' : 'stick';
-            if(isWhite) whiteCount++;
-        }
-        gameState.currentRoll = (whiteCount === 0) ? 5 : whiteCount;
-        document.getElementById('roll-val').innerText = gameState.currentRoll;
-        gameState.hasRolled = true;
-        if (gameState.mode === 'single' && gameState.turn === 2) setTimeout(handleMove, 800);
-    }
-
-    canvas.onclick = () => { if (gameState.hasRolled && !(gameState.mode === 'single' && gameState.turn === 2)) handleMove(); };
-
-    function handleMove() {
-        if(gameState.settings.sfx) sfxMove.play();
-        let pIdx = gameState.pieces.findIndex(p => p.player === gameState.turn);
-        let currentPos = gameState.pieces[pIdx].pos;
-        let newPos = currentPos + gameState.currentRoll;
-        
-        // Correct Rule Logic
-        if (newPos === 26) { // Water (Adjusting to 0-indexed where 26 is actually square 27)
-            newPos = 14; 
-            alert("House of Water! Back to 15."); 
-        } 
-        else if (currentPos < 25 && newPos > 25 && newPos !== 25) { 
-            // Must land exactly on Happiness (Square 26, index 25) to proceed
-            newPos = currentPos; 
-        }
-
-        gameState.pieces[pIdx].pos = newPos;
-        drawBoard();
-
-        if (newPos >= 29) { endGame(gameState.turn === 1 ? "Player 1" : "AI/P2"); return; }
-        
-        gameState.turn = gameState.turn === 1 ? 2 : 1;
-        gameState.hasRolled = false;
-        document.getElementById('turn-indicator').innerText = (gameState.mode === 'single' && gameState.turn === 2) ? "AI's Turn" : `Player ${gameState.turn}'s Turn`;
-        document.getElementById('roll-val').innerText = "?";
-        if (gameState.mode === 'single' && gameState.turn === 2) setTimeout(rollSticks, 1000);
-    }
-
-    function drawBoard() {
-        ctx.clearRect(0,0, canvas.width, canvas.height);
-        ctx.textAlign = "center";
-        ctx.font = "bold 14px Segoe UI";
-        for(let i=0; i<10; i++) for(let j=0; j<3; j++) {
-            let idx = (j * 10) + i;
-            ctx.strokeStyle = "#d4af37"; ctx.lineWidth = 1;
-            ctx.strokeRect(i*80, j*80, 80, 80);
-            
-            // Draw Special Squares
-            if(idx === 25) { // House of Happiness
-                ctx.fillStyle = "rgba(46, 204, 113, 0.3)"; ctx.fillRect(i*80, j*80, 80, 80);
-                ctx.fillStyle = "#fff"; ctx.fillText("HAPPY", i*80+40, j*80+45);
-            }
-            if(idx === 26) { // House of Water
-                ctx.fillStyle = "rgba(52, 152, 219, 0.3)"; ctx.fillRect(i*80, j*80, 80, 80);
-                ctx.fillStyle = "#fff"; ctx.fillText("WATER", i*80+40, j*80+45);
-            }
-        }
-        gameState.pieces.forEach(p => {
-            let row = Math.floor(p.pos / 10), col = p.pos % 10;
-            if(row === 1) col = 9 - col; 
-            let x = col * 80 + 40, y = row * 80 + 40;
-            const pData = p.player === 1 ? gameState.p1 : gameState.p2;
-            ctx.fillStyle = colorMap[pData.activeSkin] || (p.player === 1 ? "#fff" : "#c0393b");
-            ctx.strokeStyle = "#000"; ctx.lineWidth = 2;
-            ctx.beginPath();
-            const shape = pData.activeShape;
-            if(shape === 'square') ctx.rect(x-25, y-25, 50, 50);
-            else if(shape === 'pentagon') { 
-                for(let i=0; i<5; i++) {
-                    let angle = (i * 0.4 * Math.PI) - (Math.PI/2);
-                    ctx.lineTo(x + 30 * Math.cos(angle), y + 30 * Math.sin(angle));
-                }
-                ctx.closePath();
-            }
-            else ctx.arc(x, y, 25, 0, Math.PI * 2);
-            ctx.fill(); ctx.stroke();
-        });
-    }
-
-    function buyItem(type, name, cost) {
-        if (gameState.money >= cost) {
-            gameState.money -= cost;
-            if(type === 'skin') { gameState.p1.ownedSkins.push(name); gameState.p2.ownedSkins.push(name); }
-            else { gameState.p1.ownedShapes.push(name); gameState.p2.ownedShapes.push(name); }
-            saveData(); updateMoneyUI(); updateShopButtons(); alert("Purchased!");
-        } else alert("Not enough Deben!");
-    }
-
-    function renderLeaderboard() {
-        const list = document.getElementById('leaderboard-list');
-        list.innerHTML = "<tr><td>Rank</td><td>Pharaoh</td><td>Wins</td></tr>";
-        gameState.leaderboard.sort((a,b) => b.wins - a.wins).slice(0,5).forEach((entry, i) => {
-            list.innerHTML += `<tr><td>#${i+1}</td><td>${entry.name}</td><td>${entry.wins}</td></tr>`;
-        });
-    }
-
-    function endGame(winner) {
-        gameState.money += 100;
-        let lb = gameState.leaderboard.find(e => e.name === winner);
-        if(lb) lb.wins++; else gameState.leaderboard.push({name: winner, wins: 1});
-        saveData(); updateMoneyUI(); alert(winner + " Wins! +100 Deben"); toggleScreen('main-menu');
-    }
-
-    function startGame(m) { 
-        if(gameState.settings.bgm) bgm.play(); 
-        gameState.mode = m; gameState.turn = 1; gameState.hasRolled = false;
-        gameState.pieces = [{pos:0,player:1},{pos:2,player:1},{pos:1,player:2},{pos:3,player:2}];
-        toggleScreen('game-ui'); drawBoard(); 
-    }
-
-    function toggleSound(t) {
-        gameState.settings[t] = !gameState.settings[t];
-        document.getElementById(`${t}-status`).innerText = gameState.settings[t] ? "ON" : "OFF";
-        if (t === 'bgm') gameState.settings.bgm ? bgm.play() : bgm.pause();
-    }
-
-    function saveData() {
-        localStorage.setItem('senet_money', gameState.money);
-        localStorage.setItem('senet_leaderboard', JSON.stringify(gameState.leaderboard));
-        localStorage.setItem('senet_p1_skins', JSON.stringify(gameState.p1.ownedSkins));
-        localStorage.setItem('senet_p1_active_skin', gameState.p1.activeSkin);
-        localStorage.setItem('senet_p1_shapes', JSON.stringify(gameState.p1.ownedShapes));
-        localStorage.setItem('senet_p1_active_shape', gameState.p1.activeShape);
-        localStorage.setItem('senet_p2_skins', JSON.stringify(gameState.p2.ownedSkins));
-        localStorage.setItem('senet_p2_active_skin', gameState.p2.activeSkin);
-        localStorage.setItem('senet_p2_shapes', JSON.stringify(gameState.p2.ownedShapes));
-        localStorage.setItem('senet_p2_active_shape', gameState.p2.activeShape);
-    }
-
+    function saveData() { localStorage.setItem('senet_money', gameState.money); localStorage.setItem('senet_p1_name', gameState.p1.name); localStorage.setItem('senet_p2_name', gameState.p2.name); localStorage.setItem('senet_p1_skins', JSON.stringify(gameState.p1.ownedSkins)); localStorage.setItem('senet_p1_active_skin', gameState.p1.activeSkin); localStorage.setItem('senet_p1_shapes', JSON.stringify(gameState.p1.ownedShapes)); localStorage.setItem('senet_p1_active_shape', gameState.p1.activeShape); localStorage.setItem('senet_p2_skins', JSON.stringify(gameState.p2.ownedSkins)); localStorage.setItem('senet_p2_active_skin', gameState.p2.activeSkin); localStorage.setItem('senet_p2_shapes', JSON.stringify(gameState.p2.ownedShapes)); localStorage.setItem('senet_p2_active_shape', gameState.p2.activeShape); localStorage.setItem('senet_leaderboard', JSON.stringify(gameState.leaderboard)); }
     function updateMoneyUI() { document.querySelectorAll('.money-display').forEach(el => el.innerText = gameState.money); }
+    function startGame(m) { gameState.mode=m; gameState.turn=1; gameState.pieces=[{pos:0,player:1},{pos:2,player:1},{pos:1,player:2},{pos:3,player:2}]; toggleScreen('game-ui'); drawBoard(); document.getElementById('turn-indicator').innerText = gameState.p1.name+"'s Turn"; }
+    function endGame(w) { gameState.money+=100; let lb = gameState.leaderboard.find(e=>e.name===w); if(lb) lb.wins++; else gameState.leaderboard.push({name:w,wins:1}); saveData(); alert(w+" Wins!"); toggleScreen('main-menu'); }
+    function renderLeaderboard() { const l=document.getElementById('leaderboard-list'); l.innerHTML="<tr><td>Rank</td><td>Name</td><td>Wins</td></tr>"; gameState.leaderboard.sort((a,b)=>b.wins-a.wins).forEach((e,i)=>l.innerHTML+=`<tr><td>#${i+1}</td><td>${e.name}</td><td>${e.wins}</td></tr>`); }
+    function toggleSound(t) { gameState.settings[t]=!gameState.settings[t]; document.getElementById(t+'-status').innerText=gameState.settings[t]?"ON":"OFF"; if (t === 'bgm') gameState.settings.bgm ? bgm.play() : bgm.pause(); }
+    canvas.onclick = () => { if(gameState.hasRolled && !(gameState.mode==='single'&&gameState.turn===2)) handleMove(); };
     window.onload = () => { updateMoneyUI(); };
 </script>
 </body>
