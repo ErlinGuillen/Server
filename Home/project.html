@@ -17,51 +17,44 @@
   img.project{
 	 width: 75%;
   }
-  div:hover{
-	background-color: rgba(0, 188, 255, 0.2);
-  }
-  .mycontainer2{
-	display: flex;
-  }
-  div.mycontainer2 > .navigator{
-    width: 50%;
-	float:left;
-  }
+ .grid-container6{
+	display: grid;
+    grid-template-columns: 50% 50%;
+    background-color: rgba(0,0,0,0.1);
+	padding: 10px 10px;	
+ }
 </style>
 </head>
 <body>
   <wrapper>
-  <header style="text-align: left; padding-top: 10px">
+  <header>
+	<div class="grid-container4">
 	 <img src="logo.png" alt="Logo" width="50px" height="50px" class="logo">
-	 <hr class="hrlogo">
-     <h1 class="sidelogo">Project</h1>
-  </header>
-  <nav>
-	<div class="mycontainer2">
-    <a href="https://erlinguillen.github.io/Server/Home/index.html" class="navigator">Back</a>
-    <a href="#SocialMedia" class="navigator">Bottom</a>
+     <h1 class="sidelogo" style="text-align: left">Stats</h1>
+	 <a href="https://erlinguillen.github.io/Server/Home/index.html" class="navigator">Back</a>
+	 <a href="#SocialMedia" class="navigator">Bottom</a>
 	</div>
-  </nav>
+  </header>
   <main>
-	 <h1>2026</h1>
-     <hr>
-	 <section>
+	<h1>2026</h1>
+    <hr>
+	<div class="grid-container6">
 	 <div class="project">
 	 <h2>Module 1 - GRA1280c</h2>
 	 <hr>
-     <img src="gra1280cP1ErlinGuillen2026.jpg" alt="Project" width="400px" class="project">
+     <img src="gra1280cP1ErlinGuillen2026.jpg" alt="Project" width="400px">
 	 </div>
-	 <div class="photoshop">
+	 <div class="project">
 	 <h2>Module 1 - GRA1750</h2>
 	 <hr>
-	 <img src="gra1750P1ErlinGuillen2026.jpg" alt="Project"  width="400px" class="project">
+	 <img src="gra1750P1ErlinGuillen2026.jpg" alt="Project"  width="400px">
      </div>
      <div class="project">
 	 <h2>Module 2 - GRA1280c</h2>
 	 <hr>
-	 <img src="gra1280cp2ErlinGuillen2026.jpg" alt="Project" width="400px" class="project">
+	 <img src="gra1280cp2ErlinGuillen2026.jpg" alt="Project" width="400px">
 	 </div>
-	 <div class="site">
+	 <div class="project">
      <h2>Module 2 and 3 - GRA1750</h2>
 	 <hr>
 	 <p><a href="https://eguillenvelasque001.github.io/MDC/gra1750p2erlinguillen2026/" alt="Project" target="_blank" class="navigator">Creamist Project</a></p>
@@ -69,9 +62,9 @@
 	 <div class="project">
 	 <h2>Module 3 - GRA1280c</h2>
 	 <hr>
-	 <img src="gra1280cp3ErlinGuillen2026.jpg" alt="Project" width="400px" class="project">
+	 <img src="gra1280cp3ErlinGuillen2026.jpg" alt="Project" width="400px">
 	 </div>
-	 <div class="site">
+	 <div class="project">
 	 <h2>Module 4 - GRA1750</h2>
 	 <hr>
 	 <p><a href="https://eguillenvelasque001.github.io/MDC/gra1750p4erlinguillen2026/" alt="Project" target="_blank" class="navigator">Invitation Project</a></p>
@@ -81,7 +74,7 @@
 	 <hr>
 	 <p>Coming Soon</p>
 	 </div>
-	 </section>
+	</div>
   </main>
   <footer>
 	  <address>

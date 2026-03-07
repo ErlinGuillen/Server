@@ -11,9 +11,8 @@
 <link rel="stylesheet" href="mystyle.css">
 <title>Home</title>
 <style>
-  section {
-	margin: 10px;
-    display: flex;
+  .pad {
+	padding: 10px;
   }
   .mycontainer{
 	display: flex;
@@ -33,72 +32,75 @@
 	width: 50%;
     float:left;
   }
-  .game{
-	width: 100%;
+  .grid-container5 {
+    display: grid;
+    grid-template-columns: 4.5% 40.5% 11% 11% 11% 11% 11%;
+    background-color: rgba(0,0,0,0.1);
+	padding: 10px 10px;
+  }
+  .border{
+	 border-radius: 10px;
+	 border: solid white;
   }
 </style>
 </head>
 <body>
   <wrapper>
-  <header style="text-align: left; padding-top: 10px">
-	 <img src="logo.png" alt="Logo" width="50px" height="50px" class="logo">
-	 <hr class="hrlogo">
-     <h1 class="sidelogo">Home</h1>
-  </header>
-  <nav>
-	<div class="mycontainer2">
-    <a href="https://erlinguillen.github.io/Server/Home/version.html" class="navigator">Game</a>
-    <a href="https://erlinguillen.github.io/Server/Home/project.html" class="navigator">Project</a>
-    <a href="https://erlinguillen.github.io/Server/Home/stats.html" class="navigator">Stats</a>
-	<a class="navigator">Coming Soon</a>
-    <a href="#SocialMedia" class="navigator">Bottom</a>
+  <header>
+	<div class="grid-container5">
+	 <img src="logo.png" alt="Logo" width="50px" height="50px">
+     <h1 class="sidelogo" style="text-align: left;">Home</h1>
+	 <a href="https://erlinguillen.github.io/Server/Home/version.html" class="navigator">Senet</a>
+     <a href="https://erlinguillen.github.io/Server/Home/project.html" class="navigator">Project</a>
+     <a href="https://erlinguillen.github.io/Server/Home/stats.html" class="navigator">Stats</a>
+	 <a class="navigator">Coming Soon</a>
+     <a href="#SocialMedia" class="navigator">Bottom</a>
 	</div>
-  </nav>
+  </header>
+  <br>
+  <div class="pad">
   <main>
-   <section>
-	<div class="mycontainer">
+	<div class="grid-container2 border">
 	 <div class="welcome">
-     <h1>Welcome to my website</h1>
+	 <h1>Welcome to my website</h1>
      <hr>
-     <p>This site is a place where you can explore, learn, and discover helpful information. I hope you enjoy your time here and find exactly what you're looking for.</p>
-	 <br>
-	 <h1>Get Started</h1>
-     <hr>
-     <p>This is your first step in exploring everything this website has to offer. Here, you can learn more about my projects, discover useful information, and navigate through different sections easily.</p>
-	 <br>
+     <p>This website is a place where you can explore my creations and projects. You can play my Senet game, one of the oldest board games in history, recreated with modern web technology. You can also check out the stats section to see information and progress about the games or features on this site. Finally, visit the projects section to see other things I’m building, experimenting with, and improving. Have fun exploring and playing!</p>
+	 </div>
+     <div>
+	   <img src="imageicon.png" alt="icon" width="100%" height="100%" class="welcome">
+	 </div>
+	</div>
+	<br>
+	<div class="grid-container2 border">
+	 <div class="contact">
 	 <h1>Contact</h1>
      <hr>
      <p>Press the button below to send me an email.</p>
      <p><a href="mailto:guillenvelaaquezerlin@gmail.com" class="navigator">Email Me</a>
      </p>
-	 <br>
+     </div>
+     <div class="quote">
      <h1>Quote</h1>
      <hr>
      <p>For Erlin:</p>
      <blockquote><q>On Saturday, I will post six or more because it is important to stay active.</q></blockquote><br>
 	 </div>
-	 <div class="icon">
-	 <img src="imageicon.png" alt="icon" width="100%" height="100%" class="welcome">
-	 </div>
 	</div>
-  </section>
+    <br>
+	<div class="border">
+	 <h1>Coming Soon</h1>
+	 <p>This section shows features and projects that are currently being developed. New games, improvements, and tools will be added here in the future. Stay tuned for updates as the website continues to grow!</p>
+	</div>
 	    <p id="code"></p>
 	    <form action="https://erlinguillen.github.io/Server/Home/Senet%20Game/senet.html">
         <input type="text" name="fname"><br><br>
         <button disabled type="submit">Submit Form</button>
         <button disabled type="reset">Reset Form</button>
 		</form>
-  <section>
-	  <div class="game">
-		<h1>Game</h1>
-		<hr>
-		<p>Try out my game! Click the button below to start playing.</p>
-	    <p><a href="https://erlinguillen.github.io/Server/Home/Senet%20Game/senet.html" class="navigator">Play "Senet" – Version 1.1.8 Full Screen</a></p>
-		<p><iframe src="https://erlinguillen.github.io/Server/Home/Senet%20Game/senet.html" style="height:1000px;width:90%;border:none;" title="Iframe Example"></iframe></p>
-	  </div>
-   </section>
-   <button type="button" onclick="mystyle()">Click Me!</button>
-  </main>
+	  <br>
+      <button type="button" onclick="mystyle()">Click Me!</button>
+    </main>
+  </div>
   <footer>
 	  <h3 id="SocialMedia">Social Media</h3>
 	  <p id="demo">Follow me on social media to see more content and updates.</p>

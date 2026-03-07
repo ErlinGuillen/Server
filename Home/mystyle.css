@@ -60,7 +60,13 @@
   .navigator:active{
 	background-color: rgba(0,125,0,1.00)
   }
-  .welcome:hover, .game:hover, .count:hover {
+  .welcome:hover, .game:hover, .count:hover, .contact:hover, .quote:hover{
+	background-color: rgba(0, 188, 255, 0.2);
+  }
+  header:hover{
+	background-color: rgba(0,46,62.5,1.00);
+  }
+  .project:hover {
 	background-color: rgba(0, 188, 255, 0.2);
   }
   tr:hover {
@@ -71,33 +77,9 @@
 	width: 10%;
 	border-radius: 5px;
   } 
-  .hrlogo{
-	display: inline-block;
-	width: auto;
-	height: 30px;
-  }
-  .hrnav{
-	display: inline-block;
-	width: auto;
-	padding-top: 32px;
-	vertical-align: bottom;
-  } 	
   .sidelogo{
 	margin:0px 10px;
 	padding:6.25px 0%;
-	display:inline-block; 
-	vertical-align: top;
-  }
-  .logo{
-	margin:0px 10px;	
-  }
-  .quote{
-	width: 47.4%; 
-	display:inline-block; 
-  }
-  .contact{
-	width: 47.4%; 
-	display:inline-block; 
   }
 	.health{
 		font-size: 300%;
@@ -105,12 +87,6 @@
 	.dps{
 		font-size: 200%;
 	}
-    .project{
-      background-color: rgba(0,0,0,0.1);
-	  display: inline-block;
-	  width: 40%;
-	  vertical-align: top;
-    }
   .site{
       background-color: rgba(0,0,0,0.1);
 	  display: inline-block;
@@ -126,7 +102,7 @@
   }
   .navigator{
 	background-color: black;
-	padding: 10px;
+    padding: 15px;
 	cursor: pointer;
   }
   .game{
@@ -141,10 +117,24 @@
 	border: none;
 	padding: 10px;
   }
-
   button:hover{
 	background-color: white;
 	border: none;
 	padding: 10px;
 	color: black;
   }
+  .grid-container4 {
+    display: grid;
+    grid-template-columns: 4.5% 45.5% 25% 25%;
+	padding: 10px 0px;
+  }
+  .grid-container2 {
+    display: grid;
+    grid-template-columns: 50% 50%;
+	background-color: rgba(0,0,0,0.1);
+   }
+  .grid-container {
+      display: grid;
+      grid-template-columns: 14.28% 14.28% 14.28% 14.28% 14.28% 14.28% 14.28%;
+	  background-color: rgba(0,0,0,0.1);
+   }
