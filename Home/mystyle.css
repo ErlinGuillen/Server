@@ -123,16 +123,23 @@
 	padding: 10px;
 	color: black;
   }
+  .grid-container5 {
+    display: grid;
+    grid-template-columns: 4.5% 40.5% 11% 11% 11% 11% 11%;
+    background-color: rgba(0,0,0,0.1);
+	padding: 10px 10px;
+  }
   .grid-container4 {
     display: grid;
     grid-template-columns: 4.5% 45.5% 25% 25%;
-	padding: 10px 0px;
+	padding: 10px 10px;
   }
+ 
   .grid-container2 {
     display: grid;
     grid-template-columns: 50% 50%;
 	background-color: rgba(0,0,0,0.1);
-   }
+  }
   .grid-container {
       display: grid;
       grid-template-columns: 14.28% 14.28% 14.28% 14.28% 14.28% 14.28% 14.28%;
