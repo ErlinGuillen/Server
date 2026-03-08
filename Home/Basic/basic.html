@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
 	<script src="draw.js"></script>
 	<script src="update.js"></script>
+	<script src="particles.js"></script>
     <title>Square Dodger Pro</title>
     <style>
-        body { margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; background: #1a1a1a; color: white; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; overflow: hidden; }
+        body { margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; background: #1a1a1a; color: white; font-family: sans-serif; overflow: hidden; }
         canvas { border: 4px solid #333; background: #000; box-shadow: 0 0 20px rgba(0,0,0,0.5); }
-        .info { position: absolute; top: 20px; font-size: 24px; text-shadow: 2px 2px #000; }
+        .info { position: absolute; top: 20px; font-size: 24px; }
     </style>
 </head>
 <body>
@@ -16,28 +17,30 @@
     <div class="info">Score: <span id="score">0</span> | High: <span id="highScore">0</span></div>
     <canvas id="gameCanvas" width="400" height="600"></canvas>
 
+    <script src="draw.js"></script>
+    <script src="update.js"></script>
+
     <script>
         const canvas = document.getElementById("gameCanvas");
         const ctx = canvas.getContext("2d");
         const scoreUI = document.getElementById("score");
         const highUI = document.getElementById("highScore");
 
-        // --- GAME STATE ---
+        // Game State
         let score = 0;
         let highScore = localStorage.getItem("dodgerHighScore") || 0;
         let gameState = "START"; 
         let hasShield = false;
 
-        // --- OBJECTS ---
+        // Objects
         const player = { x: 185, y: 530, size: 30, speed: 7, color: "#0095DD" };
         let enemies = [];
         let powerUps = [];
         const keys = {};
 
-        // Update High Score Display
         highUI.innerText = highScore;
 
-        // --- INPUTS ---
+        // Input Handling
         window.addEventListener("keydown", (e) => {
             keys[e.code] = true;
             if (e.code === "Space" && gameState !== "PLAYING") resetGame();
@@ -82,9 +85,10 @@
             ctx.fillText(txt, canvas.width/2, y);
         }
 
+        // The Engine
         function loop() {
-            update();
-            draw();
+            update(); // From update.js
+            draw();   // From draw.js
             requestAnimationFrame(loop);
         }
 
