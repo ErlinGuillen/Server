@@ -1,7 +1,13 @@
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Background Stars
+    particles.forEach(p => {
+        ctx.fillStyle = p.color;
+        ctx.globalAlpha = p.life / 20; // Fade out as they die
+        ctx.fillRect(p.x, p.y, 4, 4);
+    });
+    ctx.globalAlpha = 1.0; // Reset alpha for other objects
+	
     ctx.fillStyle = "#333";
     for(let i=0; i<10; i++) {
         ctx.fillRect(i*50, (Date.now()/20 + i*100)%600, 2, 2);

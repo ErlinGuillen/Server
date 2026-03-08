@@ -2,9 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-	<script src="draw.js"></script>
-	<script src="update.js"></script>
 	<script src="particles.js"></script>
+	<script src="draw.js"></script>
+	<script src="gameover.js"></script>
+	<script src="update.js"></script>
+	<script src="resetgame.js"></script>
     <title>Square Dodger Pro</title>
     <style>
         body { margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; background: #1a1a1a; color: white; font-family: sans-serif; overflow: hidden; }
@@ -16,11 +18,8 @@
 
     <div class="info">Score: <span id="score">0</span> | High: <span id="highScore">0</span></div>
     <canvas id="gameCanvas" width="400" height="600"></canvas>
-
-    <script src="draw.js"></script>
-    <script src="update.js"></script>
-
-    <script>
+	
+<script>
         const canvas = document.getElementById("gameCanvas");
         const ctx = canvas.getContext("2d");
         const scoreUI = document.getElementById("score");
@@ -47,15 +46,6 @@
         });
         window.addEventListener("keyup", (e) => keys[e.code] = false);
 
-        function resetGame() {
-            score = 0;
-            scoreUI.innerText = score;
-            hasShield = false;
-            enemies = [{ x: Math.random() * 370, y: -30, size: 30, speed: 4 }];
-            powerUps = [];
-            gameState = "PLAYING";
-        }
-
         function spawnEnemy() {
             enemies.push({
                 x: Math.random() * (canvas.width - 30),
@@ -67,15 +57,6 @@
 
         function spawnPowerUp() {
             powerUps.push({ x: Math.random() * 380, y: -20, size: 20, speed: 2 });
-        }
-
-        function gameOver() {
-            gameState = "OVER";
-            if (score > highScore) {
-                highScore = score;
-                localStorage.setItem("dodgerHighScore", highScore);
-                highUI.innerText = highScore;
-            }
         }
 
         function drawText(txt, size, y) {
