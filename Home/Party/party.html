@@ -1,1 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple HTML5 Game</title>
+    <style>
+        body { margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; background: #222; color: white; font-family: sans-serif; overflow: hidden; }
+        canvas { border: 2px solid #fff; background: #000; }
+        .info { position: absolute; top: 10px; }
+    </style>
+</head>
+<body>
 
+    <div class="info">Score: <span id="score">0</span></div>
+    <canvas id="gameCanvas" width="400" height="500"></canvas>
+
+    <script>
+        /**
+         * 1. SETUP: Initialize canvas and variables
+         */
+        const canvas = document.getElementById("gameCanvas");
+        const ctx = canvas.getContext("2d");
+        const scoreElement = document.getElementById("score");
+
+        let score = 0;
+        let gameActive = true;
+
+        // Player properties
+        const player = { x: 175, y: 450, size: 30, speed: 7, color: "#0095DD" };
+
+        // Enemy properties
+        const enemy = { x: Math.random() * 370, y: 0, size: 30, speed: 5, color: "#FF4136" };
+
+        // Input handling
+        const keys = {};
+        window.addEventListener("keydown", (e) => keys[e.code] = true);
+        window.addEventListener("keyup", (e) => keys[e.code] = false);
+
+        /**
+         * 2. LOGIC: Update positions and check collisions
+         */
+        function update() {
+            if (!gameActive) return;
+
+            // Move player
+            if (keys["ArrowLeft"] && player.x > 0) player.x -= player.speed;
+            if (keys["ArrowRight"] && player.x < canvas.width - player.size) player.x += player.speed;
+
+            // Move enemy
+            enemy.y += enemy.speed;
+
+            // Reset enemy if it falls off screen
+            if (enemy.y > canvas.height) {
+                enemy.y = -30;
+                enemy.x = Math.random() * (canvas.width - enemy.size);
+                score++;
+                scoreElement.innerText = score;
+                enemy.speed += 0.2; // Increase difficulty
+            }
+
+            // Collision Detection
+            if (player.x < enemy.x + enemy.size &&
+                player.x + player.size > enemy.x &&
+                player.y < enemy.y + enemy.size &&
+                player.y + player.size > enemy.y) {
+                gameActive = false;
+                alert("Game Over! Score: " + score);
+                location.reload(); // Restart the game
+            }
+        }
+
+        /**
+         * 3. RENDERING: Draw the objects on the canvas
+         */
+        function draw() {
+            // Clear the canvas every frame
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Draw Player
+            ctx.fillStyle = player.color;
+            ctx.fillRect(player.x, player.y, player.size, player.size);
+
+            // Draw Enemy
+            ctx.fillStyle = enemy.color;
+            ctx.fillRect(enemy.x, enemy.y, enemy.size, enemy.size);
+        }
+
+        // The Game Loop
+        function loop() {
+            update();
+            draw();
+            requestAnimationFrame(loop);
+        }
+
+        loop();
+    </script>
+</body>
+</html>
