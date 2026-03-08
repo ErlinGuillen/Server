@@ -15,84 +15,122 @@
     <canvas id="gameCanvas" width="400" height="500"></canvas>
 
     <script>
-        /**
-         * 1. SETUP: Initialize canvas and variables
-         */
-        const canvas = document.getElementById("gameCanvas");
-        const ctx = canvas.getContext("2d");
-        const scoreElement = document.getElementById("score");
+/**
+ * 1. SETUP: Enhanced Variables
+ */
+const canvas = document.getElementById("gameCanvas");
+const ctx = canvas.getContext("2d");
+const scoreElement = document.getElementById("score");
 
-        let score = 0;
-        let gameActive = true;
+let score = 0;
+let gameState = "START"; // Possible states: START, PLAYING, OVER
 
-        // Player properties
-        const player = { x: 175, y: 450, size: 30, speed: 7, color: "#0095DD" };
+const player = { x: 175, y: 450, size: 30, speed: 7, color: "#0095DD" };
+let enemies = [];
 
-        // Enemy properties
-        const enemy = { x: Math.random() * 370, y: 0, size: 30, speed: 5, color: "#FF4136" };
+const keys = {};
+window.addEventListener("keydown", (e) => {
+    keys[e.code] = true;
+    // Press Space to start the game
+    if (e.code === "Space" && gameState !== "PLAYING") {
+        resetGame();
+    }
+});
+window.addEventListener("keyup", (e) => keys[e.code] = false);
 
-        // Input handling
-        const keys = {};
-        window.addEventListener("keydown", (e) => keys[e.code] = true);
-        window.addEventListener("keyup", (e) => keys[e.code] = false);
+function spawnEnemy() {
+    enemies.push({
+        x: Math.random() * (canvas.width - 30),
+        y: -30,
+        size: 30,
+        speed: 3 + Math.random() * 3
+    });
+}
 
-        /**
-         * 2. LOGIC: Update positions and check collisions
-         */
-        function update() {
-            if (!gameActive) return;
+function resetGame() {
+    score = 0;
+    scoreElement.innerText = score;
+    enemies = [ { x: Math.random() * 370, y: 0, size: 30, speed: 5 } ];
+    player.x = 175;
+    gameState = "PLAYING";
+}
 
-            // Move player
-            if (keys["ArrowLeft"] && player.x > 0) player.x -= player.speed;
-            if (keys["ArrowRight"] && player.x < canvas.width - player.size) player.x += player.speed;
+/**
+ * 2. LOGIC: Array Handling and Difficulty
+ */
+function update() {
+    if (gameState !== "PLAYING") return;
 
-            // Move enemy
-            enemy.y += enemy.speed;
+    if (keys["ArrowLeft"] && player.x > 0) player.x -= player.speed;
+    if (keys["ArrowRight"] && player.x < canvas.width - player.size) player.x += player.speed;
 
-            // Reset enemy if it falls off screen
-            if (enemy.y > canvas.height) {
-                enemy.y = -30;
-                enemy.x = Math.random() * (canvas.width - enemy.size);
-                score++;
-                scoreElement.innerText = score;
-                enemy.speed += 0.2; // Increase difficulty
-            }
+    enemies.forEach((enemy, index) => {
+        enemy.y += enemy.speed;
 
-            // Collision Detection
-            if (player.x < enemy.x + enemy.size &&
-                player.x + player.size > enemy.x &&
-                player.y < enemy.y + enemy.size &&
-                player.y + player.size > enemy.y) {
-                gameActive = false;
-                alert("Game Over! Score: " + score);
-                location.reload(); // Restart the game
-            }
+        // Reset enemy and increase score
+        if (enemy.y > canvas.height) {
+            enemy.y = -30;
+            enemy.x = Math.random() * (canvas.width - enemy.size);
+            score++;
+            scoreElement.innerText = score;
+            
+            // Spawn an extra enemy every 10 points
+            if (score % 10 === 0) spawnEnemy();
         }
 
-        /**
-         * 3. RENDERING: Draw the objects on the canvas
-         */
-        function draw() {
-            // Clear the canvas every frame
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        // Collision Check
+        if (player.x < enemy.x + enemy.size &&
+            player.x + player.size > enemy.x &&
+            player.y < enemy.y + enemy.size &&
+            player.y + player.size > enemy.y) {
+            gameState = "OVER";
+        }
+    });
+}
 
-            // Draw Player
-            ctx.fillStyle = player.color;
-            ctx.fillRect(player.x, player.y, player.size, player.size);
+/**
+ * 3. RENDERING: UI Screens
+ */
+function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            // Draw Enemy
-            ctx.fillStyle = enemy.color;
+    if (gameState === "START") {
+        ctx.fillStyle = "white";
+        ctx.textAlign = "center";
+        ctx.font = "20px Arial";
+        ctx.fillText("SQUARE DODGER", canvas.width / 2, canvas.height / 2 - 20);
+        ctx.fillText("Press SPACE to Start", canvas.width / 2, canvas.height / 2 + 20);
+    } 
+    
+    if (gameState === "PLAYING" || gameState === "OVER") {
+        // Draw Player
+        ctx.fillStyle = player.color;
+        ctx.fillRect(player.x, player.y, player.size, player.size);
+
+        // Draw Enemies
+        ctx.fillStyle = "#FF4136";
+        enemies.forEach(enemy => {
             ctx.fillRect(enemy.x, enemy.y, enemy.size, enemy.size);
-        }
+        });
+    }
 
-        // The Game Loop
-        function loop() {
-            update();
-            draw();
-            requestAnimationFrame(loop);
-        }
+    if (gameState === "OVER") {
+        ctx.fillStyle = "rgba(0, 0, 0, 0.7)";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "white";
+        ctx.textAlign = "center";
+        ctx.fillText("GAME OVER", canvas.width / 2, canvas.height / 2);
+        ctx.fillText("Press SPACE to Restart", canvas.width / 2, canvas.height / 2 + 40);
+    }
+}
 
-        loop();
+function loop() {
+    update();
+    draw();
+    requestAnimationFrame(loop);
+}
+
+loop();
     </script>
 </body>
 </html>
