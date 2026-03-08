@@ -2,135 +2,93 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Simple HTML5 Game</title>
+	<script src="draw.js"></script>
+	<script src="update.js"></script>
+    <title>Square Dodger Pro</title>
     <style>
-        body { margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; background: #222; color: white; font-family: sans-serif; overflow: hidden; }
-        canvas { border: 2px solid #fff; background: #000; }
-        .info { position: absolute; top: 10px; }
+        body { margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; background: #1a1a1a; color: white; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; overflow: hidden; }
+        canvas { border: 4px solid #333; background: #000; box-shadow: 0 0 20px rgba(0,0,0,0.5); }
+        .info { position: absolute; top: 20px; font-size: 24px; text-shadow: 2px 2px #000; }
     </style>
 </head>
 <body>
 
-    <div class="info">Score: <span id="score">0</span></div>
-    <canvas id="gameCanvas" width="400" height="500"></canvas>
+    <div class="info">Score: <span id="score">0</span> | High: <span id="highScore">0</span></div>
+    <canvas id="gameCanvas" width="400" height="600"></canvas>
 
     <script>
-/**
- * 1. SETUP: Enhanced Variables
- */
-const canvas = document.getElementById("gameCanvas");
-const ctx = canvas.getContext("2d");
-const scoreElement = document.getElementById("score");
+        const canvas = document.getElementById("gameCanvas");
+        const ctx = canvas.getContext("2d");
+        const scoreUI = document.getElementById("score");
+        const highUI = document.getElementById("highScore");
 
-let score = 0;
-let gameState = "START"; // Possible states: START, PLAYING, OVER
+        // --- GAME STATE ---
+        let score = 0;
+        let highScore = localStorage.getItem("dodgerHighScore") || 0;
+        let gameState = "START"; 
+        let hasShield = false;
 
-const player = { x: 175, y: 450, size: 30, speed: 7, color: "#0095DD" };
-let enemies = [];
+        // --- OBJECTS ---
+        const player = { x: 185, y: 530, size: 30, speed: 7, color: "#0095DD" };
+        let enemies = [];
+        let powerUps = [];
+        const keys = {};
 
-const keys = {};
-window.addEventListener("keydown", (e) => {
-    keys[e.code] = true;
-    // Press Space to start the game
-    if (e.code === "Space" && gameState !== "PLAYING") {
-        resetGame();
-    }
-});
-window.addEventListener("keyup", (e) => keys[e.code] = false);
+        // Update High Score Display
+        highUI.innerText = highScore;
 
-function spawnEnemy() {
-    enemies.push({
-        x: Math.random() * (canvas.width - 30),
-        y: -30,
-        size: 30,
-        speed: 3 + Math.random() * 3
-    });
-}
-
-function resetGame() {
-    score = 0;
-    scoreElement.innerText = score;
-    enemies = [ { x: Math.random() * 370, y: 0, size: 30, speed: 5 } ];
-    player.x = 175;
-    gameState = "PLAYING";
-}
-
-/**
- * 2. LOGIC: Array Handling and Difficulty
- */
-function update() {
-    if (gameState !== "PLAYING") return;
-
-    if (keys["ArrowLeft"] && player.x > 0) player.x -= player.speed;
-    if (keys["ArrowRight"] && player.x < canvas.width - player.size) player.x += player.speed;
-
-    enemies.forEach((enemy, index) => {
-        enemy.y += enemy.speed;
-
-        // Reset enemy and increase score
-        if (enemy.y > canvas.height) {
-            enemy.y = -30;
-            enemy.x = Math.random() * (canvas.width - enemy.size);
-            score++;
-            scoreElement.innerText = score;
-            
-            // Spawn an extra enemy every 10 points
-            if (score % 10 === 0) spawnEnemy();
-        }
-
-        // Collision Check
-        if (player.x < enemy.x + enemy.size &&
-            player.x + player.size > enemy.x &&
-            player.y < enemy.y + enemy.size &&
-            player.y + player.size > enemy.y) {
-            gameState = "OVER";
-        }
-    });
-}
-
-/**
- * 3. RENDERING: UI Screens
- */
-function draw() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    if (gameState === "START") {
-        ctx.fillStyle = "white";
-        ctx.textAlign = "center";
-        ctx.font = "20px Arial";
-        ctx.fillText("SQUARE DODGER", canvas.width / 2, canvas.height / 2 - 20);
-        ctx.fillText("Press SPACE to Start", canvas.width / 2, canvas.height / 2 + 20);
-    } 
-    
-    if (gameState === "PLAYING" || gameState === "OVER") {
-        // Draw Player
-        ctx.fillStyle = player.color;
-        ctx.fillRect(player.x, player.y, player.size, player.size);
-
-        // Draw Enemies
-        ctx.fillStyle = "#FF4136";
-        enemies.forEach(enemy => {
-            ctx.fillRect(enemy.x, enemy.y, enemy.size, enemy.size);
+        // --- INPUTS ---
+        window.addEventListener("keydown", (e) => {
+            keys[e.code] = true;
+            if (e.code === "Space" && gameState !== "PLAYING") resetGame();
         });
-    }
+        window.addEventListener("keyup", (e) => keys[e.code] = false);
 
-    if (gameState === "OVER") {
-        ctx.fillStyle = "rgba(0, 0, 0, 0.7)";
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = "white";
-        ctx.textAlign = "center";
-        ctx.fillText("GAME OVER", canvas.width / 2, canvas.height / 2);
-        ctx.fillText("Press SPACE to Restart", canvas.width / 2, canvas.height / 2 + 40);
-    }
-}
+        function resetGame() {
+            score = 0;
+            scoreUI.innerText = score;
+            hasShield = false;
+            enemies = [{ x: Math.random() * 370, y: -30, size: 30, speed: 4 }];
+            powerUps = [];
+            gameState = "PLAYING";
+        }
 
-function loop() {
-    update();
-    draw();
-    requestAnimationFrame(loop);
-}
+        function spawnEnemy() {
+            enemies.push({
+                x: Math.random() * (canvas.width - 30),
+                y: -30,
+                size: 30,
+                speed: 3 + Math.random() * 4
+            });
+        }
 
-loop();
+        function spawnPowerUp() {
+            powerUps.push({ x: Math.random() * 380, y: -20, size: 20, speed: 2 });
+        }
+
+        function gameOver() {
+            gameState = "OVER";
+            if (score > highScore) {
+                highScore = score;
+                localStorage.setItem("dodgerHighScore", highScore);
+                highUI.innerText = highScore;
+            }
+        }
+
+        function drawText(txt, size, y) {
+            ctx.fillStyle = "white";
+            ctx.textAlign = "center";
+            ctx.font = size + "px Arial";
+            ctx.fillText(txt, canvas.width/2, y);
+        }
+
+        function loop() {
+            update();
+            draw();
+            requestAnimationFrame(loop);
+        }
+
+        loop();
     </script>
 </body>
 </html>
