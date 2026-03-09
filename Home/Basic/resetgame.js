@@ -1,4 +1,5 @@
 function resetGame() {
+	startMusic();
     score = 0;
     level = 1; // Reset level
     scoreUI.innerText = score;
