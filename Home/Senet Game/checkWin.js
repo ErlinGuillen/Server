@@ -25,6 +25,9 @@ function checkWin() {
             localStorage.setItem('p2Wins', p2Wins);
             document.getElementById('p2-score').innerText = p2Wins;
             addToLog("Player 2 won the match!");
+            setTimeout(() => {
+               alert("Player 1 Wins the journey to the Afterlife!");
+            }, 100);
         }
         resetGame();
     }
