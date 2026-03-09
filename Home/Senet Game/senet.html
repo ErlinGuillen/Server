@@ -15,6 +15,7 @@
     <script src="movePiece.js"></script>
 	<script src="toggleTheme.js"></script>
 	<script src="shareResults.js"></script>
+	<script src="toggleRules.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 	<link rel="stylesheet" href="dark-tomb.css">
     <title>Ancient Egyptian Senet</title>
@@ -182,6 +183,20 @@
             <li>Game started...</li>
         </ul>
    </div>
+	
+	<div id="rules-modal" style="position:fixed; z-index:100; left:0; top:0; width:100%; height:100%; background-color:rgba(0,0,0,0.8); overflow:auto;">
+    <div style="background-color:#d2b48c; color:#5d2e0a; margin:10% auto; padding:20px; border:5px solid #8b4513; width:80%; max-width:600px; border-radius:10px; font-family:serif;">
+        <span onclick="toggleRules()" style="color:#8b4513; float:right; font-size:28px; font-weight:bold; cursor:pointer;">&times;</span>
+        <h2 style="text-align:center; text-transform:uppercase;">📜 Rules of Senet</h2>
+        <p><strong>The Goal:</strong> Be the first to move all 5 pieces off the board (past Square 30).</p>
+        <ul>
+            <li><strong>Movement:</strong> Pieces follow an "S" path across three rows.</li>
+            <li><strong>The Throw:</strong> You roll 4 sticks. The number of white sides facing up determines your move (1, 2, 3, 4, or 5).</li>
+            <li><strong>Capturing:</strong> Landing on an opponent's piece swaps your positions, unless they are protected by a teammate.</li>
+            <li><strong>Square 27 (Water):</strong> 𓈗 Falling here sends you back to the House of Rebirth (Square 15)!</li>
+        </ul>
+        <button onclick="toggleRules()" style="display:block; margin:20px auto; padding:10px 20px; background:#8b4513; color:white; border:none; cursor:pointer; border-radius:5px;">Close</button>
+    </div>
 </div>
 
     <audio id="bg-music" loop>
