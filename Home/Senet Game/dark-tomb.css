@@ -31,4 +31,13 @@ body.dark-tomb {
     background: #111;
     border: 1px solid #ffd700;
 }
-
+.dark-tomb #history-log::-webkit-scrollbar {
+    width: 8px;
+}
+.dark-tomb #history-log::-webkit-scrollbar-track {
+    background: #111;
+}
+.dark-tomb #history-log::-webkit-scrollbar-thumb {
+    background: #ffd700;
+    border-radius: 4px;
+}
