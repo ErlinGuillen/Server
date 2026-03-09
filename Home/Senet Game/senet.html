@@ -10,6 +10,7 @@
 	<script src="checkWin.js"></script>
 	<script src="resetGame.js"></script>
 	<script src="toggleMusic.js"></script>
+	<script src="addToLog.js"></script>
     <title>Ancient Egyptian Senet</title>
     <style>
         :root {
@@ -109,17 +110,24 @@
     <h1>Senet</h1>
     <div id="status">Player 1's Turn</div>
 
-    <div id="game-container">
+    <div id="game-container" style="display: flex; flex-direction: row; align-items: flex-start; gap: 30px;">
+    <div>
         <div id="board"></div>
-
         <div class="controls">
             <div id="roll-result">Roll: -</div>
             <button id="roll-btn" onclick="rollSticks()">Throw Sticks</button>
-            <p><small>Click a piece to move after rolling</small></p>
             <hr>
             <button onclick="toggleMusic()">🎵 Toggle Music</button>
         </div>
     </div>
+
+    <div id="history-log" style="background: #333; padding: 15px; border-radius: 10px; width: 200px; height: 400px; overflow-y: auto; border: 2px solid #8b4513;">
+        <h3 style="margin-top: 0; color: #ffd700; border-bottom: 1px solid #8b4513;">Move History</h3>
+        <ul id="log-list" style="list-style: none; padding: 0; font-size: 0.9rem; color: #f0e68c;">
+            <li>Game started...</li>
+        </ul>
+   </div>
+</div>
 
     <audio id="bg-music" loop>
         <source src="https://www.dropbox.com/scl/fi/1xmbrk702snvfxyd8md43/BrooklynBloodPop.mp3?rlkey=62ww3ss9nwtns7opcokc3jdwf&st=z44xhdvt&dl=1" type="audio/mpeg">
