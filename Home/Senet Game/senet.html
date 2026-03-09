@@ -120,11 +120,12 @@
             <button onclick="toggleMusic()">🎵 Toggle Music</button>
         </div>
     </div>
-	
-	<div id="scoreboard" style="color: #ffd700; font-weight: bold; margin-bottom: 10px;">
-    P1 Wins: <span id="p1-score">0</span> | P2 Wins: <span id="p2-score">0</span>
+   
+	<div id="scoreboard" style="color: #ffd700; font-weight: bold; margin-bottom: 10px; text-align: center; border-bottom: 2px solid #8b4513; padding-bottom: 5px;">
+    🏆 WINS <br>
+    P1: <span id="p1-score">0</span> | P2: <span id="p2-score">0</span>
     </div>
-
+		
     <div id="history-log" style="background: #333; padding: 15px; border-radius: 10px; width: 200px; height: 400px; overflow-y: auto; border: 2px solid #8b4513;">
         <h3 style="margin-top: 0; color: #ffd700; border-bottom: 1px solid #8b4513;">Move History</h3>
         <ul id="log-list" style="list-style: none; padding: 0; font-size: 0.9rem; color: #f0e68c;">
@@ -163,9 +164,13 @@
         gameState[i] = (i % 2 === 0) ? 2 : 1;
     }
     // Ensure the board draws only after all external scripts load
-    window.onload = () => {
-        createBoard();
-    };
+window.onload = () => {
+    // Load saved wins from Local Storage
+    document.getElementById('p1-score').innerText = localStorage.getItem('p1Wins') || 0;
+    document.getElementById('p2-score').innerText = localStorage.getItem('p2Wins') || 0;
+    
+    createBoard();
+};
 </script>
 	
 </body>
