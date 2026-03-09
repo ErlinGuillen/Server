@@ -1,30 +1,42 @@
-      function createBoard() {
-            boardElement.innerHTML = '';
-            
-            // The S-curve display order
-            const displayOrder = [
-                1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
-                20, 19, 18, 17, 16, 15, 14, 13, 12, 11,
-                21, 22, 23, 24, 25, 26, 27, 28, 29, 30
-            ];
+function createBoard() {
+    boardElement.innerHTML = '';
 
-            displayOrder.forEach(i => {
-                const cell = document.createElement('div');
-                cell.className = 'cell';
-                
-                // Square types
-                if(i === 26) cell.classList.add('special', 'house-of-happiness');
-                else if(i === 27) cell.classList.add('special', 'water');
-                else if(i >= 28) cell.classList.add('special');
-                
-                cell.innerText = i;
+    // The special hieroglyph icons for the final squares
+    const specialIcons = {
+        26: "𓄣", // House of Happiness
+        27: "𓈗", // House of Water
+        28: "𓏽", // House of Three
+        29: "𓏾", // House of Two
+        30: "𓅃"  // House of Horus
+    };
 
-                if (gameState[i] !== 0) {
-                    const piece = document.createElement('div');
-                    piece.className = `piece p${gameState[i]}`;
-                    piece.onclick = () => movePiece(i);
-                    cell.appendChild(piece);
-                }
-                boardElement.appendChild(cell);
-            });
+    // Loop through all 30 squares of the Senet board
+    for (let i = 1; i <= 30; i++) {
+        const cell = document.createElement('div');
+        cell.classList.add('cell');
+
+        // Apply special classes for colors/styling
+        if (i === 26) cell.classList.add('special', 'house-of-happiness');
+        if (i === 27) cell.classList.add('special', 'water');
+        if (i >= 28 && i <= 30) cell.classList.add('special');
+
+        // FIX: Ensure 'i' is defined inside this loop to avoid ReferenceError
+        if (specialIcons[i]) {
+            cell.innerHTML = `<span style="font-size: 20px;">${specialIcons[i]}</span>`;
+        } else {
+            cell.innerText = i;
         }
+
+        // Create the game pieces (p1 or p2)
+        if (gameState[i] > 0) {
+            const piece = document.createElement('div');
+            piece.classList.add('piece', `p${gameState[i]}`);
+            
+            // Add click event for moving
+            piece.onclick = () => movePiece(i);
+            cell.appendChild(piece);
+        }
+
+        boardElement.appendChild(cell);
+    }
+}
