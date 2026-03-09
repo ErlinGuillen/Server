@@ -13,6 +13,9 @@
 	<script src="addToLog.js"></script>
     <script src="aiPlayer.js"></script>
     <script src="movePiece.js"></script>
+	<script src="toggleTheme.js"></script>
+	<link rel="stylesheet" href="dark-tomb.css">
+	<link rel="stylesheet" href="mobile.css">
     <title>Ancient Egyptian Senet</title>
     <style>
         :root {
@@ -106,40 +109,6 @@
         button:disabled { background: #555; }
 
         #status { font-size: 1.2rem; margin: 10px 0; }
-		
-/* Mobile Styles */
-@media (max-width: 600px) {
-    #board {
-        /* Reduce gap and padding to save space */
-        grid-template-columns: repeat(10, 32px); 
-        grid-template-rows: repeat(3, 32px);
-        gap: 3px;
-        padding: 5px;
-    }
-
-    .cell {
-        width: 32px;
-        height: 32px;
-        font-size: 8px; /* Shrink text for smaller cells */
-    }
-
-    .piece {
-        width: 24px;
-        height: 24px;
-    }
-
-    #game-container {
-        /* Stack the board and history log vertically on mobile */
-        flex-direction: column !important; 
-        align-items: center;
-    }
-
-    #history-log {
-        width: 90%; /* Make the log wider on mobile */
-        height: 200px; /* Make it shorter so it doesn't take the whole screen */
-    }
-}
-		
     </style>
 </head>
 <body>
@@ -156,6 +125,7 @@
             <button id="roll-btn" onclick="rollSticks()">Throw Sticks</button>
             <hr>
             <button onclick="toggleMusic()">🎵 Toggle Music</button>
+			<button onclick="toggleTheme()" style="background: #333; border: 1px solid #ffd700; font-size: 14px; margin-top: 10px;">🌙 Toggle Dark Tomb</button>
         </div>
     </div>
    
@@ -206,6 +176,11 @@ window.onload = () => {
     // Load saved wins from Local Storage
     document.getElementById('p1-score').innerText = localStorage.getItem('p1Wins') || 0;
     document.getElementById('p2-score').innerText = localStorage.getItem('p2Wins') || 0;
+    
+    // FIX: Load saved theme here instead of inside toggleTheme.js
+    if (localStorage.getItem('theme') === 'dark-tomb') {
+        document.body.classList.add('dark-tomb');
+    }
     
     createBoard();
 };

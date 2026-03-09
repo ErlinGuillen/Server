@@ -1,0 +1,34 @@
+/* Dark Tomb Theme Variables */
+body.dark-tomb {
+    background-color: #000;
+    color: #ffd700;
+}
+
+.dark-tomb #board {
+    background-color: #333;
+    border-color: #ffd700;
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.2);
+}
+
+.dark-tomb .cell {
+    background-color: #1a1a1a;
+    border-color: #333;
+    color: #ffd700;
+}
+
+.dark-tomb .special {
+    background-color: #3d3d00;
+    color: #ffd700;
+}
+
+.dark-tomb .house-of-happiness { background-color: #aa8800; }
+.dark-tomb .water { background-color: #004466; }
+
+.dark-tomb .p1 { background-color: #ffd700; border-color: #b8860b; }
+.dark-tomb .p2 { background-color: #ffffff; border-color: #cccccc; }
+
+.dark-tomb .controls, .dark-tomb #history-log {
+    background: #111;
+    border: 1px solid #ffd700;
+}
+
