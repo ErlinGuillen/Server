@@ -1,7 +1,7 @@
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Background Stars
+    // Stars Background
     ctx.fillStyle = "#333";
     for(let i=0; i<10; i++) ctx.fillRect(i*50, (Date.now()/20 + i*100)%600, 2, 2);
 
@@ -19,7 +19,7 @@ function draw() {
     } 
 
     if (gameState === "PLAYING" || gameState === "OVER") {
-        // Slow-Mo Screen Effect
+        // Power-up Tint
         if (isSlowMo) {
             ctx.fillStyle = "rgba(255, 220, 0, 0.15)";
             ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -31,14 +31,14 @@ function draw() {
                 ctx.fillStyle = "#00ffff";
                 ctx.fillRect(p.x, p.y, p.size, p.size);
             } else {
-                ctx.fillStyle = "#FFDC00"; // Yellow Circle for Slow-Mo
+                ctx.fillStyle = "#FFDC00";
                 ctx.beginPath();
                 ctx.arc(p.x + p.size/2, p.y + p.size/2, p.size/2, 0, Math.PI * 2);
                 ctx.fill();
             }
         });
 
-        // Player & Shield
+        // Player
         if (hasShield) {
             ctx.strokeStyle = "#00ffff";
             ctx.lineWidth = 3;
@@ -62,10 +62,9 @@ function draw() {
         });
 
         // UI
-        ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
+        ctx.fillStyle = "white";
         ctx.font = "bold 16px Arial";
         ctx.fillText("LVL " + level, canvas.width - 40, 30);
-        if (isSlowMo) drawText("TIME WARP ACTIVE", 14, 50);
     }
 
     if (gameState === "OVER") {

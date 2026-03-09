@@ -8,18 +8,12 @@ const sounds = {
 sounds.background.loop = true;
 const slider = document.getElementById("volumeSlider");
 
-// Handle volume changes
 slider.addEventListener("input", (e) => {
     const v = parseFloat(e.target.value);
-    Object.keys(sounds).forEach(key => {
-        sounds[key].volume = v;
-    });
+    Object.keys(sounds).forEach(key => { sounds[key].volume = v; });
 });
 
-// Give focus back to the game window after using the slider
-slider.addEventListener("change", () => {
-    slider.blur();
-});
+slider.addEventListener("change", () => { slider.blur(); });
 
 function playSound(name) {
     if (sounds[name]) {
@@ -29,5 +23,5 @@ function playSound(name) {
 }
       
 function startMusic() {
-    sounds.background.play().catch(() => console.log("User interaction required"));
+    sounds.background.play().catch(() => console.log("Interaction required"));
 }

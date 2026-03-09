@@ -29,12 +29,13 @@
         const scoreUI = document.getElementById("score");
         const highUI = document.getElementById("highScore");
 
+        // Global Game State
         let score = 0;
         let level = 1;
         let highScore = localStorage.getItem("dodgerHighScore") || 0;
         let gameState = "START"; 
         let hasShield = false;
-        let isSlowMo = false; // NEW FEATURE STATE
+        let isSlowMo = false;
 
         const player = { x: 185, y: 530, size: 30, speed: 7, color: "#0095DD" };
         let enemies = [];
@@ -56,7 +57,6 @@
         window.addEventListener("keyup", (e) => keys[e.code] = false);
 
         function spawnPowerUp() {
-            // Randomly pick between Shield (Blue) and Slow-Mo (Yellow)
             const type = Math.random() > 0.5 ? "shield" : "slowmo";
             powerUps.push({ 
                 x: Math.random() * 380, 
