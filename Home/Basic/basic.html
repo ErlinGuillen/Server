@@ -29,13 +29,18 @@
         const scoreUI = document.getElementById("score");
         const highUI = document.getElementById("highScore");
 
-        // Global Game State
+        // Global State
         let score = 0;
         let level = 1;
         let highScore = localStorage.getItem("dodgerHighScore") || 0;
         let gameState = "START"; 
+        
+        // Power-up States
         let hasShield = false;
         let isSlowMo = false;
+        let pulseBlasts = 0; 
+        let isPulseActive = false;
+        let pulseRadius = 0;
 
         const player = { x: 185, y: 530, size: 30, speed: 7, color: "#0095DD" };
         let enemies = [];
@@ -59,7 +64,7 @@
         function spawnPowerUp() {
             const type = Math.random() > 0.5 ? "shield" : "slowmo";
             powerUps.push({ 
-                x: Math.random() * 380, 
+                x: Math.random() * (canvas.width - 20), 
                 y: -20, 
                 size: 20, 
                 speed: 2, 
@@ -70,7 +75,7 @@
         function drawText(txt, size, y) {
             ctx.fillStyle = "white";
             ctx.textAlign = "center";
-            ctx.font = size + "px Arial";
+            ctx.font = "bold " + size + "px Arial";
             ctx.fillText(txt, canvas.width/2, y);
         }
 
