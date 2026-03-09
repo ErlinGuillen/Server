@@ -11,6 +11,7 @@
 	<script src="resetGame.js"></script>
 	<script src="toggleMusic.js"></script>
 	<script src="addToLog.js"></script>
+	<script src="resetScores.js"></script>
     <title>Ancient Egyptian Senet</title>
     <style>
         :root {
@@ -114,6 +115,7 @@
     <div>
         <div id="board"></div>
         <div class="controls">
+			<button onclick="resetScores()" style="font-size: 12px; padding: 5px; background: #5d2e0a;">Reset All Wins</button>
             <div id="roll-result">Roll: -</div>
             <button id="roll-btn" onclick="rollSticks()">Throw Sticks</button>
             <hr>
