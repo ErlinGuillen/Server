@@ -16,6 +16,7 @@
 	<script src="toggleTheme.js"></script>
 	<script src="shareResults.js"></script>
 	<script src="toggleRules.js"></script>
+	<script src="changeMode.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 	<link rel="stylesheet" href="dark-tomb.css">
     <title>Ancient Egyptian Senet</title>
@@ -157,7 +158,15 @@
 
     <h1>Senet</h1>
     <div id="status">Player 1's Turn</div>
-
+	
+	<div class="control-group">
+    <label for="game-mode">Opponent: </label>
+    <select id="game-mode" onchange="changeMode()" style="padding: 5px; border-radius: 5px;">
+        <option value="ai">Computer (AI)</option>
+        <option value="human">Friend (Local 2P)</option>
+    </select>
+   </div>
+	
     <div id="game-container" style="display: flex; flex-direction: row; align-items: flex-start; gap: 30px;">
     <div>
         <div id="board"></div>
@@ -172,7 +181,7 @@
 			<button onclick="toggleRules()" style="background: #5d2e0a; border: 1px solid #ffd700; font-size: 14px; margin-top: 10px;">❓ How to Play</button>
         </div>
     </div>
-   
+     
 	<div id="scoreboard" style="color: #ffd700; font-weight: bold; margin-bottom: 10px; text-align: center; border-bottom: 2px solid #8b4513; padding-bottom: 5px;">
     🏆 WINS <br>
     P1: <span id="p1-score">0</span> | P2: <span id="p2-score">0</span>
@@ -200,6 +209,10 @@
     </div>
 </div>
 
+<div style="text-align: center; margin-top: 20px; font-size: 12px; opacity: 0.5;">
+    Senet Master Edition - v1.3.0
+</div>
+		
     <audio id="bg-music" loop>
         <source src="https://www.dropbox.com/scl/fi/1xmbrk702snvfxyd8md43/BrooklynBloodPop.mp3?rlkey=62ww3ss9nwtns7opcokc3jdwf&st=z44xhdvt&dl=1" type="audio/mpeg">
     </audio>
@@ -243,6 +256,5 @@ window.onload = () => {
     createBoard();
 };
 </script>
-	
 </body>
 </html>

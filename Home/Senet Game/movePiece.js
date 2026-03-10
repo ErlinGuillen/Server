@@ -1,42 +1,65 @@
 function movePiece(index) {
-    if (!hasRolled) return;
-    if (gameState[index] !== currentPlayer) return;
+    if (!hasRolled) {
+        alert("Please roll the sticks first!");
+        return;
+    }
 
-    let target = index + lastRoll;
+    if (gameState[index] !== currentPlayer) {
+        alert("That's not your piece!");
+        return;
+    }
 
-    if (target > 30) {
+    let targetIndex = index + lastRoll;
+
+    // Movement Logic
+    if (targetIndex > 30) {
+        // Piece finishes the journey
         gameState[index] = 0;
-        addToLog(`Player ${currentPlayer} cleared a piece!`);
+        addToLog(`Player ${currentPlayer} moved a piece off the board!`);
     } else {
-        let targetOccupant = gameState[target];
-        if (targetOccupant === currentPlayer) {
-            if (currentPlayer === 1) alert("Occupied by your own piece!");
+        let occupant = gameState[targetIndex];
+
+        if (occupant === currentPlayer) {
+            alert("You already have a piece there!");
             return;
         }
 
-        gameState[index] = targetOccupant;
-        gameState[target] = currentPlayer;
-
-        if (target === 27) {
-            addToLog(`Player ${currentPlayer} drowned!`);
+        // Handle Square 27 (Water)
+        if (targetIndex === 27) {
+            addToLog(`Player ${currentPlayer} fell into the Water! Reset to Square 15.`);
+            gameState[index] = 0;
             gameState[15] = currentPlayer;
-            gameState[27] = 0;
+        } else {
+            // Standard move or Capture (Swap)
+            if (occupant !== 0) {
+                addToLog(`Player ${currentPlayer} captured an opponent at ${targetIndex}!`);
+                gameState[index] = occupant; // Swap opponent back
+            } else {
+                gameState[index] = 0;
+            }
+            gameState[targetIndex] = currentPlayer;
         }
     }
 
-    moveSfx.currentTime = 0;
-    moveSfx.play().catch(() => {});
-
-    hasRolled = false;
-    currentPlayer = (currentPlayer === 1) ? 2 : 1;
-    statusElement.innerText = `Player ${currentPlayer}'s Turn`;
-    rollBtn.disabled = false;
-    
+    // Play Sound and Re-render
+    if (moveSfx) moveSfx.play();
     createBoard();
     checkWin();
 
-    // TRIGGER AI: If it's now Player 2's turn, start the AI
-    if (currentPlayer === 2) {
+    // End Turn
+    hasRolled = false;
+    currentPlayer = (currentPlayer === 1) ? 2 : 1;
+    
+    // --- NEW LOGIC FOR LOCAL 2-PLAYER vs AI ---
+    const gameModeElement = document.getElementById('game-mode');
+    const gameMode = gameModeElement ? gameModeElement.value : 'ai';
+
+    if (currentPlayer === 2 && gameMode === 'ai') {
+        statusElement.innerText = "Computer is thinking...";
+        if (rollBtn) rollBtn.disabled = true;
         runAI();
+    } else {
+        statusElement.innerText = `Player ${currentPlayer}'s Turn`;
+        if (rollBtn) rollBtn.disabled = false;
     }
-} // <--- MAKE SURE THIS BRACKET IS HERE
+}
