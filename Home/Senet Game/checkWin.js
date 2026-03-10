@@ -29,6 +29,15 @@ function checkWin() {
                alert("Player 1 Wins the journey to the Afterlife!");
             }, 100);
         }
+		let streak = parseInt(localStorage.getItem('winStreak')) || 0;
+const gameMode = document.getElementById('game-mode').value;
+
+if (gameMode === 'ai') {
+    streak++;
+    localStorage.setItem('winStreak', streak);
+    document.getElementById('streak-count').innerText = streak;
+	document.getElementById('streak-count').innerText = localStorage.getItem('winStreak') || 0;
+}
         resetGame();
     }
 }

@@ -1,0 +1,45 @@
+ #board {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr); /* 10 columns */
+    gap: 4px;
+    width: 100%;
+    max-width: 900px; /* Adjust this to make the board bigger */
+    margin: 20px auto; 
+    background-color: #8b4513; /* Board border color */
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.cell {
+    aspect-ratio: 1 / 1; /* This forces cells to stay square */
+    background-color: #d2b48c;
+    border: 1px solid #8b4513;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.primary-btn {
+    background: #8b4513;
+    color: #f0e68c;
+    font-size: 1.2rem;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+    transition: 0.2s;
+}
+
+.primary-btn:hover { background: #a0522d; transform: scale(1.02); }
+
+.stats-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+}
+

@@ -17,12 +17,14 @@
 	<script src="shareResults.js"></script>
 	<script src="toggleRules.js"></script>
 	<script src="changeMode.js"></script>
+	<script src="undoMove.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 	<link rel="stylesheet" href="dark-tomb.css">
 	<link rel="stylesheet" href="VisualStickThrow.css">
+    <link rel="stylesheet" href="ui-style.css">
     <title>Ancient Egyptian Senet</title>
     <style>
-        :root {
+    :root {
             --board-color: #d2b48c;
             --cell-border: #8b4513;
             --p1-color: #2c3e50;
@@ -47,32 +49,6 @@
             flex-direction: column;
             align-items: center;
             gap: 20px;
-        }
-
-        /* The Board Grid */
-        #board {
-            display: grid;
-            grid-template-columns: repeat(10, 60px);
-            grid-template-rows: repeat(3, 60px);
-            gap: 5px;
-            background-color: var(--cell-border);
-            padding: 10px;
-            border: 8px solid #5d2e0a;
-            box-shadow: 0 0 20px rgba(0,0,0,0.5);
-        }
-
-        .cell {
-            width: 60px;
-            height: 60px;
-            background-color: var(--board-color);
-            border: 1px solid var(--cell-border);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            font-size: 10px;
-            color: rgba(0,0,0,0.3);
-			touch-action: manipulation;
         }
 
         /* Special Squares */
@@ -115,14 +91,7 @@
         #status { font-size: 1.2rem; margin: 10px 0; }
 		
 		/* Mobile Styles */
-@media (max-width: 600px) {
-    #board {
-        /* Reduce gap and padding to save space */
-        grid-template-columns: repeat(10, 32px); 
-        grid-template-rows: repeat(3, 32px);
-        gap: 3px;
-        padding: 5px;
-    }
+   @media (max-width: 600px) {
 
     .cell {
         width: 32px;
@@ -152,47 +121,57 @@
     box-shadow: 0 0 10px 2px #00ff00;
     border: 2px solid gold !important;
 }
-    </style>
+
+.sticks-layout {
+   display: flex; justify-content: center; gap: 10px; margin-bottom: 10px; height: 60px;
+}
+</style>
 </head>
 <body>
-
     <h1>Senet</h1>
     <div id="status">Player 1's Turn</div>
-	
-	<div class="control-group">
-    <label for="game-mode">Opponent: </label>
-    <select id="game-mode" onchange="changeMode()" style="padding: 5px; border-radius: 5px;">
-        <option value="ai">Computer (AI)</option>
-        <option value="human">Friend (Local 2P)</option>
-    </select>
-   </div>
-	
-    <div id="game-container" style="display: flex; flex-direction: row; align-items: flex-start; gap: 30px;">
-    <div>
-        <div id="board"></div>
-        <div class="controls">
-			<div id="sticks-container" style="display: flex; justify-content: center; gap: 10px; margin-bottom: 10px; height: 60px;">
-             <div class="stick"></div>
-             <div class="stick"></div>
-             <div class="stick"></div>
-             <div class="stick"></div>
-            </div>
-            <div id="roll-result" style="font-weight: bold; margin-bottom: 5px;">Roll: -</div>
-            <button id="roll-btn" onclick="rollSticks()">Throw Sticks</button>
-			<button onclick="resetScores()" style="font-size: 12px; padding: 5px; background: #5d2e0a;">Reset All Wins</button>
-            <hr>
-            <button onclick="toggleMusic()">🎵 Toggle Music</button>
-			<audio id="sfx-sticks">
-            <source src="https://assets.mixkit.co/active_storage/sfx/1110/1110-preview.mp3" type="audio/mpeg">
-            </audio>
-            <audio id="sfx-splash">
-            <source src="https://assets.mixkit.co/active_storage/sfx/1191/1191-preview.mp3" type="audio/mpeg">
-            </audio>
-			<button onclick="toggleTheme()" style="background: #333; border: 1px solid #ffd700; font-size: 14px; margin-top: 10px;">🌙 Toggle Dark Tomb</button>
-			<button onclick="shareResults()" style="background: #27ae60; border: none; font-size: 14px; margin-top: 10px;">📤 Share My Stats</button>
-			<button onclick="toggleRules()" style="background: #5d2e0a; border: 1px solid #ffd700; font-size: 14px; margin-top: 10px;">❓ How to Play</button>
-        </div>
+    <div class="dashboard">
+    <div class="stats-bar">
+        <div id="status" style="font-weight: bold; color: #ffd700;">Player 1's Turn</div>
+        <button class="btn-secondary" onclick="undoMove()" style="padding: 5px 10px; cursor: pointer;">↩ Undo</button>
     </div>
+
+    <div id="board"></div>
+    <div class="controls">
+    <div class="main-actions" style="text-align: center;">
+        <div id="sticks-container" style="display: flex; justify-content: center; gap: 10px; margin-bottom: 10px; height: 60px;">
+            <div class="stick"></div><div class="stick"></div>
+            <div class="stick"></div><div class="stick"></div>
+        </div>
+        <div id="roll-result" style="margin-bottom: 10px;">Roll: -</div>
+        <button id="roll-btn" class="primary-btn" onclick="rollSticks()">Throw Sticks</button>
+    </div>
+
+    <div class="score-display" style="display: flex; justify-content: space-around; background: rgba(0,0,0,0.2); padding: 10px; border-radius: 8px;">
+        <div>👤 P1: <span id="p1-score">0</span></div>
+        <div>🔥 Streak: <span id="streak-count">0</span></div>
+        <div>🤖 AI: <span id="p2-score">0</span></div>
+    </div>
+
+    <div class="settings-bar" style="display: flex; gap: 5px; flex-wrap: wrap; justify-content: center;">
+        <select id="game-mode" onchange="changeMode()" style="background: #3d1f07; color: #f0e68c; border: 1px solid #8b4513;">
+            <option value="ai">vs Computer</option>
+            <option value="human">vs Friend</option>
+        </select>
+	    <button class="btn-small" onclick="toggleMusic()">🎵 Toggle Music</button>
+        <button class="btn-small" onclick="toggleTheme()">🌓 Theme</button>
+        <button class="btn-small" onclick="toggleRules()">📜 Rules</button>
+        <button class="btn-small" onclick="resetScores()">♻️ Reset</button>
+		<button class="btn-small" onclick="shareResults()">📤 Share My Stats</button>
+		<audio id="sfx-sticks">
+        <source src="https://assets.mixkit.co/active_storage/sfx/1110/1110-preview.mp3" type="audio/mpeg">
+        </audio>
+        <audio id="sfx-splash">
+        <source src="https://assets.mixkit.co/active_storage/sfx/1191/1191-preview.mp3" type="audio/mpeg">
+        </audio>
+    </div>
+    </div>
+	</div>
      
 	<div id="scoreboard" style="color: #ffd700; font-weight: bold; margin-bottom: 10px; text-align: center; border-bottom: 2px solid #8b4513; padding-bottom: 5px;">
     🏆 WINS <br>
@@ -246,10 +225,11 @@
     let currentPlayer = 1;
     let lastRoll = 0;
     let hasRolled = false;
-    let gameState = Array(31).fill(0); 
+    let gameState = Array(31).fill(0);
 	let p1Wins = 0;
     let p2Wins = 0;
-
+    let previousGameState = null; // Ensure this is here
+    let previousPlayer = 1;      // Ensure this is here
     // Initial Setup: Alternating pieces on the first 10 squares
     for(let i=1; i<=10; i++) {
         gameState[i] = (i % 2 === 0) ? 2 : 1;
@@ -259,6 +239,7 @@ window.onload = () => {
     // Load saved wins from Local Storage
     document.getElementById('p1-score').innerText = localStorage.getItem('p1Wins') || 0;
     document.getElementById('p2-score').innerText = localStorage.getItem('p2Wins') || 0;
+    document.getElementById('streak-count').innerText = localStorage.getItem('winStreak') || 0;
     
     // FIX: Load saved theme here instead of inside toggleTheme.js
     if (localStorage.getItem('theme') === 'dark-tomb') {
@@ -270,3 +251,4 @@ window.onload = () => {
 </script>
 </body>
 </html>
+    

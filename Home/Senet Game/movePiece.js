@@ -1,4 +1,8 @@
 function movePiece(index) {
+    // 1. TAKE SNAPSHOT FIRST (Before any changes)
+    previousGameState = [...gameState]; 
+    previousPlayer = currentPlayer;
+
     if (!hasRolled) {
         alert("Please roll the sticks first!");
         return;
@@ -8,7 +12,8 @@ function movePiece(index) {
         alert("That's not your piece!");
         return;
     }
-
+    
+    // ... rest of your code ...
     let targetIndex = index + lastRoll;
 
     // Movement Logic
