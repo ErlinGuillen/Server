@@ -18,10 +18,11 @@ function movePiece(index) {
     let targetIndex = index + lastRoll;
 
     // 2. Movement Logic
-    if (targetIndex > 30) {
-        gameState[index] = 0;
-        addToLog(`Player ${currentPlayer} moved off the board!`);
-    } else {
+   if (targetIndex > 30) {
+    gameState[index] = 0; // Remove piece from board
+    addToLog(`Player ${currentPlayer} completed a journey!`);
+    // Important: call checkWin() here!
+} else {
         let occupant = gameState[targetIndex];
         if (occupant === currentPlayer) {
             alert("You already have a piece there!");

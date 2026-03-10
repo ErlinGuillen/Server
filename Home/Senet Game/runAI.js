@@ -1,38 +1,42 @@
 function runAI() {
-    // 1. Identify all pieces belonging to the AI (Player 2)
     let aiPieces = [];
     gameState.forEach((player, index) => {
         if (player === 2) aiPieces.push(index);
     });
 
-    // 2. Find valid moves
-    let validMoves = aiPieces.filter(index => {
+    // 1. Find all possible moves
+    let validMoves = aiPieces.map(index => {
         let target = index + lastRoll;
-        // Ensure move is on board and not landing on own piece
-        return target <= 30 && gameState[target] !== 2;
+        return { start: index, end: target };
+    }).filter(move => {
+        // Can move if target is on board and not blocked by own piece
+        // OR if target is > 30 (which means moving off the board)
+        if (move.end <= 30) {
+            return gameState[move.end] !== 2;
+        }
+        return true; // Allow moving off the board
     });
 
-    // 3. Simple Strategy: Pick a move
     if (validMoves.length > 0) {
-        // Priority 1: Move a piece off the board
-        let finishingMove = validMoves.find(index => index + lastRoll === 31);
-        // Priority 2: Capture a player 1 piece
-        let captureMove = validMoves.find(index => gameState[index + lastRoll] === 1);
+        // 2. PRIORITY: Move off the board if possible!
+        let winMove = validMoves.find(m => m.end >= 31);
         
-        let chosenMove = finishingMove || captureMove || validMoves[Math.floor(Math.random() * validMoves.length)];
+        // 3. SECOND PRIORITY: Capture a Player 1 piece
+        let captureMove = validMoves.find(m => gameState[m.end] === 1);
+        
+        // Pick the best move found, or a random valid one
+        let chosen = winMove || captureMove || validMoves[Math.floor(Math.random() * validMoves.length)];
 
-        addToLog(`AI decided to move from square ${chosenMove}`);
+        addToLog(`AI moves from ${chosen.start} towards ${chosen.end > 30 ? 'Victory!' : chosen.end}`);
         
-        // Small delay so the human can see what happened
         setTimeout(() => {
-            movePiece(chosenMove);
+            movePiece(chosen.start);
         }, 800);
     } else {
-        addToLog("AI has no valid moves and passes.");
-        // Switch back to Player 1
+        addToLog("AI has no moves and passes.");
         currentPlayer = 1;
         hasRolled = false;
         statusElement.innerText = "Player 1's Turn";
-        if (rollBtn) rollBtn.disabled = false;
+        if (typeof rollBtn !== 'undefined') rollBtn.disabled = false;
     }
 }
