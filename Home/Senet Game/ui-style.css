@@ -105,3 +105,52 @@ body {
     align-items: center;
     font-size: 0.9rem;
 }
+
+#sticks-container {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 20px 0;
+    perspective: 1000px; /* Gives the flip a 3D effect */
+}
+
+#sticks-container {
+    display: flex;
+    justify-content: center; /* Centers the sticks horizontally */
+    align-items: center;     /* Aligns them vertically */
+    gap: 12px;               /* This creates the "gap" to prevent overlap */
+    margin: 25px auto;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    width: fit-content;      /* Shrinks the container to fit the sticks */
+    perspective: 1000px;
+}
+
+.stick {
+    width: 22px;
+    height: 100px;
+    flex-shrink: 0;          /* Prevents sticks from squishing on small screens */
+    background: linear-gradient(to right, #4b2c20, #2a1810);
+    border-radius: 12px;
+    border: 1px solid #1a0f05;
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 2px 4px 8px rgba(0,0,0,0.4);
+    cursor: default;
+}
+
+.stick.flipped {
+    background: linear-gradient(to right, #f5f5dc, #e8e8c8);
+    transform: rotateY(180deg);
+}
+
+#game-log {
+    height: 100px;
+    overflow-y: auto;
+    border: 1px solid #8b4513;
+    padding: 10px;
+    background: rgba(0,0,0,0.3);
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.8rem;
+    color: #f0e68c;
+}

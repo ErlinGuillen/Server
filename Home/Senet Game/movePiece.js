@@ -66,5 +66,12 @@ function movePiece(index) {
         }, 1000);
     } else {
         if (typeof rollBtn !== 'undefined' && rollBtn) rollBtn.disabled = false;
-    }
+	}
 }
+
+// Replace moveSfx.play() with this:
+if (window.moveSfx) {
+    window.moveSfx.currentTime = 0; 
+    window.moveSfx.play().catch(e => console.log("Audio waiting for interaction"));
+}
+

@@ -97,9 +97,6 @@
     border: 2px solid gold !important;
 }
 
-.sticks-layout {
-   display: flex; justify-content: center; gap: 10px; margin-bottom: 10px; height: 60px;
-}
 </style>
 </head>
 <body>
@@ -107,7 +104,6 @@
     <div id="status">Player 1's Turn</div>
     <div class="dashboard">
     <div class="stats-bar">
-        <div id="status" style="font-weight: bold; color: #ffd700;">Player 1's Turn</div>
         <button class="btn-secondary" onclick="undoMove()" style="padding: 5px 10px; cursor: pointer;">↩ Undo</button>
     </div>
 
@@ -117,6 +113,7 @@
         <div id="sticks-container" style="display: flex; justify-content: center; gap: 10px; margin-bottom: 10px; height: 60px;">
             <div class="stick"></div><div class="stick"></div>
             <div class="stick"></div><div class="stick"></div>
+			<div class="stick"></div>
         </div>
         <div id="roll-result" style="margin-bottom: 10px;">Roll: -</div>
         <button id="roll-btn" class="primary-btn" onclick="rollSticks()">Throw Sticks</button>
@@ -143,23 +140,13 @@
     <option value="blue">🌊 Blue Nile (3 Streak)</option>
     <option value="gold">👑 Golden Pharaoh (5 Streak)</option>
 </select>
-
-
-		<audio id="sfx-sticks">
-        <source src="https://assets.mixkit.co/active_storage/sfx/1110/1110-preview.mp3" type="audio/mpeg">
-        </audio>
-        <audio id="sfx-splash">
-        <source src="https://assets.mixkit.co/active_storage/sfx/1191/1191-preview.mp3" type="audio/mpeg">
-        </audio>
+   
     </div>
     </div>
 	</div>
      
-	<div id="scoreboard" style="color: #ffd700; font-weight: bold; margin-bottom: 10px; text-align: center; border-bottom: 2px solid #8b4513; padding-bottom: 5px;">
-    🏆 WINS <br>
-    P1: <span id="p1-score">0</span> | P2: <span id="p2-score">0</span>
-    </div>
-		
+	<br>
+	
     <div id="history-log" style="background: #333; padding: 15px; border-radius: 10px; width: 200px; height: 400px; overflow-y: auto; border: 2px solid #8b4513;">
         <h3 style="margin-top: 0; color: #ffd700; border-bottom: 1px solid #8b4513;">Move History</h3>
         <ul id="log-list" style="list-style: none; padding: 0; font-size: 0.9rem; color: #f0e68c;">
@@ -189,25 +176,26 @@
     <audio id="bg-music" loop>
         <source src="https://www.dropbox.com/scl/fi/1xmbrk702snvfxyd8md43/BrooklynBloodPop.mp3?rlkey=62ww3ss9nwtns7opcokc3jdwf&st=z44xhdvt&dl=1" type="audio/mpeg">
     </audio>
-    <audio id="sfx-move">
-       <source src="https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3" type="audio/mpeg">
-    </audio>
-
+	
+	<audio id="sfx-move" src="https://www.dropbox.com/scl/fi/1xmbrk702snvfxyd8md43/BrooklynBloodPop.mp3?rlkey=62ww3ss9nwtns7opcokc3jdwf&st=z44xhdvt&dl=1"></audio>
+    <audio id="sfx-splash" src="https://codeskulptor-demos.commondatastorage.googleapis.com/Ricochet.mp3"></audio>
+    <audio id="sfx-win" src="https://inline-generated-static-content.s3.amazonaws.com/success.mp3"></audio>
+    <audio id="sfx-sticks" src="https://codeskulptor-demos.commondatastorage.googleapis.com/pang/pop.mp3"></audio>
+	
 <script>
     // DOM Elements
     const boardElement = document.getElementById('board');
     const statusElement = document.getElementById('status');
     const rollResultElement = document.getElementById('roll-result');
-    const moveSfx = document.getElementById('sfx-move');
     const bgMusic = document.getElementById('bg-music');
-    // FIX: Define the missing rollBtn reference
     const rollBtn = document.getElementById('roll-btn'); 
 
     // Global Game State
-    let currentPlayer = 1;
-    let lastRoll = 0;
-    let hasRolled = false;
-    let gameState = Array(31).fill(0);
+	var moveSfx, splashSfx, winSfx, sticksSfx;
+    var hasRolled = false;
+    var lastRoll = 0;
+    var currentPlayer = 1;
+    var gameState = Array(31).fill(0);
 	let p1Wins = 0;
     let p2Wins = 0;
     let previousGameState = null; // Ensure this is here
@@ -216,9 +204,28 @@
     for(let i=1; i<=10; i++) {
         gameState[i] = (i % 2 === 0) ? 2 : 1;
     }
-    // Ensure the board draws only after all external scripts load
+
 window.onload = () => {
+    moveSfx = document.getElementById('sfx-move');
+    splashSfx = document.getElementById('sfx-splash');
+    winSfx = document.getElementById('sfx-win');
+    sticksSfx = document.getElementById('sfx-sticks');
+
+    // Start the game
+    initGame();
+};
+
+window.onload = () => {
+    // 2. ASSIGNMENT (Notice: NO 'const' or 'let' here!)
+    moveSfx = document.getElementById('sfx-move');
+    splashSfx = document.getElementById('sfx-splash');
+    winSfx = document.getElementById('sfx-win');
+    sticksSfx = document.getElementById('sfx-sticks');
+	
     const savedTheme = localStorage.getItem('activeTheme') || 'default';
+    applyTheme(savedTheme);
+	
+	
     document.getElementById('skin-selector').value = savedTheme;
     applyTheme(savedTheme);
     document.getElementById('p1-score').innerText = localStorage.getItem('p1Wins') || 0;
@@ -227,12 +234,10 @@ window.onload = () => {
     
     // FIX: Load saved theme here instead of inside toggleTheme.js
     if (localStorage.getItem('theme') === 'dark-tomb') {
-        document.body.classList.add('dark-tomb');
+     document.body.classList.add('dark-tomb');
     }
-    
-    createBoard();
+  createBoard();
 };
 </script>
 </body>
 </html>
-    
