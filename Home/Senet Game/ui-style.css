@@ -1,20 +1,83 @@
- #board {
+/* THEME COLOR DEFINITIONS */
+:root {
+    /* Default Tomb Colors */
+    --bg-color: #1a0f05;
+    --board-bg: #8b4513;
+    --cell-bg: #d2b48c;
+    --text-color: #f0e68c;
+}
+
+.theme-blue-nile {
+    --bg-color: #001220;
+    --board-bg: #005073;
+    --cell-bg: #71c7ec;
+    --text-color: #ffffff;
+}
+
+.theme-golden-pharaoh {
+    --bg-color: #2c1e05;
+    --board-bg: #d4af37;
+    --cell-bg: #fcf4a3;
+    --text-color: #3d2b08;
+}
+
+/* APPLY COLORS TO THE GAME */
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: all 0.5s ease; /* Smooth fade between themes */
+}
+
+#board {
     display: grid;
-    grid-template-columns: repeat(10, 1fr); /* 10 columns */
+    grid-template-columns: repeat(10, 1fr);
+    background-color: var(--board-bg); /* Uses theme variable */
+    /* ... other board styles ... */
+}
+
+.cell {
+    background-color: var(--cell-bg); /* Uses theme variable */
+    /* ... other cell styles ... */
+}
+
+/* MOBILE IMPROVEMENT */
+@media (max-width: 768px) {
+    #board {
+        grid-template-columns: repeat(5, 1fr); /* 5x6 layout for vertical mobile */
+        max-width: 95vw;
+        gap: 2px;
+    }
+    
+    .cell {
+        font-size: 0.9rem;
+    }
+
+    .piece {
+        width: 90%;
+        height: 90%;
+        touch-action: manipulation; /* Faster tapping on mobile */
+    }
+}
+
+#board {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
     gap: 4px;
     width: 100%;
-    max-width: 900px; /* Adjust this to make the board bigger */
+    max-width: 900px;
     margin: 20px auto; 
-    background-color: #8b4513; /* Board border color */
+    /* CHANGE THIS: */
+    background-color: var(--board-bg); 
     padding: 10px;
     border-radius: 8px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
 
 .cell {
-    aspect-ratio: 1 / 1; /* This forces cells to stay square */
-    background-color: #d2b48c;
-    border: 1px solid #8b4513;
+    aspect-ratio: 1 / 1;
+    /* CHANGE THIS: */
+    background-color: var(--cell-bg);
+    border: 1px solid var(--board-bg);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -42,4 +105,3 @@
     align-items: center;
     font-size: 0.9rem;
 }
-

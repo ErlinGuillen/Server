@@ -1,6 +1,6 @@
 function movePiece(index) {
-    // 1. TAKE SNAPSHOT FIRST (Before any changes)
-    previousGameState = [...gameState]; 
+    // 1. Snapshot for Undo
+    previousGameState = [...gameState];
     previousPlayer = currentPlayer;
 
     if (!hasRolled) {
@@ -12,34 +12,31 @@ function movePiece(index) {
         alert("That's not your piece!");
         return;
     }
-    
-    // ... rest of your code ...
+
     let targetIndex = index + lastRoll;
 
-    // Movement Logic
+    // 2. Movement Logic
     if (targetIndex > 30) {
-        // Piece finishes the journey
         gameState[index] = 0;
-        addToLog(`Player ${currentPlayer} moved a piece off the board!`);
+        addToLog(`Player ${currentPlayer} moved off the board!`);
     } else {
         let occupant = gameState[targetIndex];
-
         if (occupant === currentPlayer) {
             alert("You already have a piece there!");
             return;
         }
 
-     if (targetIndex === 27) {
-    const splashSfx = document.getElementById('sfx-splash');
-    if (splashSfx) splashSfx.play();
-    addToLog(`Player ${currentPlayer} fell into the Water! Reset to Square 15.`);
-    gameState[index] = 0;
-    gameState[15] = currentPlayer;
-} else {
-            // Standard move or Capture (Swap)
+        if (targetIndex === 27) {
+            const splashSfx = document.getElementById('sfx-splash');
+            if (splashSfx) splashSfx.play();
+            addToLog(`Player ${currentPlayer} hit the Water! Reset to 15.`);
+            gameState[index] = 0;
+            gameState[15] = currentPlayer;
+        } else {
+            // Swap pieces (Capture)
             if (occupant !== 0) {
-                addToLog(`Player ${currentPlayer} captured an opponent at ${targetIndex}!`);
-                gameState[index] = occupant; // Swap opponent back
+                addToLog(`Captured opponent at ${targetIndex}!`);
+                gameState[index] = occupant;
             } else {
                 gameState[index] = 0;
             }
@@ -47,25 +44,23 @@ function movePiece(index) {
         }
     }
 
-    // Play Sound and Re-render
+    // 3. Update Board & Check Win
     if (moveSfx) moveSfx.play();
     createBoard();
     checkWin();
 
-    // End Turn
+    // 4. End Turn & Switch Player
     hasRolled = false;
     currentPlayer = (currentPlayer === 1) ? 2 : 1;
-    
-    // --- NEW LOGIC FOR LOCAL 2-PLAYER vs AI ---
-    const gameModeElement = document.getElementById('game-mode');
-    const gameMode = gameModeElement ? gameModeElement.value : 'ai';
+    statusElement.innerText = `Player ${currentPlayer}'s Turn`;
 
+    // 5. Handle AI Turn
+    const gameMode = document.getElementById('game-mode').value;
     if (currentPlayer === 2 && gameMode === 'ai') {
         statusElement.innerText = "Computer is thinking...";
         if (rollBtn) rollBtn.disabled = true;
-        runAI();
-    } else {
-        statusElement.innerText = `Player ${currentPlayer}'s Turn`;
-        if (rollBtn) rollBtn.disabled = false;
+        setTimeout(() => {
+            runAI();
+        }, 600);
     }
-}
+} // <--- This final bracket was likely missing!

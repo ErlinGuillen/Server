@@ -29,15 +29,23 @@ function checkWin() {
                alert("Player 1 Wins the journey to the Afterlife!");
             }, 100);
         }
-		let streak = parseInt(localStorage.getItem('winStreak')) || 0;
-const gameMode = document.getElementById('game-mode').value;
+// ... (existing win logic above)
 
-if (gameMode === 'ai') {
-    streak++;
-    localStorage.setItem('winStreak', streak);
-    document.getElementById('streak-count').innerText = streak;
-	document.getElementById('streak-count').innerText = localStorage.getItem('winStreak') || 0;
-}
-        resetGame();
-    }
-}
+        let streak = parseInt(localStorage.getItem('winStreak')) || 0;
+        const gameMode = document.getElementById('game-mode').value;
+
+        // Check if the win counts toward a streak
+        if (gameMode === 'ai') {
+            streak++;
+            localStorage.setItem('winStreak', streak);
+            document.getElementById('streak-count').innerText = streak;
+
+            // Unlock Notifications
+            if (streak === 3) {
+                alert("🎁 UNLOCKED: 'Blue Nile' theme is now available in Settings!");
+            } else if (streak === 5) {
+                alert("✨ UNLOCKED: 'Golden Pharaoh' legendary theme earned!");
+            }
+        } // End of AI check
+    } // End of pieces check
+} // End of function checkWin
