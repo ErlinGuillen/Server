@@ -1,48 +1,44 @@
 function rollSticks() {
+    const sticks = document.querySelectorAll('.stick');
+    const rollBtn = document.getElementById('roll-btn');
+    
     if (hasRolled) return;
 
-    const sticks = document.querySelectorAll('.stick');
-    const container = document.getElementById('sticks-container');
-	const sticksSfx = document.getElementById('sfx-sticks');
-    if (sticksSfx) sticksSfx.play();
-    
-    // 1. Add throwing animation
-    container.classList.add('throwing');
+    // Disable button during animation
     if (rollBtn) rollBtn.disabled = true;
 
-    setTimeout(() => {
-        container.classList.remove('throwing');
-        
-        let whiteSides = 0;
-        let results = [];
+    // Animate sticks
+    sticks.forEach(stick => {
+        const isFlipped = Math.random() > 0.5;
+        stick.classList.toggle('flipped', isFlipped);
+    });
 
-        // 2. Flip each stick randomly
-        sticks.forEach(stick => {
-            const isWhite = Math.random() > 0.5;
-            if (isWhite) {
-                stick.classList.add('white');
-                stick.style.transform = "rotateY(0deg)";
-                whiteSides++;
-            } else {
-                stick.classList.remove('white');
-                stick.style.transform = "rotateY(180deg)";
-            }
-        });
+    // Calculate score (1-5)
+    let whiteSides = 0;
+    document.querySelectorAll('.stick.flipped').forEach(() => whiteSides++);
+    
+    // In Senet: 0 white sides = 5 points
+    lastRoll = whiteSides === 0 ? 5 : whiteSides;
+    hasRolled = true;
 
-        // 3. Ancient Scoring Rules:
-        // 1 white = 1, 2 white = 2, 3 white = 3, 4 white = 4, 0 white = 5
-        lastRoll = whiteSides === 0 ? 5 : whiteSides;
-        
-        rollResultElement.innerText = `Roll: ${lastRoll}`;
-        hasRolled = true;
-        
-        addToLog(`Player ${currentPlayer} threw the sticks: ${lastRoll}`);
-        
+    document.getElementById('roll-result').innerText = `Roll: ${lastRoll}`;
+
+    // Re-enable button if it's a human turn
+    if (currentPlayer === 1) {
         if (rollBtn) rollBtn.disabled = false;
-        
-        // If playing against AI, it will handle the next move
-        if (currentPlayer === 2 && document.getElementById('game-mode').value === 'ai') {
-            runAI();
-        }
-    }, 600);
-}
+    }
+
+    // --- TRIGGER AI LOGIC ---
+    const modeSelect = document.getElementById('game-mode');
+    const currentMode = modeSelect ? modeSelect.value : 'ai';
+
+    if (currentPlayer === 2 && currentMode === 'ai') {
+        setTimeout(() => {
+            if (typeof runAI === 'function') {
+                runAI();
+            } else {
+                console.error("runAI.js is missing or not loaded!");
+            }
+        }, 1000);
+    }
+} // <--- This was likely the missing brace!

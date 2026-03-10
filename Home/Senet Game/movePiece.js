@@ -1,7 +1,9 @@
 function movePiece(index) {
     // 1. Snapshot for Undo
-    previousGameState = [...gameState];
-    previousPlayer = currentPlayer;
+    if (currentPlayer === 1) {
+        previousGameState = [...gameState];
+        previousPlayer = 1;
+    }
 
     if (!hasRolled) {
         alert("Please roll the sticks first!");
@@ -27,13 +29,11 @@ function movePiece(index) {
         }
 
         if (targetIndex === 27) {
-            const splashSfx = document.getElementById('sfx-splash');
-            if (splashSfx) splashSfx.play();
+            if (typeof sfxSplash !== 'undefined') sfxSplash.play();
             addToLog(`Player ${currentPlayer} hit the Water! Reset to 15.`);
             gameState[index] = 0;
             gameState[15] = currentPlayer;
         } else {
-            // Swap pieces (Capture)
             if (occupant !== 0) {
                 addToLog(`Captured opponent at ${targetIndex}!`);
                 gameState[index] = occupant;
@@ -45,7 +45,6 @@ function movePiece(index) {
     }
 
     // 3. Update Board & Check Win
-    if (moveSfx) moveSfx.play();
     createBoard();
     checkWin();
 
@@ -55,12 +54,17 @@ function movePiece(index) {
     statusElement.innerText = `Player ${currentPlayer}'s Turn`;
 
     // 5. Handle AI Turn
-    const gameMode = document.getElementById('game-mode').value;
-    if (currentPlayer === 2 && gameMode === 'ai') {
-        statusElement.innerText = "Computer is thinking...";
-        if (rollBtn) rollBtn.disabled = true;
+    const modeSelect = document.getElementById('game-mode'); // Renamed to avoid error
+    const currentMode = modeSelect ? modeSelect.value : 'ai';
+
+    if (currentPlayer === 2 && currentMode === 'ai') {
+        statusElement.innerText = "Computer is rolling...";
+        if (typeof rollBtn !== 'undefined' && rollBtn) rollBtn.disabled = true;
+        
         setTimeout(() => {
-            runAI();
-        }, 600);
+            rollSticks(); 
+        }, 1000);
+    } else {
+        if (typeof rollBtn !== 'undefined' && rollBtn) rollBtn.disabled = false;
     }
-} // <--- This final bracket was likely missing!
+}
