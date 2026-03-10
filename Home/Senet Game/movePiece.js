@@ -24,12 +24,13 @@ function movePiece(index) {
             return;
         }
 
-        // Handle Square 27 (Water)
-        if (targetIndex === 27) {
-            addToLog(`Player ${currentPlayer} fell into the Water! Reset to Square 15.`);
-            gameState[index] = 0;
-            gameState[15] = currentPlayer;
-        } else {
+     if (targetIndex === 27) {
+    const splashSfx = document.getElementById('sfx-splash');
+    if (splashSfx) splashSfx.play();
+    addToLog(`Player ${currentPlayer} fell into the Water! Reset to Square 15.`);
+    gameState[index] = 0;
+    gameState[15] = currentPlayer;
+} else {
             // Standard move or Capture (Swap)
             if (occupant !== 0) {
                 addToLog(`Player ${currentPlayer} captured an opponent at ${targetIndex}!`);

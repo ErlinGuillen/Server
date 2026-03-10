@@ -3,6 +3,8 @@ function rollSticks() {
 
     const sticks = document.querySelectorAll('.stick');
     const container = document.getElementById('sticks-container');
+	const sticksSfx = document.getElementById('sfx-sticks');
+    if (sticksSfx) sticksSfx.play();
     
     // 1. Add throwing animation
     container.classList.add('throwing');
