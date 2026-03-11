@@ -8,7 +8,7 @@ function checkWin() {
             particleCount: 150,
             spread: 70,
             origin: { y: 0.6 },
-            colors: ['#ffd700', '#ffffff', '#8b4513'] // Gold, White, and Bronze
+            colors: ['#ffd700', '#ffffff', '#8b4513']
         });
 
         if (p1Pieces === 0) {
@@ -25,27 +25,26 @@ function checkWin() {
             localStorage.setItem('p2Wins', p2Wins);
             document.getElementById('p2-score').innerText = p2Wins;
             addToLog("Player 2 won the match!");
-            setTimeout(() => {
-               alert("Player 1 Wins the journey to the Afterlife!");
-            }, 100);
+            // EXTRA ALERT REMOVED FROM HERE TO FIX SYNTAX ERROR
         }
-// ... (existing win logic above)
 
+        // Streak Logic
         let streak = parseInt(localStorage.getItem('winStreak')) || 0;
         const gameMode = document.getElementById('game-mode').value;
 
-        // Check if the win counts toward a streak
         if (gameMode === 'ai') {
-            streak++;
-            localStorage.setItem('winStreak', streak);
-            document.getElementById('streak-count').innerText = streak;
+            if (p1Pieces === 0) { // Player 1 won against AI
+                streak++;
+                localStorage.setItem('winStreak', streak);
+                document.getElementById('streak-count').innerText = streak;
 
-            // Unlock Notifications
-            if (streak === 3) {
-                alert("🎁 UNLOCKED: 'Blue Nile' theme is now available in Settings!");
-            } else if (streak === 5) {
-                alert("✨ UNLOCKED: 'Golden Pharaoh' legendary theme earned!");
+                if (streak === 3) alert("? UNLOCKED: 'Blue Nile' theme!");
+                else if (streak === 5) alert("? UNLOCKED: 'Golden Pharaoh' theme!");
+            } else { // Player 1 lost to AI
+                streak = 0; // Reset streak on loss
+                localStorage.setItem('winStreak', streak);
+                document.getElementById('streak-count').innerText = streak;
             }
-        } // End of AI check
-    } // End of pieces check
-} // End of function checkWin
+        }
+    }
+}

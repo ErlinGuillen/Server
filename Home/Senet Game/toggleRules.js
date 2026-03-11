@@ -1,9 +1,12 @@
 function toggleRules() {
-    const modal = document.getElementById('rules-modal');
-    if (modal.style.display === "none") {
-        modal.style.display = "block";
-        if(typeof addToLog === 'function') addToLog("Opened Game Rules.");
+    const modal = document.getElementById('how-to-modal');
+    if (modal) {
+        if (modal.style.display === "block") {
+            modal.style.display = "none";
+        } else {
+            modal.style.display = "block";
+        }
     } else {
-        modal.style.display = "none";
+        console.error("Could not find the element with ID 'how-to-modal'");
     }
-}// JavaScript Document
+}

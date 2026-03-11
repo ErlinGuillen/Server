@@ -1,48 +1,56 @@
 function createBoard() {
     boardElement.innerHTML = '';
 
-    const specialIcons = {
-        26: "?", 
-        27: "?", 
-        28: "?", 
-        29: "?", 
-        30: "?"
-    };
+    const specialIcons = { 26: "𓄼", 27: "𓈗", 28: "𓋀", 29: "𓋁", 30: "𓏶" };
 
     for (let i = 1; i <= 30; i++) {
         const cell = document.createElement('div');
         cell.classList.add('cell');
 
-        if (i === 26) cell.classList.add('special', 'house-of-happiness');
-        if (i === 27) cell.classList.add('special', 'water');
-        if (i >= 28 && i <= 30) cell.classList.add('special');
-
-        if (specialIcons[i]) {
-            cell.innerHTML = `<span style="font-size: 20px;">${specialIcons[i]}</span>`;
+        // --- SNAKE LOGIC ---
+        // Row 1: 1-10 (Left to Right)
+        // Row 2: 11-20 (Right to Left)
+        // Row 3: 21-30 (Left to Right)
+        let visualIndex;
+        let row = Math.floor((i - 1) / 10);
+        if (row === 1) {
+            visualIndex = 20 - (i - 11); // Reverses the middle row
         } else {
-            cell.innerText = i;
+            visualIndex = i;
         }
 
-        if (gameState[i] > 0) {
-            const piece = document.createElement('div'); // Piece is defined here
-            piece.classList.add('piece', `p${gameState[i]}`);
+        // Store the TRUE mathematical index in the HTML element
+        cell.setAttribute('data-index', visualIndex);
+
+        // Styling based on visualIndex
+        if (visualIndex === 26) cell.classList.add('special', 'house-of-happiness');
+        if (visualIndex === 27) cell.classList.add('special', 'water');
+        if (visualIndex >= 28 && visualIndex <= 30) cell.classList.add('special');
+
+        cell.innerHTML = specialIcons[visualIndex] 
+            ? `<span style="font-size: 20px;">${specialIcons[visualIndex]}</span>` 
+            : visualIndex;
+
+        // Draw Pieces
+        if (gameState[visualIndex] > 0) {
+            const piece = document.createElement('div');
+            piece.classList.add('piece', `p${gameState[visualIndex]}`);
             
-            // FIX: The onclick logic must be inside this block where 'piece' exists
             piece.onclick = () => {
                 // 1. Clear previous highlights
                 document.querySelectorAll('.cell').forEach(c => c.classList.remove('highlight-target'));
 
-                // 2. Only show highlight if it's the current player's piece and they've rolled
-                if (hasRolled && gameState[i] === currentPlayer) {
-                    let target = i + lastRoll;
+                // 2. Logic for current player
+                if (hasRolled && gameState[visualIndex] === currentPlayer) {
+                    let target = visualIndex + lastRoll;
                     if (target <= 30) {
-                        const targetCell = boardElement.children[target - 1]; 
+                        // FIX: Search for the cell by its data-index attribute
+                        const targetCell = document.querySelector(`[data-index="${target}"]`);
                         if (targetCell) targetCell.classList.add('highlight-target');
                     }
-                    // 3. Brief delay to show the glow before moving
-                    setTimeout(() => movePiece(i), 300);
+                    setTimeout(() => movePiece(visualIndex), 300);
                 } else {
-                    movePiece(i);
+                    movePiece(visualIndex);
                 }
             };
             cell.appendChild(piece);

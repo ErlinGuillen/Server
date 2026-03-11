@@ -1,0 +1,4 @@
+.modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); }
+.modal-content { background: #d2b48c; margin: 10% auto; padding: 20px; border: 5px solid #8b4513; width: 80%; max-width: 500px; color: #1a0f05; position: relative; border-radius: 10px; }
+.close-btn { position: absolute; right: 15px; top: 10px; font-size: 28px; cursor: pointer; }
+.rules-scroll { max-height: 300px; overflow-y: auto; text-align: left; }
